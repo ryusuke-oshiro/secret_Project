@@ -16,7 +16,7 @@ public:
 	void SelectApple(int x);
 	int CreateApple();
 	void AppleControl();
-	
+	void AppleScore();
 };
 extern APPLE apple;
 extern APPLE g_apple[Apple_MAX];

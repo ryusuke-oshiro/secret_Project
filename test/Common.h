@@ -1,5 +1,5 @@
 #pragma once
-#define Apple_MAX  7
+#define Apple_MAX  10
 #define ITEM_MAX  3
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480

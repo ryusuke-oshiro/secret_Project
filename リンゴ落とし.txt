@@ -5,7 +5,7 @@ APPLE:::
 
 リンゴの表示、X座標の見直し		//clear
 
-SelectAppleの確立操作見直し
+SelectAppleの確立操作見直し		//clear
 
 Playerとの当たり判定の座標見直し
 
@@ -30,7 +30,7 @@ POSE機能の実装
 
 Title、End、Help、画面のクラス分け
 
-ランキング処理のクラス分け
+ランキング処理のクラス分け,名前の入力方法をゲーセンのやつにする
 
 GameInit関数のクラス分け
 

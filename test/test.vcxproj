@@ -58,6 +58,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="STP.cpp" />
     <ClCompile Include="tetoris.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="turn_extend_rota.cpp" />
     <ClCompile Include="GameEnd.cpp" />
   </ItemGroup>
@@ -70,6 +71,7 @@
     <ClInclude Include="DrawGame.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="Rank.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -56,6 +56,7 @@ void APPLE::SelectApple(int x) {
 		g_apple[i].speed = 1;
 		g_apple[i].point= -1000;
 	}
+
 }
 
  
@@ -83,6 +84,8 @@ int APPLE::CreateApple() {
 }
 
 void APPLE::AppleControl() {
+	//リンゴの合計スコア
+	AppleScore();
 	for (int i = 0; i < Apple_MAX; i++) {
 		if (g_apple[i].flg == TRUE) {
 
@@ -121,13 +124,18 @@ void APPLE::AppleControl() {
 			if (g_player.HitBoxPlayer(&g_player, &g_apple[i]) == TRUE) {
 				if (g_apple[i].type == 0) { 
 					AppleCount1++;
-					/*g_Score += g_apple[i].point;*/
+					g_Score += g_apple[i].point;
 				}
 				if (g_apple[i].type == 1) { 
 					AppleCount2++; 
+					g_Score += g_apple[i].point;
 				}
 				if (g_apple[i].type == 2){
 					AppleCount3++;
+					g_Score += g_apple[i].point;
+				}
+				if (g_apple[i].type == 3) {
+					g_Score += g_apple[i].point;
 				}
 				g_player.flg = FALSE;
 				g_player.speed = 5;
@@ -146,5 +154,10 @@ void APPLE::AppleControl() {
 	if (g_Mileage / 10 % 50 == 0) {
 		CreateApple();
 	}
+	
 }
 
+void APPLE::AppleScore() {
+
+	DrawFormatString(561, 200, 0xffffff,"%d", g_Score);
+}

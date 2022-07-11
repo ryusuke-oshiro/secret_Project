@@ -142,10 +142,7 @@ void APPLE::AppleControl() {
 				g_player.count = 0;
 				g_player.hp -= 100;
 				g_apple[i].flg = FALSE;
-				if (g_player.hp <= 0) {
-					g_GameState = 6;
-					StopSoundMem(g_MusicBGM);
-				}
+				
 			}
 		}
 	}

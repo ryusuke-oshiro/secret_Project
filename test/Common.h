@@ -6,6 +6,9 @@
 
 extern XINPUT_STATE input;
 
+extern int Time;
+
+extern int StartTime;
 
 
 extern int g_MusicBGM;

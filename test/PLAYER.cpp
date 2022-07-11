@@ -83,6 +83,15 @@ void PLAYER::PlayerControl() {
 	DrawFormatString(560, 140, 0xFFFFFF, "%03d", AppleCount2);
 	DrawFormatString(610, 140, 0xFFFFFF, "%03d", AppleCount3);
 
+	StartTime = GetNowCount()-Time;
+	
+	DrawFormatString(510, 200, 0xFFFFFF, "%02d", 30-StartTime/1000);
+	if (StartTime >= 30000) {
+		g_GameState = 6;
+		StopSoundMem(g_MusicBGM);
+	}
+	
+
 }
 
 

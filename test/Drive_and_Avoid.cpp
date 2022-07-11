@@ -28,7 +28,11 @@ int g_Score = 0;		//スコア
 
 int g_RankingImage;		//画像用変数
 
-int g_WaitTime = 0;     //待ち時間
+int g_WaitTime = 0;
+
+int Time = 0;     //待ち時間
+int StartTime;
+
 int g_EndImage;        //エンド画面
 
 int g_Mileage;          //走行距離
@@ -157,8 +161,7 @@ int LoadSounds();	//ステージ
 int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	hPrevInstance, _In_ LPSTR IpCmdLine, _In_ int nCmdShow)
 {
-
-	XINPUT_STATE input;
+	
 	SetMainWindowText("Drive&Avoid");		//タイトルを設定
 
 	ChangeWindowMode(TRUE);					//ウィンドウモードで起動
@@ -286,6 +289,9 @@ void GameInit(void)
 	g_player.bari = PLAYER_BARRIER;
 	g_player.bariup = PLAYER_BARRIERUP;*/
 
+	Time = GetNowCount();
+	
+
 	//ゲームメイン処理へ
 	g_GameState = 5;
 
@@ -293,9 +299,9 @@ void GameInit(void)
 
 
 	//エネミーの初期設定
-	for (int i = 0; i < Apple_MAX; i++) {
+	/*for (int i = 0; i < Apple_MAX; i++) {
 		g_apple[i].flg = FALSE;
-	}
+	}*/
 
 	////アイテムの初期設定
 	//for (int i = 0; i < ITEM_MAX; i++) {
@@ -366,6 +372,7 @@ void DrawEnd(void)
 ******************************************/
 void GameMain(void)
 {
+
 	PlaySoundMem(g_MusicBGM, DX_PLAYTYPE_LOOP, FALSE);
 
 	DrawBackGround();
@@ -375,6 +382,9 @@ void GameMain(void)
 	/*ItemControl();*/
 
 	g_player.PlayerControl();
+
+	
+	
 
 	//スペースキーでメニューに戻る
 	//if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;

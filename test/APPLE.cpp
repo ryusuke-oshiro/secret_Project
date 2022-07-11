@@ -7,6 +7,10 @@
 APPLE apple;
 APPLE g_apple[Apple_MAX];
 
+int RedAppleScore = 0;
+int GreenAppleScore = 0;
+int YellowAppleScore = 0;
+
 APPLE::APPLE() {
 	flg = FALSE;
 	type = 0;
@@ -123,15 +127,15 @@ void APPLE::AppleControl() {
 			//“–‚½‚è”»’è
 			if (g_player.HitBoxPlayer(&g_player, &g_apple[i]) == TRUE) {
 				if (g_apple[i].type == 0) { 
-					AppleCount1++;
+					RedAppleScore++;
 					g_Score += g_apple[i].point;
 				}
 				if (g_apple[i].type == 1) { 
-					AppleCount2++; 
+					GreenAppleScore++; 
 					g_Score += g_apple[i].point;
 				}
 				if (g_apple[i].type == 2){
-					AppleCount3++;
+					YellowAppleScore++;
 					g_Score += g_apple[i].point;
 				}
 				if (g_apple[i].type == 3) {
@@ -158,6 +162,14 @@ void APPLE::AppleControl() {
 }
 
 void APPLE::AppleScore() {
-
-	DrawFormatString(561, 200, 0xffffff,"%d", g_Score);
+	SetFontSize(40);
+	DrawFormatString(504, 350, 0xffffff, "ƒXƒRƒA" );
+	SetFontSize(20);
+	DrawFormatString(509, 225, 0xffffff, "%d",RedAppleScore);
+	SetFontSize(20);
+	DrawFormatString(559, 225, 0xffffff, "%d", GreenAppleScore);
+	SetFontSize(20);
+	DrawFormatString(609, 225, 0xffffff, "%d", YellowAppleScore);
+	SetFontSize(50);
+	DrawFormatString(510, 400, 0xffffff,"%d", g_Score);
 }

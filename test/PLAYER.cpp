@@ -75,13 +75,13 @@ void PLAYER::PlayerControl() {
 		if (g_player.count >= 80)g_player.flg = TRUE;
 	}
 
-	DrawRotaGraph(523, 120, 0.3f, 0, Apple_Img[0], TRUE, FALSE);
-	DrawRotaGraph(573, 120, 0.3f, 0, Apple_Img[1], TRUE, FALSE);
-	DrawRotaGraph(623, 120, 0.3f, 0, Apple_Img[2], TRUE, FALSE);
+	DrawRotaGraph(513, 200, 1.0f, 0, Apple_Img[0], TRUE, FALSE);
+	DrawRotaGraph(563, 200, 1.0f, 0, Apple_Img[1], TRUE, FALSE);
+	DrawRotaGraph(613, 205, 0.7f, 0, Apple_Img[2], TRUE, FALSE);
 
-	DrawFormatString(510, 140, 0xFFFFFF, "%03d", AppleCount1);
-	DrawFormatString(560, 140, 0xFFFFFF, "%03d", AppleCount2);
-	DrawFormatString(610, 140, 0xFFFFFF, "%03d", AppleCount3);
+	/*DrawFormatString(510, 140, 0xFFFFFF, "%03d", RedAppleScore);
+	DrawFormatString(560, 140, 0xFFFFFF, "%03d", GreenAppleScore);
+	DrawFormatString(610, 140, 0xFFFFFF, "%03d", YellowAppleScore);*/
 
 }
 

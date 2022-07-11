@@ -1,7 +1,9 @@
 #pragma once
 #include"DxLib.h"
 #include"Common.h"
-
+extern int RedAppleScore;
+extern int GreenAppleScore;
+extern int YellowAppleScore;
 class APPLE {
 public:
 	int flg;	//使用フラグ

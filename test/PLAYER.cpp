@@ -9,6 +9,7 @@ PLAYER g_player;
 
 PLAYER::PLAYER() {
 	flg = 0;
+	tenmetu = 0;
 	x = 0;
 	y = 0;
 	w = 0;
@@ -26,6 +27,7 @@ PLAYER::PLAYER() {
 void PLAYER::InitPlayer() {
 	//プレイヤーの初期設定
 	flg = TRUE;
+	tenmetu = FALSE;
 	x = 320;
 	y = 380;
 	w = 63;
@@ -40,11 +42,11 @@ void PLAYER::InitPlayer() {
 }
 
 void PLAYER::PlayerControl() {
-	//上下左右移動
-	if (g_player.flg == TRUE) {
-		if (g_NowKey & PAD_INPUT_LEFT)g_player.x -= g_player.speed;
-		if (g_NowKey & PAD_INPUT_RIGHT)g_player.x += g_player.speed;
-	}
+	////上下左右移動
+	//if (g_player.flg == TRUE) {
+	//	if (g_NowKey & PAD_INPUT_LEFT)g_player.x -= g_player.speed;
+	//	if (g_NowKey & PAD_INPUT_RIGHT)g_player.x += g_player.speed;
+	//}
 
 	//画面をはみ出さないようにする
 	if (g_player.x < 32)g_player.x = 32;
@@ -52,27 +54,29 @@ void PLAYER::PlayerControl() {
 
 
 	//プレイヤーの表示
-	if (g_player.flg == TRUE) {
+	if (g_player.flg == TRUE && g_player.tenmetu==FALSE) {
 		if (g_NowKey & PAD_INPUT_LEFT) {
+			g_player.x -= g_player.speed;
 			DrawRotaGraph(g_player.x, g_player.y, 1.0f, -M_PI / 18, g_Car_left, TRUE, FALSE);
 			g_Car_Nowangle = g_Car_left;
 		}
 		else if (g_NowKey & PAD_INPUT_RIGHT) {
+			g_player.x += g_player.speed;
 			DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 18, g_Car_right, TRUE, FALSE);
 			g_Car_Nowangle = g_Car_right;
 		}
 		else {
 			DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
 		}
-		//if (g_KeyFlg & PAD_INPUT_C && g_player.bari > 0 && g_player.baricnt <= 0) {	//バリア？
-		//	g_player.bari--;
-		//	g_player.baricnt = 1000;
-		//}
 	
 	}
-	else {		//player.flgがFALSE(リンゴにあたって)になった時
-		DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 8 * (++g_player.count / 5), g_Car_Nowangle, TRUE, FALSE);
-		if (g_player.count >= 80)g_player.flg = TRUE;
+	else {		
+		g_player.count += ++g_player.count;
+		if(g_player.count % 20 == 0)
+		PlayerTenmetuControl();
+		//player.flgがFALSE(リンゴにあたって)になった時
+		/*DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 8 * (++g_player.count / 5), g_Car_Nowangle, TRUE, FALSE);
+		if (g_player.count >= 80)g_player.flg = TRUE;*/
 	}
 
 	DrawRotaGraph(520, 110, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
@@ -86,12 +90,48 @@ void PLAYER::PlayerControl() {
 	StartTime = GetNowCount()-Time;
 	
 	DrawFormatString(510, 200, 0xFFFFFF, "%02d", 30-StartTime/1000);
-	if (StartTime >= 30000) {
+	
+	if (StartTime >= 30000) {		//制限時間30秒たったらGameState=6 -> ランキング入力へ！
 		g_GameState = 6;
 		StopSoundMem(g_MusicBGM);
 	}
 	
 
+}
+
+void PLAYER::PlayerTenmetuControl() {
+	g_player.count += ++g_player.count;
+	if (g_player.flg == FALSE && g_player.tenmetu == TRUE) {
+		if (g_NowKey & PAD_INPUT_LEFT) {
+			g_player.x -= g_player.speed;
+			DrawRotaGraph(g_player.x, g_player.y, 1.0f, -M_PI / 18, g_Car_left, TRUE, FALSE);
+			g_Car_Nowangle = g_Car_left;
+		}
+		else if (g_NowKey & PAD_INPUT_RIGHT) {
+			g_player.x += g_player.speed;
+			DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 18, g_Car_right, TRUE, FALSE);
+			g_Car_Nowangle = g_Car_right;
+		}
+		else {
+			DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
+		}
+
+	}
+	/*for (int i = 1; i <= 6; i++) {
+		for (int j = 1; j <= 2; j++) {
+			if (g_player.flg == TRUE) {
+				for (int k = 1; k <= 20; k++) {
+					g_player.flg = FALSE;
+				}
+			}
+			if (g_player.flg == FALSE) {
+				for (int t = 1; t <= 20; t++) {
+					g_player.flg = TRUE;
+				}
+			}
+		}
+	}*/
+	g_player.tenmetu = FALSE;
 }
 
 

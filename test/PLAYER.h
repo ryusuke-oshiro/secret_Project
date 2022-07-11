@@ -5,6 +5,7 @@
 class PLAYER {
 public:
 	int flg;	//使用フラグ
+	int tenmetu; //点滅フラグ
 	int x, y;	//座標x,y
 	int w, h;	//幅w,高さh
 	double angle;//機体の向き
@@ -19,6 +20,7 @@ public:
 	PLAYER();
 	void InitPlayer();
 	void PlayerControl();
+	void PlayerTenmetuControl();
 	int HitBoxPlayer(PLAYER* p, APPLE* e);
 };
 

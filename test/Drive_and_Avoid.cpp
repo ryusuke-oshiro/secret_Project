@@ -32,6 +32,7 @@ int g_WaitTime = 0;
 
 int Time = 0;     //待ち時間
 int StartTime;
+int RefreshTime;
 
 int g_EndImage;        //エンド画面
 
@@ -52,6 +53,10 @@ int g_MusicBGM;	//ステージ音源
 int g_GameOverSE;
 int g_SE1;
 int g_SE2;
+
+int counter = 0, FpsTime[2] = { 0, }, FpsTime_i = 0;
+int color_white;
+double Fps = 0.0;
 
 
 //ランキングデータ（構造体）
@@ -152,8 +157,10 @@ void DrawBackGround();		//背景画像スクロール処理
 
 //void ItemControl();		//アイテム処理
 //int CreateItem();		//アイテム生成処理
-
 int LoadSounds();	//ステージ
+
+void SetColor();
+void FpsTimeFanction();
 
 /****************************************************
 *プログラムの開始
@@ -173,6 +180,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	if ((g_RankingImage = LoadGraph("images/Ranking.bmp")) == -1)return -1;
 
 	SetDrawScreen(DX_SCREEN_BACK);			//描画先画面を裏にする
+	SetColor();
 
 	if (LoadImages() == -1)return -1;		//画像読み込み関数を呼び出し
 
@@ -182,13 +190,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
-
+		RefreshTime = GetNowCount();
 		//入力キー取得
 		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 		g_KeyFlg = g_NowKey & ~g_OldKey;
 
 		ClearDrawScreen();			//画面の初期化
+		FpsTimeFanction();
 
 		switch (g_GameState) {
 		case 0:
@@ -217,12 +226,33 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			break;
 		}
 		ScreenFlip();	//裏画面の内容を表画面に反映
+		while (GetNowCount() - RefreshTime < 17);
 	}
 	DxLib_End();	//DXライブラリ使用の終了処理
 
 	return 0;	//ソフトの終了
 }
 
+
+void FpsTimeFanction() {
+	if (FpsTime_i == 0)
+		FpsTime[0] = GetNowCount();               //1周目の時間取得
+	if (FpsTime_i == 49) {
+		FpsTime[1] = GetNowCount();               //50周目の時間取得
+		Fps = 1000.0f / ((FpsTime[1] - FpsTime[0]) / 50.0f);//測定した値からfpsを計算
+		FpsTime_i = 0;//カウントを初期化
+	}
+	else
+		FpsTime_i++;//現在何周目かカウント
+	if (Fps != 0)
+		DrawFormatString(565, 460, color_white, "FPS %.1f", Fps); //fpsを表示
+	return;
+}
+
+void SetColor() {
+	color_white = GetColor(255, 255, 255);            //白色ハンドルを取得
+	return;
+}
 /*********************************************
 *ゲームタイトル表示（メニュー画面）
 **********************************************/
@@ -372,18 +402,17 @@ void DrawEnd(void)
 ******************************************/
 void GameMain(void)
 {
+		PlaySoundMem(g_MusicBGM, DX_PLAYTYPE_LOOP, FALSE);
 
-	PlaySoundMem(g_MusicBGM, DX_PLAYTYPE_LOOP, FALSE);
+		DrawBackGround();
 
-	DrawBackGround();
+		apple.AppleControl();
 
-	apple.AppleControl();
+		/*ItemControl();*/
 
-	/*ItemControl();*/
+		g_player.PlayerControl();
 
-	g_player.PlayerControl();
 
-	
 	
 
 	//スペースキーでメニューに戻る

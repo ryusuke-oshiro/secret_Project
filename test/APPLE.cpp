@@ -35,7 +35,7 @@ void APPLE::InitApple() {
 
 void APPLE::SelectApple(int x) {
 	int i = x;
-	int select = GetRand(6) + 1;
+	int select = GetRand(7) + 1;
 	if (select <= 2) {
 		g_apple[i].type=0;
 		g_apple[i].speed=2;
@@ -46,7 +46,7 @@ void APPLE::SelectApple(int x) {
 		g_apple[i].speed = 5;
 		g_apple[i].point=300;
 	}
-	else if (select <= 5) {
+	else if (select <= 6) {
 		g_apple[i].type = 2;
 		g_apple[i].speed = 10;
 		g_apple[i].point=500;
@@ -64,7 +64,7 @@ int APPLE::CreateApple() {
 		if (g_apple[i].flg == FALSE) {
 			
 			g_apple[i].flg = TRUE;
-			g_apple[i].x = i * 72 + 25;		//‚±‚Ìi‚ðƒ‰ƒ“ƒ_ƒ€GetRand(1`7)-1‚É‚·‚é
+			g_apple[i].x = GetRand(6) * 72 + 25;		//‚±‚Ìi‚ðƒ‰ƒ“ƒ_ƒ€GetRand(1`7)-1‚É‚·‚é
 			g_apple[i].y = 20;
 			SelectApple(i);
 			g_apple[i].img = Apple_Img[g_apple[i].type];

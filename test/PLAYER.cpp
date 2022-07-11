@@ -78,7 +78,7 @@ void PLAYER::PlayerControl() {
 
 	DrawRotaGraph(513, 200, 1.0f, 0, Apple_Img[0], TRUE, FALSE);
 	DrawRotaGraph(563, 200, 1.0f, 0, Apple_Img[1], TRUE, FALSE);
-	DrawRotaGraph(613, 205, 0.7f, 0, Apple_Img[2], TRUE, FALSE);
+	DrawRotaGraph(613, 200, 1.0f, 0, Apple_Img[2], TRUE, FALSE);
 
 
 	/*DrawFormatString(510, 140, 0xFFFFFF, "%03d", RedAppleScore);

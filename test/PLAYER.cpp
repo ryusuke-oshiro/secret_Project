@@ -28,10 +28,10 @@ void PLAYER::InitPlayer() {
 	//プレイヤーの初期設定
 	flg = TRUE;
 	tenmetu = FALSE;
-	x = 320;
+	x = 320; //320
 	y = 380;
-	w = 63;
-	h = 120;
+	w = 50; //63
+	h = 67;
 	angle = 0.0;
 	count = 0;
 	speed = 5;
@@ -57,7 +57,7 @@ void PLAYER::PlayerControl() {
 	if (g_player.flg == TRUE) {
 		if (g_NowKey & PAD_INPUT_LEFT) {
 			g_player.x -= g_player.speed;
-			DrawRotaGraph(g_player.x, g_player.y, 1.0f, -M_PI / 18, g_Car_left, TRUE, FALSE);
+			DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 18, g_Car_left, TRUE, FALSE);
 			g_Car_Nowangle = g_Car_left;
 		}
 		else if (g_NowKey & PAD_INPUT_RIGHT) {
@@ -145,11 +145,12 @@ int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)
 	int sy1 = p->y - (p->h / 2);
 	int sx2 = sx1 + p->w;
 	int sy2 = sy1 + p->h;
-
+     DrawBox(sx1, sy1, sx2, sy2, 0xffffff, FALSE);
 	int dx1 = e->x - (e->w / 2);
 	int dy1 = e->y - (e->h / 2);
 	int dx2 = dx1 + e->w;
 	int dy2 = dy1 + e->h;
+	DrawBox(dx1, dy1, dx2, dy2, 0xffffff, FALSE);
 
 	//矩形が重なっていれば当たり
 	if (sx1 < dx2 && dx1 < sx2 && sy1 < dy2 && dy1 < sy2) {

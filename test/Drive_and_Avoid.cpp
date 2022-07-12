@@ -124,7 +124,7 @@ struct RankingData g_Ranking[RANKING_DATA];
 void GameInit(void);	//ゲーム初期化処理
 void GameMain(void);	//ゲームメイン処理
 
-void DrawGameTitle(void);//タイトル描画処理
+/*void DrawGameTitle(void);*/  //タイトル描画処理
 void DrawGameOver(void);//ゲームオーバー画面描画処理
 void DrawEnd(void);//ゲームエンド描画処理
 void DrawHelp(void);//ゲームヘルプ描画処理
@@ -155,18 +155,14 @@ int LoadSounds();	//ステージ
 /****************************************************
 *プログラムの開始
 ******************************************************/
-int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
-	hPrevInstance, _In_ LPSTR IpCmdLine, _In_ int nCmdShow)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmbLine, int nCmbShow)
 {
 
-	XINPUT_STATE input;
 	SetMainWindowText("Drive&Avoid");		//タイトルを設定
 
 	ChangeWindowMode(TRUE);					//ウィンドウモードで起動
 
 	if (DxLib_Init() == -1)return -1;		//DXライブラリの初期化処理
-
-
 
 	if ((g_RankingImage = LoadGraph("images/Ranking.bmp")) == -1)return -1;
 
@@ -174,7 +170,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 	if (LoadImages() == -1)return -1;		//画像読み込み関数を呼び出し
 
-	if (LoadSounds() == -1)return -1;		//サウンド読み込み関数を呼び出し
+	if (LoadSounds() == -1)return -1;
 
 	if (ReadRanking() == -1) return -1;		//ランキングデータの読み込み
 
@@ -190,7 +186,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 		switch (g_GameState) {
 		case 0:
-			DrawGameTitle();		//ゲームタイトル描画処理
+			title.DrawGameTitle();		//ゲームタイトル描画処理
 			break;
 		case 1:
 			GameInit();				//ゲーム初期処理
@@ -859,7 +855,7 @@ int LoadSounds()
 int LoadImages()
 {
 	//タイトル
-	if ((g_TitleImage = LoadGraph("images/Title.bmp")) == -1)return -1;
+	if ((g_TitleImage = LoadGraph("images/BackGround_a.png")) == -1)return -1;
 	//メニュー
 	if ((g_Menu = LoadGraph("images/menu.bmp")) == -1)return -1;
 	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;

@@ -3,11 +3,11 @@
 #include"Common.h"
 #include <math.h>
 #include <corecrt_math_defines.h>
-//#include "Drive_and_Avoid.cpp"
 
 Title title;
 
 void Title::DrawGameTitle() {
+
 	static int MenuNo = 0;
 
 	PlaySoundMem(g_TitleBGM, DX_PLAYTYPE_BACK, FALSE);

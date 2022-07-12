@@ -20,8 +20,6 @@ public:
 	PLAYER();
 	void InitPlayer();
 	void PlayerControl();
-	void PlayerTenmetuON();
-	void PlayerTenmetuOFF();
 	int HitBoxPlayer(PLAYER* p, APPLE* e);
 };
 

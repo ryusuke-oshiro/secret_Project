@@ -137,7 +137,6 @@ void APPLE::AppleControl() {
 				if (g_apple[i].type == 3) {
 					g_Score += g_apple[i].point;
 					g_player.tenmetu = TRUE;
-					/*g_player.flg = FALSE;*/
 				}	
 				g_apple[i].flg = FALSE;			//ƒŠƒ“ƒS‚ğÁ‚·
 			}

@@ -57,7 +57,6 @@ void PLAYER::PlayerControl() {
 
 	if (g_NowKey & PAD_INPUT_LEFT) {
 			g_player.x -= g_player.speed;
-			DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 18, g_Car_left, TRUE, FALSE);
 			g_Car_Nowangle = g_Car_left;
 	}
 	if (g_NowKey & PAD_INPUT_RIGHT) {
@@ -72,12 +71,16 @@ void PLAYER::PlayerControl() {
 	
 	
 	if (g_player.tenmetu == TRUE) {		//TRUE‚ÌŠÔA“_–Å
+		if (g_player.count == 0) { 
+			g_player.flg = ~g_player.flg; 
+		}
 		++g_player.count;
 		if (g_player.count % 20 == 0) {
 			g_player.flg = ~g_player.flg;
 		}
 		if (g_player.count >= 120) {
 			g_player.tenmetu = FALSE;
+			g_player.flg = TRUE;
 			g_player.count = 0;
 		}
 	}

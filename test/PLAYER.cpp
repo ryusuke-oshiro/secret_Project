@@ -54,7 +54,7 @@ void PLAYER::PlayerControl() {
 
 
 	//プレイヤーの表示
-	if (g_player.flg == TRUE && g_player.tenmetu==FALSE) {
+	if (g_player.flg == TRUE) {
 		if (g_NowKey & PAD_INPUT_LEFT) {
 			g_player.x -= g_player.speed;
 			DrawRotaGraph(g_player.x, g_player.y, 1.0f, -M_PI / 18, g_Car_left, TRUE, FALSE);
@@ -70,13 +70,20 @@ void PLAYER::PlayerControl() {
 		}
 	
 	}
-	else {		
-		g_player.count += ++g_player.count;
-		if(g_player.count % 20 == 0)
-		PlayerTenmetuControl();
-		//player.flgがFALSE(リンゴにあたって)になった時
-		/*DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 8 * (++g_player.count / 5), g_Car_Nowangle, TRUE, FALSE);
-		if (g_player.count >= 80)g_player.flg = TRUE;*/
+	else {		//player.flg = FALSE	player.tenmetu = TRUE
+		g_player.count = ++g_player.count;
+		if (g_player.tenmetu==TRUE) {
+			PlayerTenmetuON();
+			if (g_player.count % 20 == 0)g_player.tenmetu = FALSE;
+		}
+		if (g_player.tenmetu == FALSE) {
+			PlayerTenmetuOFF();
+			if (g_player.count % 20 == 0)g_player.tenmetu = TRUE;
+		}
+		if (g_player.count == 120) {
+			g_player.flg = TRUE;
+			g_player.count = 0;
+		}
 	}
 
 	DrawRotaGraph(520, 110, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
@@ -99,9 +106,21 @@ void PLAYER::PlayerControl() {
 
 }
 
-void PLAYER::PlayerTenmetuControl() {
-	g_player.count += ++g_player.count;
-	if (g_player.flg == FALSE && g_player.tenmetu == TRUE) {
+void PLAYER::PlayerTenmetuON() {
+		if (g_NowKey & PAD_INPUT_LEFT) {
+			g_player.x -= g_player.speed;
+			g_Car_Nowangle = g_Car_left;
+		}
+		else if (g_NowKey & PAD_INPUT_RIGHT) {
+			g_player.x += g_player.speed;
+			g_Car_Nowangle = g_Car_right;
+		}
+		else {
+			
+		}
+}
+
+void PLAYER::PlayerTenmetuOFF() {
 		if (g_NowKey & PAD_INPUT_LEFT) {
 			g_player.x -= g_player.speed;
 			DrawRotaGraph(g_player.x, g_player.y, 1.0f, -M_PI / 18, g_Car_left, TRUE, FALSE);
@@ -115,24 +134,8 @@ void PLAYER::PlayerTenmetuControl() {
 		else {
 			DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
 		}
-
-	}
-	/*for (int i = 1; i <= 6; i++) {
-		for (int j = 1; j <= 2; j++) {
-			if (g_player.flg == TRUE) {
-				for (int k = 1; k <= 20; k++) {
-					g_player.flg = FALSE;
-				}
-			}
-			if (g_player.flg == FALSE) {
-				for (int t = 1; t <= 20; t++) {
-					g_player.flg = TRUE;
-				}
-			}
-		}
-	}*/
-	g_player.tenmetu = FALSE;
 }
+
 
 
 int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)

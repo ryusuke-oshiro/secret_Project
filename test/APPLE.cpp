@@ -92,7 +92,7 @@ void APPLE::AppleControl() {
 			//ìGÇÃï\é¶
 			DrawRotaGraph(g_apple[i].x, g_apple[i].y, 1.0f, 0, g_apple[i].img, TRUE, FALSE);
 
-			if (g_player.flg == FALSE)continue;
+			/*if (g_player.flg == FALSE)continue;*/
 
 			switch (g_apple[i].type) {
 			case 0:g_apple[i].y += g_apple[i].speed;
@@ -121,7 +121,7 @@ void APPLE::AppleControl() {
 				if (g_apple[i].type == 2)AppleCount3++;
 			}*/
 			//ìñÇΩÇËîªíË
-			if (g_player.HitBoxPlayer(&g_player, &g_apple[i]) == TRUE && g_player.tenmetu==FALSE) {
+			if (g_player.HitBoxPlayer(&g_player, &g_apple[i]) == TRUE && g_player.flg==TRUE) {
 				if (g_apple[i].type == 0) { 
 					AppleCount1++;
 					g_Score += g_apple[i].point;
@@ -136,11 +136,8 @@ void APPLE::AppleControl() {
 				}
 				if (g_apple[i].type == 3) {
 					g_Score += g_apple[i].point;
-					g_player.tenmetu == TRUE;
+					g_player.tenmetu = TRUE;
 					g_player.flg = FALSE;
-					/*g_player.speed = 5;
-					g_player.count = 0;
-					g_player.hp -= 100;*/
 				}	
 				g_apple[i].flg = FALSE;			//ÉäÉìÉSÇè¡Ç∑
 			}

@@ -11,7 +11,6 @@
 #include"APPLE.h"
 #include"Common.h"
 
-
 /******************************************************
 *変数宣言
 *******************************************************/
@@ -168,7 +167,7 @@ void FpsTimeFanction();
 int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	hPrevInstance, _In_ LPSTR IpCmdLine, _In_ int nCmdShow)
 {
-	
+	XINPUT_STATE input;
 	SetMainWindowText("Drive&Avoid");		//タイトルを設定
 
 	ChangeWindowMode(TRUE);					//ウィンドウモードで起動

@@ -98,9 +98,6 @@ void PLAYER::PlayerControl() {
 		g_GameState = 6;
 		StopSoundMem(g_MusicBGM);
 	}
-	
-	
-
 }
 
 int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)

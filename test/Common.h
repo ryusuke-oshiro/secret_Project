@@ -1,4 +1,5 @@
 #pragma once
+#include<DxLib.h>
 #define Apple_MAX  10
 #define ITEM_MAX  3
 #define SCREEN_WIDTH 640

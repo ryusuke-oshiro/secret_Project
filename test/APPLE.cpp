@@ -13,8 +13,8 @@ APPLE::APPLE() {
 	img = 0;
 	x = 0;
 	y = 0;
-	w = 0;
-	h = 0;
+	w = 35;
+	h = 35;
 	speed = 0;
 	point = 0;
 }

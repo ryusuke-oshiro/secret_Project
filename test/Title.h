@@ -7,7 +7,6 @@ public:
 	int g_SE1;
 	int g_SE2;
 	int g_Menu, g_Cone;
-public:
 	void DrawGameTitle();
 };
 

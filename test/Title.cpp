@@ -4,7 +4,7 @@
 #include <math.h>
 #include <corecrt_math_defines.h>
 
-Title title;
+//Title title;
 
 void Title::DrawGameTitle() {
 

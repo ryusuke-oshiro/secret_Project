@@ -12,6 +12,7 @@
 #include"Common.h"
 #include"Title.h"
 
+Title title;
 
 /******************************************************
 *変数宣言
@@ -22,8 +23,8 @@ int g_KeyFlg;	//入力キー情報
 
 int g_GameState = 0;	//ゲームモード
 
-int g_TitleImage;		//画像用変数
-int g_Menu, g_Cone;		//メニュー画像変数
+//int g_TitleImage;		//画像用変数
+//int g_Menu, g_Cone;		//メニュー画像変数
 
 int g_Score = 0;		//スコア
 
@@ -44,11 +45,11 @@ int AppleCount1, AppleCount2, AppleCount3, AppleCount4; //リンゴカウント
 
 int g_Car_left, g_Car_right, g_Car_Nowangle, g_Barrier;	//キャラ画像変数
 
-int g_TitleBGM;
+//int g_TitleBGM;
 int g_MusicBGM;	//ステージ音源
 int g_GameOverSE;
-int g_SE1;
-int g_SE2;
+//int g_SE1;
+//int g_SE2;
 
 
 //ランキングデータ（構造体）
@@ -331,7 +332,7 @@ void DrawHelp(void)
 	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 0;
 
 	//タイトル画像表示
-	DrawGraph(0, 0, g_TitleImage, FALSE);
+	DrawGraph(0, 0, title.g_TitleImage, FALSE);
 	SetFontSize(16);
 	DrawString(20, 120, "ヘルプ画面", 0xffffff, 0);
 
@@ -834,21 +835,21 @@ int ReadRanking(void) {
 ****************************************/
 int LoadSounds()
 {
-	if ((g_TitleBGM = LoadSoundMem("sounds/Initial D - Night Of Fire.mp3")) == -1)return -1;
+	if ((title.g_TitleBGM = LoadSoundMem("sounds/Initial D - Night Of Fire.mp3")) == -1)return -1;
 	//initial D音源
 	if ((g_MusicBGM = LoadSoundMem("sounds/Daisuke full ver. (歌詞・和訳付き).mp3")) == -1)return -1;
 	if ((g_GameOverSE = LoadSoundMem("sounds/GameOver.mp3")) == -1)return -1;
 
 	//SE1 データ読み込み
-	if ((g_SE1 = LoadSoundMem("sounds/SE1.mp3")) == -1)return -1;
+	if ((title.g_SE1 = LoadSoundMem("sounds/SE1.mp3")) == -1)return -1;
 	//SE2 データ読み込み
-	if ((g_SE2 = LoadSoundMem("sounds/SE2.mp3")) == -1)return -1;
+	if ((title.g_SE2 = LoadSoundMem("sounds/SE2.mp3")) == -1)return -1;
 
 
 	//SEの音量調整
-	ChangeVolumeSoundMem(80, g_SE2);
+	ChangeVolumeSoundMem(80, title.g_SE2);
 
-	ChangeVolumeSoundMem(120, g_SE1);
+	ChangeVolumeSoundMem(120, title.g_SE1);
 
 	return 0;
 }
@@ -858,10 +859,10 @@ int LoadSounds()
 int LoadImages()
 {
 	//タイトル
-	if ((g_TitleImage = LoadGraph("images/BackGround_a.png")) == -1)return -1;
+	if ((title.g_TitleImage = LoadGraph("images/BackGround_a.png")) == -1)return -1;
 	//メニュー
-	if ((g_Menu = LoadGraph("images/menu.bmp")) == -1)return -1;
-	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;
+	if ((title.g_Menu = LoadGraph("images/menu.bmp")) == -1)return -1;
+	if ((title.g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;
 	//リンゴ
 	if ((Apple_Img[0] = LoadGraph("images/RedApple.png")) == -1)return -1;
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;

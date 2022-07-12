@@ -70,19 +70,18 @@ void PLAYER::PlayerControl() {
 		}
 	
 	}
-	else {		//player.flg = FALSE	player.tenmetu = TRUE
+	else {		//player.flg = FALSE->表示状態		player.tenmetu = TRUE->非表示状態
 		g_player.count = ++g_player.count;
 		if (g_player.tenmetu==TRUE) {
-			PlayerTenmetuON();
-			if (g_player.count % 20 == 0)g_player.tenmetu = FALSE;
+			PlayerTenmetuON();										//非表示
+			if (g_player.count % 20 == 0)g_player.tenmetu = FALSE; 
 		}
 		if (g_player.tenmetu == FALSE) {
-			PlayerTenmetuOFF();
+			PlayerTenmetuOFF();										//表示
 			if (g_player.count % 20 == 0)g_player.tenmetu = TRUE;
 		}
-		if (g_player.count == 120) {
-			g_player.flg = TRUE;
-			g_player.count = 0;
+		if (g_player.count >= 120) {
+			g_player.flg = TRUE; g_player.count = 0;
 		}
 	}
 
@@ -111,12 +110,9 @@ void PLAYER::PlayerTenmetuON() {
 			g_player.x -= g_player.speed;
 			g_Car_Nowangle = g_Car_left;
 		}
-		else if (g_NowKey & PAD_INPUT_RIGHT) {
+		if (g_NowKey & PAD_INPUT_RIGHT) {
 			g_player.x += g_player.speed;
 			g_Car_Nowangle = g_Car_right;
-		}
-		else {
-			
 		}
 }
 

@@ -9,194 +9,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\DrawDORAEMON">
-      <UniqueIdentifier>{1807c6ce-125b-4410-8a59-b088554a961e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Drawtraining">
-      <UniqueIdentifier>{1ab52602-d4db-4b6f-8607-537bb69165c4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\BASE">
       <UniqueIdentifier>{deef8953-1b5e-4670-bb1b-87b90d95b9c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\DrawFormatString">
-      <UniqueIdentifier>{5d1c2798-1841-485e-990a-fd64c3739d96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\LoadGraph">
-      <UniqueIdentifier>{4b3b1920-8745-4dd1-aa4a-5ab3aa058699}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\pac_man">
-      <UniqueIdentifier>{da3e817c-7e42-479a-8c28-4f0773e0cc0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\playsound">
-      <UniqueIdentifier>{0c31d3c3-4ffd-4445-93e9-40b7e43ab1b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\chapter3">
-      <UniqueIdentifier>{0f343760-048e-4ee4-bd89-d2f8ae4b65f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Chaptar4">
-      <UniqueIdentifier>{25952953-b11f-4ca6-8f7e-bfdbcaa1e067}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Chaptar5">
       <UniqueIdentifier>{1a00d5fe-6831-4a06-a841-c8ec6895e189}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Chaptar6">
-      <UniqueIdentifier>{ec34effd-72c6-425a-a461-46e1fb5ac075}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Chapter7">
-      <UniqueIdentifier>{885e4d83-91d7-4fa3-8f2c-d97bdc3aa1db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Chaptar8">
-      <UniqueIdentifier>{df50a575-6eb5-4fc5-b938-e8ac44c088ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Chaptar4\ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="ソース ファイル\Summer_Team_Project">
-      <UniqueIdentifier>{f3be5a8d-c4ed-4522-9ec3-367bf386f08f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DrawDraemon.cpp">
-      <Filter>ソース ファイル\DrawDORAEMON</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawPixel.cpp">
-      <Filter>ソース ファイル\Drawtraining</Filter>
-    </ClCompile>
-    <ClCompile Include="dxlib2_2_1.cpp">
-      <Filter>ソース ファイル\Drawtraining</Filter>
-    </ClCompile>
-    <ClCompile Include="dxlib2_3_3drowstring.cpp">
-      <Filter>ソース ファイル\Drawtraining</Filter>
-    </ClCompile>
-    <ClCompile Include="dxlib2_4_4drawl_etc.cpp">
-      <Filter>ソース ファイル\Drawtraining</Filter>
-    </ClCompile>
     <ClCompile Include="Base.cpp">
       <Filter>ソース ファイル\BASE</Filter>
-    </ClCompile>
-    <ClCompile Include="dxlib2_8_startkey.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="dxlib2_10drawformatstring.cpp">
-      <Filter>ソース ファイル\DrawFormatString</Filter>
-    </ClCompile>
-    <ClCompile Include="move_circle.cpp">
-      <Filter>ソース ファイル\DrawFormatString</Filter>
-    </ClCompile>
-    <ClCompile Include="load_graph.cpp">
-      <Filter>ソース ファイル\LoadGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="turn_extend_rota.cpp">
-      <Filter>ソース ファイル\LoadGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="p19move_boll.cpp">
-      <Filter>ソース ファイル\DrawFormatString</Filter>
-    </ClCompile>
-    <ClCompile Include="p22_LoadDivGraph.cpp">
-      <Filter>ソース ファイル\LoadGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="p24_LoadDivGraph.cpp">
-      <Filter>ソース ファイル\LoadGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="p26bisyoujo.cpp">
-      <Filter>ソース ファイル\LoadGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="pac_man.cpp">
-      <Filter>ソース ファイル\pac_man</Filter>
-    </ClCompile>
-    <ClCompile Include="plat_sound_mem.cpp">
-      <Filter>ソース ファイル\playsound</Filter>
-    </ClCompile>
-    <ClCompile Include="p27bisyoujo.cpp">
-      <Filter>ソース ファイル\LoadGraph</Filter>
-    </ClCompile>
-    <ClCompile Include="DateData.cpp">
-      <Filter>ソース ファイル\playsound</Filter>
-    </ClCompile>
-    <ClCompile Include="processmessage.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="oldkey_nowkey.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="mouse.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTitle.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEnd.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Dxライブラリ練習用素材_画像_音など\3章\Sample030501.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="rank_p23.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="rank_p30.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="p35kussonagai.cpp">
-      <Filter>ソース ファイル\chapter3</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル\Chaptar4</Filter>
     </ClCompile>
     <ClCompile Include="Drive_and_Avoid.cpp">
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClCompile>
-    <ClCompile Include="tetoris.cpp">
-      <Filter>ソース ファイル\Chaptar6</Filter>
-    </ClCompile>
-    <ClCompile Include="SameGame.cpp">
-      <Filter>ソース ファイル\Chapter7</Filter>
-    </ClCompile>
-    <ClCompile Include="Match3puzzle.cpp">
-      <Filter>ソース ファイル\Chaptar8</Filter>
-    </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>ソース ファイル\Chaptar4</Filter>
-    </ClCompile>
-    <ClCompile Include="Bar.cpp">
-      <Filter>ソース ファイル\Chaptar4</Filter>
-    </ClCompile>
-    <ClCompile Include="Rank.cpp">
-      <Filter>ソース ファイル\Chaptar4</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawGame.cpp">
-      <Filter>ソース ファイル\Chaptar4</Filter>
-    </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>ソース ファイル\Chaptar4</Filter>
-    </ClCompile>
     <ClCompile Include="PLAYER.cpp">
       <Filter>ソース ファイル\Chaptar5</Filter>
-    </ClCompile>
-    <ClCompile Include="STP.cpp">
-      <Filter>ソース ファイル\Summer_Team_Project</Filter>
     </ClCompile>
     <ClCompile Include="APPLE.cpp">
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h">
-      <Filter>ソース ファイル\Chaptar4\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Bar.h">
-      <Filter>ソース ファイル\Chaptar4\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Rank.h">
-      <Filter>ソース ファイル\Chaptar4\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawGame.h">
-      <Filter>ソース ファイル\Chaptar4\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Block.h">
-      <Filter>ソース ファイル\Chaptar4\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="PLAYER.h">
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClInclude>

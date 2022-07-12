@@ -8,7 +8,7 @@
 PLAYER g_player;
 
 PLAYER::PLAYER() {
-	flg = 0;
+	flg = TRUE;
 	tenmetu = 0;
 	x = 0;
 	y = 0;
@@ -54,37 +54,34 @@ void PLAYER::PlayerControl() {
 
 
 	//プレイヤーの表示
-	if (g_player.flg == TRUE) {
-		if (g_NowKey & PAD_INPUT_LEFT) {
+
+	if (g_NowKey & PAD_INPUT_LEFT) {
 			g_player.x -= g_player.speed;
 			DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 18, g_Car_left, TRUE, FALSE);
 			g_Car_Nowangle = g_Car_left;
-		}
-		else if (g_NowKey & PAD_INPUT_RIGHT) {
+	}
+	if (g_NowKey & PAD_INPUT_RIGHT) {
 			g_player.x += g_player.speed;
-			DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 18, g_Car_right, TRUE, FALSE);
 			g_Car_Nowangle = g_Car_right;
 		}
-		else {
-			DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
-		}
 	
+	
+	if (g_player.flg == TRUE) {		//TRUEの間、表示
+		DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
 	}
-	else {		//player.flg = FALSE	player.tenmetu = TRUE
-		g_player.count = ++g_player.count;
-		if (g_player.tenmetu==TRUE) {
-			PlayerTenmetuON();
-			if (g_player.count % 20 == 0)g_player.tenmetu = FALSE;
+	
+	
+	if (g_player.tenmetu == TRUE) {		//TRUEの間、点滅
+		++g_player.count;
+		if (g_player.count % 20 == 0) {
+			g_player.flg = ~g_player.flg;
 		}
-		if (g_player.tenmetu == FALSE) {
-			PlayerTenmetuOFF();
-			if (g_player.count % 20 == 0)g_player.tenmetu = TRUE;
-		}
-		if (g_player.count == 120) {
-			g_player.flg = TRUE;
+		if (g_player.count >= 120) {
+			g_player.tenmetu = FALSE;
 			g_player.count = 0;
 		}
 	}
+
 
 	DrawRotaGraph(520, 110, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
 	DrawRotaGraph(570, 110, 0.9f, 0, Apple_Img[1], TRUE, FALSE);
@@ -103,40 +100,9 @@ void PLAYER::PlayerControl() {
 		StopSoundMem(g_MusicBGM);
 	}
 	
+	
 
 }
-
-void PLAYER::PlayerTenmetuON() {
-		if (g_NowKey & PAD_INPUT_LEFT) {
-			g_player.x -= g_player.speed;
-			g_Car_Nowangle = g_Car_left;
-		}
-		else if (g_NowKey & PAD_INPUT_RIGHT) {
-			g_player.x += g_player.speed;
-			g_Car_Nowangle = g_Car_right;
-		}
-		else {
-			
-		}
-}
-
-void PLAYER::PlayerTenmetuOFF() {
-		if (g_NowKey & PAD_INPUT_LEFT) {
-			g_player.x -= g_player.speed;
-			DrawRotaGraph(g_player.x, g_player.y, 1.0f, -M_PI / 18, g_Car_left, TRUE, FALSE);
-			g_Car_Nowangle = g_Car_left;
-		}
-		else if (g_NowKey & PAD_INPUT_RIGHT) {
-			g_player.x += g_player.speed;
-			DrawRotaGraph(g_player.x, g_player.y, 1.0f, M_PI / 18, g_Car_right, TRUE, FALSE);
-			g_Car_Nowangle = g_Car_right;
-		}
-		else {
-			DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
-		}
-}
-
-
 
 int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)
 {

@@ -19,57 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Dxライブラリ練習用素材_画像_音など\3章\Sample030501.cpp" />
     <ClCompile Include="APPLE.cpp" />
-    <ClCompile Include="Bar.cpp" />
     <ClCompile Include="Base.cpp" />
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="DateData.cpp" />
-    <ClCompile Include="DrawDraemon.cpp" />
-    <ClCompile Include="DrawGame.cpp" />
-    <ClCompile Include="DrawPixel.cpp" />
     <ClCompile Include="Drive_and_Avoid.cpp" />
-    <ClCompile Include="dxlib2_10drawformatstring.cpp" />
-    <ClCompile Include="dxlib2_2_1.cpp" />
-    <ClCompile Include="dxlib2_3_3drowstring.cpp" />
-    <ClCompile Include="dxlib2_4_4drawl_etc.cpp" />
-    <ClCompile Include="dxlib2_8_startkey.cpp" />
-    <ClCompile Include="load_graph.cpp" />
-    <ClCompile Include="GameTitle.cpp" />
-    <ClCompile Include="Match3puzzle.cpp" />
-    <ClCompile Include="mouse.cpp" />
-    <ClCompile Include="move_circle.cpp" />
-    <ClCompile Include="oldkey_nowkey.cpp" />
-    <ClCompile Include="p19move_boll.cpp" />
-    <ClCompile Include="p22_LoadDivGraph.cpp" />
-    <ClCompile Include="p24_LoadDivGraph.cpp" />
-    <ClCompile Include="p26bisyoujo.cpp" />
-    <ClCompile Include="p27bisyoujo.cpp" />
-    <ClCompile Include="p35kussonagai.cpp" />
-    <ClCompile Include="pac_man.cpp" />
-    <ClCompile Include="plat_sound_mem.cpp" />
     <ClCompile Include="PLAYER.cpp" />
-    <ClCompile Include="processmessage.cpp" />
-    <ClCompile Include="Rank.cpp" />
-    <ClCompile Include="rank_p23.cpp" />
-    <ClCompile Include="rank_p30.cpp" />
-    <ClCompile Include="SameGame.cpp" />
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="STP.cpp" />
-    <ClCompile Include="tetoris.cpp" />
-    <ClCompile Include="turn_extend_rota.cpp" />
-    <ClCompile Include="GameEnd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APPLE.h" />
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Bar.h" />
-    <ClInclude Include="Block.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="DrawGame.h" />
     <ClInclude Include="PLAYER.h" />
-    <ClInclude Include="Rank.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

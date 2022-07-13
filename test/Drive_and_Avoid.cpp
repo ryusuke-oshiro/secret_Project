@@ -898,7 +898,7 @@ int LoadSounds()
 int LoadImages()
 {
 	//タイトル
-	if ((g_TitleImage = LoadGraph("images/TitleBackGround.png")) == -1)return -1;
+	if ((g_TitleImage = LoadGraph("images/BackGround_title.png")) == -1)return -1;
 	//メニュー
 	if ((g_Menu = LoadGraph("images/menu.bmp")) == -1)return -1;
 	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;

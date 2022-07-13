@@ -147,6 +147,7 @@ int ReadRanking(void);	//ランキングデータ読み込み
 
 void DrawBackGround();		//背景画像スクロール処理
 
+int LoadSounds();	//ステージ
 /*void PlayerControl();*/	//自機処理
 
 /*void EnemyControl();*/	//敵機処理
@@ -345,6 +346,7 @@ void DrawRanking(void)
 	//スペースキーでメニューに戻る
 	if (g_KeyFlg & PAD_INPUT_M) g_GameState = 0;
 
+	//ランキング画像処理 
 	//ランキング画像処理
 	DrawGraph(0, 0, g_RankingImage, FALSE);
 
@@ -896,7 +898,7 @@ int LoadSounds()
 int LoadImages()
 {
 	//タイトル
-	if ((g_TitleImage = LoadGraph("images/Title.bmp")) == -1)return -1;
+	if ((g_TitleImage = LoadGraph("images/TitleBackGround.png")) == -1)return -1;
 	//メニュー
 	if ((g_Menu = LoadGraph("images/menu.bmp")) == -1)return -1;
 	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;

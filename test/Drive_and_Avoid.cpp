@@ -57,6 +57,8 @@ int counter = 0, FpsTime[2] = { 0, }, FpsTime_i = 0;
 int color_white;
 double Fps = 0.0;
 
+int x;
+int x_flg = TRUE;
 
 //ランキングデータ（構造体）
 struct RankingData {
@@ -193,6 +195,26 @@ void SetColor() {
 void DrawGameTitle(void)
 {
 	static int MenuNo = 0;
+	
+		if (x_flg == TRUE) {
+			++x;
+		}
+		else {
+			--x;
+		}
+			if (x >= 10) {
+				for (int j = 0; j <= 10; j++) {
+					x = 10;
+				}
+				x_flg = FALSE;
+			}
+			if (x <= -10) {
+				for (int k = 0; k <= 10; k++) {
+					x = -10;
+				}
+				x_flg = TRUE;
+			}
+
 
 	PlaySoundMem(g_TitleBGM, DX_PLAYTYPE_BACK, FALSE);
 
@@ -215,7 +237,7 @@ void DrawGameTitle(void)
 	DrawGraph(0, 0, g_TitleImage, FALSE);
 
 	//メニューカーソル
-	DrawRotaGraph(150, 240 + MenuNo * 50, 0.7f, M_PI / 2, g_Cone, TRUE);
+	DrawRotaGraph(150 + x, 240 + MenuNo * 50, 0.7f, M_PI / 2, g_Cone, TRUE);
 
 }
 /********************************************

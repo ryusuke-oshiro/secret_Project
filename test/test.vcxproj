@@ -23,29 +23,11 @@
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Drive_and_Avoid.cpp" />
     <ClCompile Include="PLAYER.cpp" />
-
-    <ClCompile Include="processmessage.cpp" />
-    <ClCompile Include="Rank.cpp" />
-    <ClCompile Include="rank_p23.cpp" />
-    <ClCompile Include="rank_p30.cpp" />
-    <ClCompile Include="SameGame.cpp" />
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="STP.cpp" />
-    <ClCompile Include="tetoris.cpp" />
-    <ClCompile Include="Title.cpp" />
-    <ClCompile Include="turn_extend_rota.cpp" />
-    <ClCompile Include="GameEnd.cpp" />
-
-
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APPLE.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="PLAYER.h" />
-
-    <ClInclude Include="Rank.h" />
-    <ClInclude Include="Title.h" />
-
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

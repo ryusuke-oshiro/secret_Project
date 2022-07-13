@@ -29,9 +29,6 @@
     <ClCompile Include="APPLE.cpp">
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>ソース ファイル\Chaptar5</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PLAYER.h">
@@ -41,9 +38,6 @@
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClInclude>
     <ClInclude Include="APPLE.h">
-      <Filter>ソース ファイル\Chaptar5</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h">
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClInclude>
   </ItemGroup>

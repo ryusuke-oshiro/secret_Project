@@ -52,6 +52,7 @@
     <ClCompile Include="PLAYER.cpp" />
     <ClCompile Include="processmessage.cpp" />
     <ClCompile Include="Rank.cpp" />
+    <ClCompile Include="Ranking.cpp" />
     <ClCompile Include="rank_p23.cpp" />
     <ClCompile Include="rank_p30.cpp" />
     <ClCompile Include="SameGame.cpp" />
@@ -70,6 +71,7 @@
     <ClInclude Include="DrawGame.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="Rank.h" />
+    <ClInclude Include="Ranking.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

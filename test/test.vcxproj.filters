@@ -180,6 +180,9 @@
     <ClCompile Include="APPLE.cpp">
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClCompile>
+    <ClCompile Include="Ranking.cpp">
+      <Filter>ソース ファイル\Chaptar5</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h">
@@ -204,6 +207,9 @@
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClInclude>
     <ClInclude Include="APPLE.h">
+      <Filter>ソース ファイル\Chaptar5</Filter>
+    </ClInclude>
+    <ClInclude Include="Ranking.h">
       <Filter>ソース ファイル\Chaptar5</Filter>
     </ClInclude>
   </ItemGroup>

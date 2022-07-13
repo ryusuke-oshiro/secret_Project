@@ -67,6 +67,64 @@ struct RankingData {
 //ランキングデータ変数宣言
 struct RankingData g_Ranking[RANKING_DATA];
 
+////リンゴの最大数
+//const int Apple_MAX = 9;
+
+//アイテムの最大数
+//const int ITEM_MAX = 3;
+
+//自機の構造体
+//struct PLAYER {
+//	int flg;	//使用フラグ
+//	int x, y;	//座標x,y
+//	int w, h;	//幅w,高さh
+//	double angle;//機体の向き
+//	int count;	//タイミング用
+//	int speed;	//移動速度
+//	int hp;		//体力
+//	int fuel;	//燃料
+//	int bari;	//バリア回数
+//	int baricnt;	//バリア継続時間
+//	int bariup;	//バリア回数（走行距離アップ）
+//};
+////自機
+//struct PLAYER g_player;
+
+//敵機の構造体
+//struct ENEMY {
+//	int flg;	//使用フラグ
+//	int type;	//タイプ
+//	int img;	//画像
+//	int x, y, w, h;	//座標x,y 幅 w 高さ h
+//	int speed;	//移動速度
+//	int point;	//スコア加算
+//};
+//
+////リンゴ
+//struct ENEMY g_enemy[Apple_MAX];
+//struct ENEMY g_enemy00 = { TRUE,0,0,0,-50,63,120,0,1 };
+//struct ENEMY g_enemyCn = { TRUE,4,0,0,-50,18,18,0,1 };
+//struct ENEMY g_item[ITEM_MAX];
+//struct ENEMY g_item00 = { TRUE,0,0,0,-50,50,50,0,1 };
+/******************************************************
+*定数の宣言
+*******************************************************/
+
+//const int SCREEN_WIDTH = 640;
+//const int SCREEN_HEIGHT = 480;
+
+//自機の初期値
+//const int PLAYER_POS_X = SCREEN_WIDTH / 2;
+//const int PLAYER_POS_Y = SCREEN_HEIGHT - 100;
+//const int PLAYER_WIDTH = 63;
+//const int PLAYER_HEIGHT = 120;
+//const int PLAYER_SPEED = 5;
+//const int PLAYER_HP = 1000;
+//const int PLAYER_FUEL = 20000;
+//const int PLAYER_BARRIER = 3;
+//const int PLAYER_BARRIERUP = 10;
+
+
 /***************************************************
 *関数のプロトタイプ宣言
 ****************************************************/
@@ -89,6 +147,15 @@ int ReadRanking(void);	//ランキングデータ読み込み
 
 void DrawBackGround();		//背景画像スクロール処理
 
+/*void PlayerControl();*/	//自機処理
+
+/*void EnemyControl();*/	//敵機処理
+/*int CreateEnemy();	*/	//敵機生成処理
+
+/*int HitBoxPlayer(PLAYER* p, ENEMY* e);*/	//当たり判定
+
+//void ItemControl();		//アイテム処理
+//int CreateItem();		//アイテム生成処理
 int LoadSounds();	//ステージ
 
 void SetColor();
@@ -232,11 +299,43 @@ void GameInit(void)
 	g_player.InitPlayer();
 	apple.InitApple();
 
+	//敵１を避けた数の初期設定
+	/*g_EnemyCount1 = 0;
+	g_EnemyCount2 = 0;
+	g_EnemyCount3 = 0;*/
+
+	//プレイヤーの初期設定
+	/*g_player.flg = TRUE;
+	g_player.x = PLAYER_POS_X;
+	g_player.y = PLAYER_POS_Y;
+	g_player.w = PLAYER_WIDTH;
+	g_player.h = PLAYER_HEIGHT;
+	g_player.angle = 0.0;
+	g_player.count = 0;
+	g_player.speed = PLAYER_SPEED;
+	g_player.hp = PLAYER_HP;
+	g_player.fuel = PLAYER_FUEL;
+	g_player.bari = PLAYER_BARRIER;
+	g_player.bariup = PLAYER_BARRIERUP;*/
+
 	Time = GetNowCount();
 	
+
 	//ゲームメイン処理へ
 	g_GameState = 5;
 
+	//音源の初期設定
+
+
+	//エネミーの初期設定
+	/*for (int i = 0; i < Apple_MAX; i++) {
+		g_apple[i].flg = FALSE;
+	}*/
+
+	////アイテムの初期設定
+	//for (int i = 0; i < ITEM_MAX; i++) {
+	//	g_item[i].flg = FALSE;
+	//}
 }
 /*******************************************
 *ゲームランキング描画処理
@@ -246,7 +345,7 @@ void DrawRanking(void)
 	//スペースキーでメニューに戻る
 	if (g_KeyFlg & PAD_INPUT_M) g_GameState = 0;
 
-	//ランキング画像処理 
+	//ランキング画像処理
 	DrawGraph(0, 0, g_RankingImage, FALSE);
 
 	//ランキング一覧を表示
@@ -797,7 +896,7 @@ int LoadSounds()
 int LoadImages()
 {
 	//タイトル
-	if ((g_TitleImage = LoadGraph("images/TitleBackGround.png")) == -1)return -1;
+	if ((g_TitleImage = LoadGraph("images/Title.bmp")) == -1)return -1;
 	//メニュー
 	if ((g_Menu = LoadGraph("images/menu.bmp")) == -1)return -1;
 	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;

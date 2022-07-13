@@ -42,6 +42,11 @@ void PLAYER::InitPlayer() {
 }
 
 void PLAYER::PlayerControl() {
+	////ã‰º¶‰EˆÚ“®
+	//if (g_player.flg == TRUE) {
+	//	if (g_NowKey & PAD_INPUT_LEFT)g_player.x -= g_player.speed;
+	//	if (g_NowKey & PAD_INPUT_RIGHT)g_player.x += g_player.speed;
+	//}
 
 	//‰æ–Ê‚ğ‚Í‚İo‚³‚È‚¢‚æ‚¤‚É‚·‚é
 	if (g_player.x < 32)g_player.x = 32;

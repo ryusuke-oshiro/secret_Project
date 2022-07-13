@@ -13,8 +13,8 @@ APPLE::APPLE() {
 	img = 0;
 	x = 0;
 	y = 0;
-	w = 0;
-	h = 0;
+	w = 35;
+	h = 35;
 	speed = 0;
 	point = 0;
 }
@@ -35,7 +35,7 @@ void APPLE::InitApple() {
 
 void APPLE::SelectApple(int x) {
 	int i = x;
-	int select = GetRand(6) + 1;
+	int select = GetRand(7) + 1;
 	if (select <= 2) {
 		g_apple[i].type=0;
 		g_apple[i].speed=2;
@@ -46,7 +46,7 @@ void APPLE::SelectApple(int x) {
 		g_apple[i].speed = 5;
 		g_apple[i].point=300;
 	}
-	else if (select <= 5) {
+	else if (select <= 6) {
 		g_apple[i].type = 2;
 		g_apple[i].speed = 10;
 		g_apple[i].point=500;
@@ -56,6 +56,7 @@ void APPLE::SelectApple(int x) {
 		g_apple[i].speed = 1;
 		g_apple[i].point= -1000;
 	}
+
 }
 
  
@@ -64,7 +65,7 @@ int APPLE::CreateApple() {
 		if (g_apple[i].flg == FALSE) {
 			
 			g_apple[i].flg = TRUE;
-			g_apple[i].x = i * 72 + 25;		//‚±‚Ìi‚ðƒ‰ƒ“ƒ_ƒ€GetRand(1`7)-1‚É‚·‚é
+			g_apple[i].x = GetRand(6) * 72 + 25;		//‚±‚Ìi‚ðƒ‰ƒ“ƒ_ƒ€GetRand(1`7)-1‚É‚·‚é
 			g_apple[i].y = 20;
 			SelectApple(i);
 			g_apple[i].img = Apple_Img[g_apple[i].type];
@@ -83,13 +84,15 @@ int APPLE::CreateApple() {
 }
 
 void APPLE::AppleControl() {
+	//ƒŠƒ“ƒS‚Ì‡ŒvƒXƒRƒA
+	AppleScore();
 	for (int i = 0; i < Apple_MAX; i++) {
 		if (g_apple[i].flg == TRUE) {
 
 			//“G‚Ì•\Ž¦
 			DrawRotaGraph(g_apple[i].x, g_apple[i].y, 1.0f, 0, g_apple[i].img, TRUE, FALSE);
 
-			if (g_player.flg == FALSE)continue;
+			/*if (g_player.flg == FALSE)continue;*/
 
 			switch (g_apple[i].type) {
 			case 0:g_apple[i].y += g_apple[i].speed;
@@ -118,26 +121,24 @@ void APPLE::AppleControl() {
 				if (g_apple[i].type == 2)AppleCount3++;
 			}*/
 			//“–‚½‚è”»’è
-			if (g_player.HitBoxPlayer(&g_player, &g_apple[i]) == TRUE) {
+			if (g_player.HitBoxPlayer(&g_player, &g_apple[i]) == TRUE && g_player.tenmetu == FALSE) {
 				if (g_apple[i].type == 0) { 
 					AppleCount1++;
-					/*g_Score += g_apple[i].point;*/
+					g_Score += g_apple[i].point;
 				}
 				if (g_apple[i].type == 1) { 
 					AppleCount2++; 
+					g_Score += g_apple[i].point;
 				}
 				if (g_apple[i].type == 2){
 					AppleCount3++;
+					g_Score += g_apple[i].point;
 				}
-				g_player.flg = FALSE;
-				g_player.speed = 5;
-				g_player.count = 0;
-				g_player.hp -= 100;
-				g_apple[i].flg = FALSE;
-				if (g_player.hp <= 0) {
-					g_GameState = 6;
-					StopSoundMem(g_MusicBGM);
-				}
+				if (g_apple[i].type == 3) {
+					g_Score += g_apple[i].point;
+					g_player.tenmetu = TRUE;
+				}	
+				g_apple[i].flg = FALSE;			//ƒŠƒ“ƒS‚ðÁ‚·
 			}
 		}
 	}
@@ -146,5 +147,10 @@ void APPLE::AppleControl() {
 	if (g_Mileage / 10 % 50 == 0) {
 		CreateApple();
 	}
+	
 }
 
+void APPLE::AppleScore() {
+
+	DrawFormatString(561, 200, 0xffffff,"%d", g_Score);
+}

@@ -11,12 +11,14 @@
 #include"APPLE.h"
 #include"Common.h"
 
+XINPUT_STATE input;
+
 /******************************************************
 *変数宣言
 *******************************************************/
-int g_OldKey;	//前回の入力キー
-int g_NowKey;	//今回の入力キー
-int g_KeyFlg;	//入力キー情報
+XINPUT_STATE g_OldKey;	//前回の入力キー
+XINPUT_STATE g_NowKey;	//今回の入力キー
+//int g_KeyFlg;	//入力キー情報
 
 int g_GameState = 0;	//ゲームモード
 
@@ -104,7 +106,7 @@ void FpsTimeFanction();
 int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	hPrevInstance, _In_ LPSTR IpCmdLine, _In_ int nCmdShow)
 {
-	XINPUT_STATE input;
+
 	SetMainWindowText("Drive&Avoid");		//タイトルを設定
 
 	ChangeWindowMode(TRUE);					//ウィンドウモードで起動
@@ -128,9 +130,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		RefreshTime = GetNowCount();
 		//入力キー取得
-		g_OldKey = g_NowKey;
+
+		GetJoypadXInputState(DX_INPUT_PAD1, &g_NowKey);
+
+		/*g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-		g_KeyFlg = g_NowKey & ~g_OldKey;
+		g_KeyFlg = g_NowKey & ~g_OldKey;*/
 
 		ClearDrawScreen();			//画面の初期化
 		FpsTimeFanction();

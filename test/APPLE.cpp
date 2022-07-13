@@ -31,22 +31,20 @@ void APPLE::InitApple() {
 	point = 0;
 }
 
-//g_apple00 = { TRUE,0,0,0,-50,63,120,0,1 }
-
 void APPLE::SelectApple(int x) {
 	int i = x;
-	int select = GetRand(7) + 1;
-	if (select <= 2) {
+	int select = GetRand(15) + 1;
+	if (select <= 4) {
 		g_apple[i].type=0;
 		g_apple[i].speed=2;
 		g_apple[i].point=150;
 	}
-	else if (select <= 4) {
+	else if (select <= 8) {
 		g_apple[i].type = 1;
 		g_apple[i].speed = 5;
 		g_apple[i].point=300;
 	}
-	else if (select <= 6) {
+	else if (select <= 12) {
 		g_apple[i].type = 2;
 		g_apple[i].speed = 10;
 		g_apple[i].point=500;

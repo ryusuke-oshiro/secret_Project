@@ -22,11 +22,13 @@
     <ClCompile Include="APPLE.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Drive_and_Avoid.cpp" />
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="PLAYER.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APPLE.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="Help.h" />
     <ClInclude Include="PLAYER.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -65,15 +65,10 @@ int APPLE::CreateApple() {
 		if (g_apple[i].flg == FALSE) {
 			
 			g_apple[i].flg = TRUE;
-			g_apple[i].x = GetRand(6) * 72 + 25;		//‚±‚Ìi‚ðƒ‰ƒ“ƒ_ƒ€GetRand(1`7)-1‚É‚·‚é
+			g_apple[i].x = GetRand(6) * 72 + 25;		//‚±‚Ìi‚ðƒ‰ƒ“ƒ_ƒ€GetRand1`7(-1)‚É‚·‚é
 			g_apple[i].y = 20;
 			SelectApple(i);
 			g_apple[i].img = Apple_Img[g_apple[i].type];
-			/*g_apple[i] = g_apple00;*/
-			/*g_apple[i].type = GetRand(2);
-			g_apple[i].img = Apple_Img[g_apple[i].type];*/
-			/*g_apple[i].x = GetRand(4) * 105 + 40;*/
-			/*g_apple[i].speed = g_apple[i].type * 2;*/
 			//¬Œ÷
 			return TRUE;
 		}
@@ -113,13 +108,6 @@ void APPLE::AppleControl() {
 				g_apple[i].flg = FALSE;
 			}
 
-			//“G‹@‚ð’Ç‚¢‰z‚µ‚½‚çƒJƒEƒ“ƒg‚·‚é
-			/*if (g_apple[i].y > g_player.y && g_apple[i].point == 1) {
-				g_apple[i].point = 0;
-				if (g_apple[i].type == 0)AppleCount1++;
-				if (g_apple[i].type == 1)AppleCount2++;
-				if (g_apple[i].type == 2)AppleCount3++;
-			}*/
 			//“–‚½‚è”»’è
 			if (g_player.HitBoxPlayer(&g_player, &g_apple[i]) == TRUE && g_player.tenmetu == FALSE) {
 				if (g_apple[i].type == 0) { 

@@ -1,0 +1,21 @@
+XINPUT_STATE *input;
+
+XINPUT_STATE g_NowKey;
+XINPUT_STATE g_OldKey;
+
+GetJoypadInputState(DX_INPUT_KEY_PAD1)
+
+
+g_OldKey = g_NowKey;
+g_NowKey = GetJoypadXInputState(DX_INPUT_PAD1,XINPUT_STATE *input);
+
+
+input.
+
+
+
+
+if (g_KeyFlg & PAD_INPUT_UP)
+
+
+if(GetJoypadXInputState( DX_INPUT_PAD1, &input) == TRUE) 

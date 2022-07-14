@@ -16,8 +16,6 @@ XINPUT_STATE input;
 /******************************************************
 *変数宣言
 *******************************************************/
-XINPUT_STATE g_OldKey;	//前回の入力キー
-XINPUT_STATE g_NowKey;	//今回の入力キー
 //int g_KeyFlg;	//入力キー情報
 
 int g_GameState = 0;	//ゲームモード
@@ -30,6 +28,8 @@ int g_Score = 0;		//スコア
 int g_RankingImage;		//画像用変数
 
 int g_WaitTime = 0;
+
+int g_WaitCount = 0;
 
 int Time = 0;     //待ち時間
 int StartTime;
@@ -131,7 +131,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 		RefreshTime = GetNowCount();
 		//入力キー取得
 
-		GetJoypadXInputState(DX_INPUT_PAD1, &g_NowKey);
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 
 		/*g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
@@ -224,11 +224,15 @@ void DrawGameTitle(void)
 	PlaySoundMem(g_TitleBGM, DX_PLAYTYPE_BACK, FALSE);
 
 	//メニューカーソル移動処理
-	if (g_KeyFlg & PAD_INPUT_DOWN) {
+	if (input.ThumbLY <= -15000) {
 		PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
 		if (++MenuNo > 3)MenuNo = 0;
+		++g_WaitCount;
+		if (g_WaitCount == 30) {
+
+		}
 	}
-	if (g_KeyFlg & PAD_INPUT_UP) {
+	if (input.ThumbLY >= 15000) {
 		PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
 		if (--MenuNo < 0)MenuNo = 3;
 	}

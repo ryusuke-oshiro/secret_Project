@@ -10,13 +10,13 @@ PLAYER g_player;
 PLAYER::PLAYER() {
 	flg = TRUE;
 	tenmetu = 0;
-	x = 0;
+	x = 0.0;
 	y = 0;
 	w = 0;
 	h = 0;
 	angle = 0.0;
 	count = 0;
-	speed = 0;
+	speed = 0.0;
 	hp = 0;
 	fuel = 0;
 	bari = 0;
@@ -34,7 +34,7 @@ void PLAYER::InitPlayer() {
 	h = 67;
 	angle = 0.0;
 	count = 0;
-	speed = 5;
+	speed = 1.0;
 	hp = 1000;
 	fuel = 20000;
 	bari = 3;
@@ -54,8 +54,40 @@ void PLAYER::PlayerControl() {
 
 
 	//ƒvƒŒƒCƒ„[‚Ì•\¦
+	if (input.ThumbLX < -17500) {		//¶“ü—Í
+            if (g_player.speed > -10) {
+                g_player.speed -= 0.5;
+            }
+            g_player.x += g_player.speed;
+        }
+        else if (input.ThumbLX > -17500 && input.ThumbLX < 128) {		//—£‚µ‚½‚Æ‚«
+            if (g_player.speed > 0) {			//h—£‚·h‚©‚Â‰Á‘¬‚ª³‚Ì”
+                g_player.speed -= 0.5;
+                g_player.x += g_player.speed;
+            }
+            else if (g_player.speed < 0) {	//h—£‚·h‚©‚Â‰Á‘¬‚ª•‰‚Ì
+                g_player.speed += 0.5;
+                g_player.x += g_player.speed;
+            }
+        }
+        if (input.ThumbLX > 17500) {		//‰E“ü—Í
+            if (g_player.speed < 10) {
+                g_player.speed += 0.5;
+            }
+            g_player.x += g_player.speed;
+        }
+        else if (input.ThumbLX < 17500 && input.ThumbLX>128) {	//—£‚µ‚½‚Æ‚«
 
-	if (g_NowKey & PAD_INPUT_LEFT) {
+            if (g_player.speed > 0) {			//h—£‚·h‚©‚Â‰Á‘¬‚ª³‚Ì
+                g_player.speed -= 0.5;
+                g_player.x -= g_player.speed;
+            }
+            else if (g_player.speed < 0) {	//h—£‚·h‚©‚Â‰Á‘¬‚ª•‰‚Ì
+                g_player.speed += 0.5;
+                g_player.x += g_player.speed;
+            }
+        }
+	/*if (g_NowKey & PAD_INPUT_LEFT) {
 			g_player.x -= g_player.speed;
 			g_Car_Nowangle = g_Car_left;
 	}
@@ -63,7 +95,7 @@ void PLAYER::PlayerControl() {
 			g_player.x += g_player.speed;
 			g_Car_Nowangle = g_Car_right;
 		}
-	
+	*/
 	
 	if (g_player.flg == TRUE) {		//TRUE‚ÌŠÔA•\¦
 		DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);

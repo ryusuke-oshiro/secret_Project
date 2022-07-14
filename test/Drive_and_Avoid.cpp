@@ -9,18 +9,23 @@
 #define RANKING_DATA 5
 #include"PLAYER.h"
 #include"APPLE.h"
+#include"TITLE.h"
 #include"Common.h"
 
 /******************************************************
 *変数宣言
 *******************************************************/
-int g_OldKey;	//前回の入力キー
-int g_NowKey;	//今回の入力キー
-int g_KeyFlg;	//入力キー情報
+XINPUT_STATE input;
+int g_KeyFLG = TRUE;	//入力キー情報
+
+
+int g_OldKey;
+int g_NowKey;
+int g_KeyFlg;
 
 int g_GameState = 0;	//ゲームモード
 
-int g_TitleImage;		//画像用変数
+/*int g_TitleImage;*/		//画像用変数
 int g_Menu, g_Cone;		//メニュー画像変数
 
 int g_Score = 0;		//スコア
@@ -28,6 +33,8 @@ int g_Score = 0;		//スコア
 int g_RankingImage;		//画像用変数
 
 int g_WaitTime = 0;
+
+int g_WaitCount = 0;
 
 int Time = 0;     //待ち時間
 int StartTime;
@@ -104,7 +111,7 @@ void FpsTimeFanction();
 int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	hPrevInstance, _In_ LPSTR IpCmdLine, _In_ int nCmdShow)
 {
-	XINPUT_STATE input;
+
 	SetMainWindowText("Drive&Avoid");		//タイトルを設定
 
 	ChangeWindowMode(TRUE);					//ウィンドウモードで起動
@@ -128,6 +135,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		RefreshTime = GetNowCount();
 		//入力キー取得
+		/*g_OldKey = g_NewKey;*/
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
+		
+
 		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 		g_KeyFlg = g_NowKey & ~g_OldKey;
@@ -137,7 +148,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 		switch (g_GameState) {
 		case 0:
-			DrawGameTitle();		//ゲームタイトル描画処理
+			title.DrawGameTitle();		//ゲームタイトル描画処理
 			break;
 		case 1:
 			GameInit();				//ゲーム初期処理
@@ -189,57 +200,76 @@ void SetColor() {
 	color_white = GetColor(255, 255, 255);            //白色ハンドルを取得
 	return;
 }
-/*********************************************
-*ゲームタイトル表示（メニュー画面）
-**********************************************/
-void DrawGameTitle(void)
-{
-	static int MenuNo = 0;
-	
-		if (x_flg == TRUE) {
-			++x;
-		}
-		else {
-			--x;
-		}
-			if (x >= 10) {
-				for (int j = 0; j <= 10; j++) {
-					x = 10;
-				}
-				x_flg = FALSE;
-			}
-			if (x <= -10) {
-				for (int k = 0; k <= 10; k++) {
-					x = -10;
-				}
-				x_flg = TRUE;
-			}
-
-
-	PlaySoundMem(g_TitleBGM, DX_PLAYTYPE_BACK, FALSE);
-
-	//メニューカーソル移動処理
-	if (g_KeyFlg & PAD_INPUT_DOWN) {
-		PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
-		if (++MenuNo > 3)MenuNo = 0;
-	}
-	if (g_KeyFlg & PAD_INPUT_UP) {
-		PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
-		if (--MenuNo < 0)MenuNo = 3;
-	}
-	//Zキーでメニュー選択
-	if (g_KeyFlg & PAD_INPUT_A) {
-		StopSoundMem(g_TitleBGM);
-		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);
-		g_GameState = MenuNo + 1;
-	}
-	//タイトル画像表示
-	DrawGraph(0, 0, g_TitleImage, FALSE);
-
-	//メニューカーソル
-	DrawRotaGraph(150 + x, 240 + MenuNo * 50, 0.7f, M_PI / 2, g_Cone, TRUE);
-
-}
+///*********************************************
+//*ゲームタイトル表示（メニュー画面）
+//**********************************************/
+//void DrawGameTitle(void)
+//{
+//	static int MenuNo = 0;
+//	
+//		if (x_flg == TRUE) {
+//			++x;
+//		}
+//		else {
+//			--x;
+//		}
+//			if (x >= 10) {
+//				for (int j = 0; j <= 10; j++) {
+//					x = 10;
+//				}
+//				x_flg = FALSE;
+//			}
+//			if (x <= -10) {
+//				for (int k = 0; k <= 10; k++) {
+//					x = -10;
+//				}
+//				x_flg = TRUE;
+//			}
+//
+//
+//	PlaySoundMem(g_TitleBGM, DX_PLAYTYPE_BACK, FALSE);
+//
+//	//メニューカーソル移動処理
+//	if (input.ThumbLY <= -15000) {
+//		if (g_KeyFLG == TRUE) { 
+//			PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE); 
+//			++MenuNo;
+//			if (MenuNo > 3) {
+//				MenuNo = 0;
+//			}
+//			g_KeyFLG = FALSE;
+//		}
+//		++g_WaitCount;
+//		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
+//	}
+//	if (input.ThumbLY >= 15000) {
+//		if (g_KeyFLG == TRUE) {
+//			PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
+//			--MenuNo;
+//			if (MenuNo < 0) {
+//				MenuNo = 3;
+//			}
+//			g_KeyFLG = FALSE;
+//		}
+//		++g_WaitCount;
+//		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
+//	}
+//	if (input.ThumbLY > -15000 && input.ThumbLY < 15000) {
+//		g_KeyFLG = TRUE; g_WaitCount = 0;
+//	}
+//	//Zキーでメニュー選択
+//	if (input.Buttons[12] == 1) {
+//		StopSoundMem(g_TitleBGM);
+//		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);
+//		g_GameState = MenuNo + 1;
+//	}
+//	//タイトル画像表示
+//	DrawGraph(0, 0, g_TitleImage, FALSE);
+//
+//	//メニューカーソル
+//	DrawRotaGraph(150 + x, 240 + MenuNo * 50, 0.7f, M_PI / 2, g_Cone, TRUE);
+//
+//}
 /********************************************
 *ゲーム初期化処理
 *********************************************/
@@ -298,7 +328,7 @@ void DrawHelp(void)
 	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 0;
 
 	//タイトル画像表示
-	DrawGraph(0, 0, g_TitleImage, FALSE);
+	DrawGraph(0, 0, title.g_TitleImage, FALSE);
 	SetFontSize(16);
 	DrawString(20, 120, "ヘルプ画面", 0xffffff, 0);
 
@@ -345,11 +375,11 @@ void GameMain(void)
 	
 
 	//スペースキーでメニューに戻る
-	//if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
+	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
 
-	//SetFontSize(16);
-	//DrawString(20, 20, "ゲームメイン", 0xffffff, 0);
-	//DrawString(150, 450, "---- スペースキーを押してゲームオーバーへ ----", 0xffffff, 0);
+	SetFontSize(16);
+	DrawString(20, 20, "ゲームメイン", 0xffffff, 0);
+	DrawString(150, 450, "---- スペースキーを押してゲームオーバーへ ----", 0xffffff, 0);
 }
 
 
@@ -526,7 +556,7 @@ int ReadRanking(void) {
 ****************************************/
 int LoadSounds()
 {
-	if ((g_TitleBGM = LoadSoundMem("sounds/Initial D - Night Of Fire.mp3")) == -1)return -1;
+	if ((title.g_TitleBGM = LoadSoundMem("sounds/Initial D - Night Of Fire.mp3")) == -1)return -1;
 	//initial D音源
 	if ((g_MusicBGM = LoadSoundMem("sounds/Daisuke full ver. (歌詞・和訳付き).mp3")) == -1)return -1;
 	if ((g_GameOverSE = LoadSoundMem("sounds/GameOver.mp3")) == -1)return -1;
@@ -550,7 +580,7 @@ int LoadSounds()
 int LoadImages()
 {
 	//タイトル
-	if ((g_TitleImage = LoadGraph("images/BackGround_title.png")) == -1)return -1;
+	if ((title.g_TitleImage = LoadGraph("images/BackGround_title.png")) == -1)return -1;
 	//メニュー
 	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;
 	//リンゴ

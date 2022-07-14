@@ -11,12 +11,16 @@
 #include"APPLE.h"
 #include"Common.h"
 
-XINPUT_STATE input;
-
 /******************************************************
 *変数宣言
 *******************************************************/
-//int g_KeyFlg;	//入力キー情報
+XINPUT_STATE input;
+int g_KeyFLG = TRUE;	//入力キー情報
+
+
+int g_OldKey;
+int g_NowKey;
+int g_KeyFlg;
 
 int g_GameState = 0;	//ゲームモード
 
@@ -130,12 +134,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		RefreshTime = GetNowCount();
 		//入力キー取得
-
+		/*g_OldKey = g_NewKey;*/
 		GetJoypadXInputState(DX_INPUT_PAD1, &input);
+		
 
-		/*g_OldKey = g_NowKey;
+		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-		g_KeyFlg = g_NowKey & ~g_OldKey;*/
+		g_KeyFlg = g_NowKey & ~g_OldKey;
 
 		ClearDrawScreen();			//画面の初期化
 		FpsTimeFanction();
@@ -225,19 +230,34 @@ void DrawGameTitle(void)
 
 	//メニューカーソル移動処理
 	if (input.ThumbLY <= -15000) {
-		PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
-		if (++MenuNo > 3)MenuNo = 0;
-		++g_WaitCount;
-		if (g_WaitCount == 30) {
-
+		if (g_KeyFLG == TRUE) { 
+			PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE); 
+			++MenuNo;
+			if (MenuNo > 3) {
+				MenuNo = 0;
+			}
+			g_KeyFLG = FALSE;
 		}
+		++g_WaitCount;
+		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
 	}
 	if (input.ThumbLY >= 15000) {
-		PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
-		if (--MenuNo < 0)MenuNo = 3;
+		if (g_KeyFLG == TRUE) {
+			PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
+			--MenuNo;
+			if (MenuNo < 0) {
+				MenuNo = 3;
+			}
+			g_KeyFLG = FALSE;
+		}
+		++g_WaitCount;
+		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
+	}
+	if (input.ThumbLY > -15000 && input.ThumbLY < 15000) {
+		g_KeyFLG = TRUE; g_WaitCount = 0;
 	}
 	//Zキーでメニュー選択
-	if (g_KeyFlg & PAD_INPUT_A) {
+	if (input.Buttons[12] == 1) {
 		StopSoundMem(g_TitleBGM);
 		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);
 		g_GameState = MenuNo + 1;
@@ -354,11 +374,11 @@ void GameMain(void)
 	
 
 	//スペースキーでメニューに戻る
-	//if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
+	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
 
-	//SetFontSize(16);
-	//DrawString(20, 20, "ゲームメイン", 0xffffff, 0);
-	//DrawString(150, 450, "---- スペースキーを押してゲームオーバーへ ----", 0xffffff, 0);
+	SetFontSize(16);
+	DrawString(20, 20, "ゲームメイン", 0xffffff, 0);
+	DrawString(150, 450, "---- スペースキーを押してゲームオーバーへ ----", 0xffffff, 0);
 }
 
 

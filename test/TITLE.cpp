@@ -67,7 +67,7 @@ void TITLE::DrawGameTitle(void)
 	if (input.ThumbLY > -15000 && input.ThumbLY < 15000) {
 		g_KeyFLG = TRUE; g_WaitCount = 0;
 	}
-	//Zキーでメニュー選択
+	//Aキーでメニュー選択
 	if (input.Buttons[12] == 1) {
 		StopSoundMem(g_TitleBGM);
 		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);

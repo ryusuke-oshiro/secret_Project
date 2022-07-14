@@ -6,15 +6,21 @@
 #define SCREEN_HEIGHT 480
 
 extern XINPUT_STATE input;
-extern int g_KeyFlg;
+extern int g_KeyFLG;
 
+extern int g_KeyFlg;
 extern int g_NowKey;
 
 extern int Time;
 
+extern int g_WaitCount;
+
 extern int StartTime;
 
 extern int g_MusicBGM;
+extern int g_SE1;
+extern int g_SE2;
+extern int g_Cone;
 
 extern int g_Mileage;
 

@@ -10,6 +10,9 @@
 #include"PLAYER.h"
 #include"APPLE.h"
 #include"Common.h"
+#include"Help.h"
+
+XINPUT_STATE input;
 
 /******************************************************
 *変数宣言
@@ -76,7 +79,7 @@ void GameMain(void);	//ゲームメイン処理
 void DrawGameTitle(void);//タイトル描画処理
 void DrawGameOver(void);//ゲームオーバー画面描画処理
 void DrawEnd(void);//ゲームエンド描画処理
-void DrawHelp(void);//ゲームヘルプ描画処理
+/*void DrawHelp(void);*///ゲームヘルプ描画処理
 
 void DrawRanking(void);//ランキング描画処理
 void InputRanking(void);//ランキング入力
@@ -102,7 +105,7 @@ void FpsTimeFanction();
 int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	hPrevInstance, _In_ LPSTR IpCmdLine, _In_ int nCmdShow)
 {
-	XINPUT_STATE input;
+
 	SetMainWindowText("Drive&Avoid");		//タイトルを設定
 
 	ChangeWindowMode(TRUE);					//ウィンドウモードで起動
@@ -125,9 +128,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		RefreshTime = GetNowCount();
+
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
+
 		//入力キー取得
 		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+		//g_NowKey = GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		g_KeyFlg = g_NowKey & ~g_OldKey;
 
 		ClearDrawScreen();			//画面の初期化
@@ -144,7 +151,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			DrawRanking();			//ランキング描画処理
 			break;
 		case 3:
-			DrawHelp();				//ゲームヘルプ描画処理
+			help.DrawHelp();				//ゲームヘルプ描画処理
 			break;
 		case 4:
 			DrawEnd();				//ゲームエンド描画処理
@@ -270,28 +277,28 @@ void DrawRanking(void)
 /*******************************************
 *ゲームヘルプ描画処理
 ********************************************/
-void DrawHelp(void)
-{
-	// スペースキーでメニューに戻る
-	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 0;
-
-	//タイトル画像表示
-	DrawGraph(0, 0, g_TitleImage, FALSE);
-	SetFontSize(16);
-	DrawString(20, 120, "ヘルプ画面", 0xffffff, 0);
-
-	DrawString(20, 160, "これは障害物を避けながら", 0xffffff, 0);
-	DrawString(20, 180, "走り続けるゲームです", 0xffffff, 0);
-	DrawString(20, 200, "燃料が尽きるか障害物に", 0xffffff, 0);
-	DrawString(20, 220, "数回当たるとゲームオーバーです", 0xffffff, 0);
-	DrawString(20, 250, "アイテム一覧", 0xffffff, 0);
-	DrawGraph(20, 260, g_Item[0], TRUE);
-	DrawString(20, 315, "取ると燃料が回復するよ", 0xffffff, 0);
-	DrawGraph(20, 335, g_Item[1], TRUE);
-	DrawString(20, 385, "ダメージを受けているときに取ると耐久回復", 0xffffff, 0);
-	DrawString(20, 405, "耐久が減っていなかったら燃料が少し回復するよ", 0xffffff, 0);
-	DrawString(20, 450, "---- スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
-}
+//void DrawHelp(void)
+//{
+//	// スペースキーでメニューに戻る
+//	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 0;
+//
+//	//タイトル画像表示
+//	DrawGraph(0, 0, g_TitleImage, FALSE);
+//	SetFontSize(16);
+//	DrawString(20, 120, "ヘルプ画面", 0xffffff, 0);
+//
+//	DrawString(20, 160, "これは障害物を避けながら", 0xffffff, 0);
+//	DrawString(20, 180, "走り続けるゲームです", 0xffffff, 0);
+//	DrawString(20, 200, "燃料が尽きるか障害物に", 0xffffff, 0);
+//	DrawString(20, 220, "数回当たるとゲームオーバーです", 0xffffff, 0);
+//	DrawString(20, 250, "アイテム一覧", 0xffffff, 0);
+//	DrawGraph(20, 260, g_Item[0], TRUE);
+//	DrawString(20, 315, "取ると燃料が回復するよ", 0xffffff, 0);
+//	DrawGraph(20, 335, g_Item[1], TRUE);
+//	DrawString(20, 385, "ダメージを受けているときに取ると耐久回復", 0xffffff, 0);
+//	DrawString(20, 405, "耐久が減っていなかったら燃料が少し回復するよ", 0xffffff, 0);
+//	DrawString(20, 450, "---- スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
+//}
 /*******************************************
 *ゲームエンド描画処理
 ********************************************/
@@ -527,6 +534,8 @@ int LoadSounds()
 *****************************************/
 int LoadImages()
 {
+	//ヘルプ
+	if ((help.g_HelpImage = LoadGraph("images/BackGround_help.png")) == -1)return -1;
 	//タイトル
 	if ((g_TitleImage = LoadGraph("images/BackGround_title.png")) == -1)return -1;
 	//メニュー

@@ -1,6 +1,6 @@
 /***********************************************************
-**    ç¬¬5ç« ã€€ãƒŸãƒ‹ã‚²ãƒ¼ãƒ ã‚’ã¤ãã‚‹ï¼ˆï¼’ï¼‰
-**ã€€ã€€ã€€ã€€ã€€ã€€ã€€ãƒ¬ãƒ¼ã‚¹ï¼†é¿ã‘ã‚²ãƒ¼
+**    ‘æ5Í@ƒ~ƒjƒQ[ƒ€‚ğ‚Â‚­‚éi‚Qj
+**@@@@@@@ƒŒ[ƒX•”ğ‚¯ƒQ[
 ************************************************************/
 #include"DxLib.h"
 #include"Common.h"
@@ -11,52 +11,51 @@
 #include"APPLE.h"
 #include"TITLE.h"
 #include"Common.h"
-#include"HELP.h"
 
 /******************************************************
-*å¤‰æ•°å®£è¨€
+*•Ï”éŒ¾
 *******************************************************/
 XINPUT_STATE input;
-int g_KeyFLG = TRUE;	//å…¥åŠ›ã‚­ãƒ¼æƒ…å ±
+int g_KeyFLG = TRUE;	//“ü—ÍƒL[î•ñ
 
 
 int g_OldKey;
 int g_NowKey;
 int g_KeyFlg;
 
-int g_GameState = 0;	//ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰
+int g_GameState = 0;	//ƒQ[ƒ€ƒ‚[ƒh
 
-/*int g_TitleImage;*/		//ç”»åƒç”¨å¤‰æ•°
-int g_Menu, g_Cone;		//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»åƒå¤‰æ•°
+/*int g_TitleImage;*/		//‰æ‘œ—p•Ï”
+int g_Menu, g_Cone;		//ƒƒjƒ…[‰æ‘œ•Ï”
 
-int g_Score = 0;		//ã‚¹ã‚³ã‚¢
+int g_Score = 0;		//ƒXƒRƒA
 
-int g_RankingImage;		//ç”»åƒç”¨å¤‰æ•°
+int g_RankingImage;		//‰æ‘œ—p•Ï”
 
 int g_WaitTime = 0;
 
 int g_WaitCount = 0;
 
-int Time = 0;     //å¾…ã¡æ™‚é–“
+int Time = 0;     //‘Ò‚¿ŠÔ
 int StartTime;
 int RefreshTime;
 
-int g_EndImage;        //ã‚¨ãƒ³ãƒ‰ç”»é¢
+int g_EndImage;        //ƒGƒ“ƒh‰æ–Ê
 
-int g_Mileage;          //èµ°è¡Œè·é›¢
+int g_Mileage;          //‘–s‹——£
 
-int Apple_Img[4]; //ãƒªãƒ³ã‚´æç”»å¤‰æ•°
-int g_Item[2];    //ã‚¢ã‚¤ãƒ†ãƒ ç”»åƒå¤‰æ•°
-int g_Teki[3];    //ã‚­ãƒ£ãƒ©ç”»åƒå¤‰æ•°
+int Apple_Img[4]; //ƒŠƒ“ƒS•`‰æ•Ï”
+int g_Item[2];    //ƒAƒCƒeƒ€‰æ‘œ•Ï”
+int g_Teki[3];    //ƒLƒƒƒ‰‰æ‘œ•Ï”
 
-int g_StageImage;//ã‚¹ãƒ†ãƒ¼ã‚¸ç”»åƒ
+int g_StageImage;//ƒXƒe[ƒW‰æ‘œ
 
-int AppleCount1, AppleCount2, AppleCount3, AppleCount4; //ãƒªãƒ³ã‚´ã‚«ã‚¦ãƒ³ãƒˆ
+int AppleCount1, AppleCount2, AppleCount3, AppleCount4; //ƒŠƒ“ƒSƒJƒEƒ“ƒg
 
-int g_Car_left, g_Car_right, g_Car_Nowangle, g_Barrier;	//ã‚­ãƒ£ãƒ©ç”»åƒå¤‰æ•°
+int g_Car_left, g_Car_right, g_Car_Nowangle, g_Barrier;	//ƒLƒƒƒ‰‰æ‘œ•Ï”
 
 int g_TitleBGM;
-int g_MusicBGM;	//ã‚¹ãƒ†ãƒ¼ã‚¸éŸ³æº
+int g_MusicBGM;	//ƒXƒe[ƒW‰¹Œ¹
 int g_GameOverSE;
 int g_SE1;
 int g_SE2;
@@ -68,144 +67,139 @@ double Fps = 0.0;
 int x;
 int x_flg = TRUE;
 
-//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ï¼ˆæ§‹é€ ä½“ï¼‰
+//ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^i\‘¢‘Ìj
 struct RankingData {
 	int no;
 	char name[11];
 	long score;
 };
-//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿å¤‰æ•°å®£è¨€
+//ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^•Ï”éŒ¾
 struct RankingData g_Ranking[RANKING_DATA];
 
 /***************************************************
-*é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
+*ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾
 ****************************************************/
-void GameInit(void);	//ã‚²ãƒ¼ãƒ åˆæœŸåŒ–å‡¦ç†
-void GameMain(void);	//ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³å‡¦ç†
+void GameInit(void);	//ƒQ[ƒ€‰Šú‰»ˆ—
+void GameMain(void);	//ƒQ[ƒ€ƒƒCƒ“ˆ—
 
-void DrawGameTitle(void);//ã‚¿ã‚¤ãƒˆãƒ«æç”»å‡¦ç†
-void DrawGameOver(void);//ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ç”»é¢æç”»å‡¦ç†
-void DrawEnd(void);//ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ãƒ‰æç”»å‡¦ç†
-/*void DrawHelp(void);*///ã‚²ãƒ¼ãƒ ãƒ˜ãƒ«ãƒ—æç”»å‡¦ç†
+void DrawGameTitle(void);//ƒ^ƒCƒgƒ‹•`‰æˆ—
+void DrawGameOver(void);//ƒQ[ƒ€ƒI[ƒo[‰æ–Ê•`‰æˆ—
+void DrawEnd(void);//ƒQ[ƒ€ƒGƒ“ƒh•`‰æˆ—
+void DrawHelp(void);//ƒQ[ƒ€ƒwƒ‹ƒv•`‰æˆ—
 
-void DrawRanking(void);//ãƒ©ãƒ³ã‚­ãƒ³ã‚°æç”»å‡¦ç†
-void InputRanking(void);//ãƒ©ãƒ³ã‚­ãƒ³ã‚°å…¥åŠ›
+void DrawRanking(void);//ƒ‰ƒ“ƒLƒ“ƒO•`‰æˆ—
+void InputRanking(void);//ƒ‰ƒ“ƒLƒ“ƒO“ü—Í
 
-int LoadImages(); //ç”»åƒèª­ã¿è¾¼ã¿
+int LoadImages(); //‰æ‘œ“Ç‚İ‚İ
 
-void SortRanking(void);	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ä¸¦ã³æ›¿ãˆ
-int SaveRanking(void);	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜
-int ReadRanking(void);	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
+void SortRanking(void);	//ƒ‰ƒ“ƒLƒ“ƒO•À‚Ñ‘Ö‚¦
+int SaveRanking(void);	//ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì•Û‘¶
+int ReadRanking(void);	//ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^“Ç‚İ‚İ
 
-void DrawBackGround();		//èƒŒæ™¯ç”»åƒã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å‡¦ç†
+void DrawBackGround();		//”wŒi‰æ‘œƒXƒNƒ[ƒ‹ˆ—
 
-int LoadSounds();	//ã‚¹ãƒ†ãƒ¼ã‚¸
-
+int LoadSounds();	//ƒXƒe[ƒW
 
 void SetColor();
 void FpsTimeFanction();
 
 /****************************************************
-*ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã®é–‹å§‹
+*ƒvƒƒOƒ‰ƒ€‚ÌŠJn
 ******************************************************/
 int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	hPrevInstance, _In_ LPSTR IpCmdLine, _In_ int nCmdShow)
 {
 
-	SetMainWindowText("Drive&Avoid");		//ã‚¿ã‚¤ãƒˆãƒ«ã‚’è¨­å®š
+	SetMainWindowText("Drive&Avoid");		//ƒ^ƒCƒgƒ‹‚ğİ’è
 
-	ChangeWindowMode(TRUE);					//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•
+	ChangeWindowMode(TRUE);					//ƒEƒBƒ“ƒhƒEƒ‚[ƒh‚Å‹N“®
 
-	if (DxLib_Init() == -1)return -1;		//DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®åˆæœŸåŒ–å‡¦ç†
+	if (DxLib_Init() == -1)return -1;		//DXƒ‰ƒCƒuƒ‰ƒŠ‚Ì‰Šú‰»ˆ—
 
 
 
 	if ((g_RankingImage = LoadGraph("images/Ranking.bmp")) == -1)return -1;
 
-	SetDrawScreen(DX_SCREEN_BACK);			//æç”»å…ˆç”»é¢ã‚’è£ã«ã™ã‚‹
+	SetDrawScreen(DX_SCREEN_BACK);			//•`‰ææ‰æ–Ê‚ğ— ‚É‚·‚é
 	SetColor();
 
-	if (LoadImages() == -1)return -1;		//ç”»åƒèª­ã¿è¾¼ã¿é–¢æ•°ã‚’å‘¼ã³å‡ºã—
+	if (LoadImages() == -1)return -1;		//‰æ‘œ“Ç‚İ‚İŠÖ”‚ğŒÄ‚Ño‚µ
 
-	if (LoadSounds() == -1)return -1;		//ã‚µã‚¦ãƒ³ãƒ‰èª­ã¿è¾¼ã¿é–¢æ•°ã‚’å‘¼ã³å‡ºã—
+	if (LoadSounds() == -1)return -1;		//ƒTƒEƒ“ƒh“Ç‚İ‚İŠÖ”‚ğŒÄ‚Ño‚µ
 
-	if (ReadRanking() == -1) return -1;		//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿
+	if (ReadRanking() == -1) return -1;		//ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì“Ç‚İ‚İ
 
-	//ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
+	//ƒQ[ƒ€ƒ‹[ƒv
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		RefreshTime = GetNowCount();
-
-		GetJoypadXInputState(DX_INPUT_PAD1, &input);
-
-		//å…¥åŠ›ã‚­ãƒ¼å–å¾—
+		//“ü—ÍƒL[æ“¾
 		/*g_OldKey = g_NewKey;*/
 		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		
 
 		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-		//g_NowKey = GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		g_KeyFlg = g_NowKey & ~g_OldKey;
 
-		ClearDrawScreen();			//ç”»é¢ã®åˆæœŸåŒ–
+		ClearDrawScreen();			//‰æ–Ê‚Ì‰Šú‰»
 		FpsTimeFanction();
 
 		switch (g_GameState) {
 		case 0:
-			title.DrawGameTitle();		//ã‚²ãƒ¼ãƒ ã‚¿ã‚¤ãƒˆãƒ«æç”»å‡¦ç†
+			title.DrawGameTitle();		//ƒQ[ƒ€ƒ^ƒCƒgƒ‹•`‰æˆ—
 			break;
 		case 1:
-			GameInit();				//ã‚²ãƒ¼ãƒ åˆæœŸå‡¦ç†
+			GameInit();				//ƒQ[ƒ€‰Šúˆ—
 			break;
 		case 2:
-			DrawRanking();			//ãƒ©ãƒ³ã‚­ãƒ³ã‚°æç”»å‡¦ç†
+			DrawRanking();			//ƒ‰ƒ“ƒLƒ“ƒO•`‰æˆ—
 			break;
 		case 3:
-			help.DrawHelp();				//ã‚²ãƒ¼ãƒ ãƒ˜ãƒ«ãƒ—æç”»å‡¦ç†
+			DrawHelp();				//ƒQ[ƒ€ƒwƒ‹ƒv•`‰æˆ—
 			break;
 		case 4:
-			DrawEnd();				//ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ãƒ‰æç”»å‡¦ç†
+			DrawEnd();				//ƒQ[ƒ€ƒGƒ“ƒh•`‰æˆ—
 			break;
 		case 5:
-			GameMain();				//ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³å‡¦ç†
+			GameMain();				//ƒQ[ƒ€ƒƒCƒ“ˆ—
 			break;
 		case 6:
-			DrawGameOver();			//ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æç”»å‡¦ç†
+			DrawGameOver();			//ƒQ[ƒ€ƒI[ƒo[•`‰æˆ—
 			break;
 		case 7:
-			InputRanking();			//ãƒ©ãƒ³ã‚­ãƒ³ã‚°å…¥åŠ›å‡¦ç†
+			InputRanking();			//ƒ‰ƒ“ƒLƒ“ƒO“ü—Íˆ—
 			break;
 		}
-		ScreenFlip();	//è£ç”»é¢ã®å†…å®¹ã‚’è¡¨ç”»é¢ã«åæ˜ 
+		ScreenFlip();	//— ‰æ–Ê‚Ì“à—e‚ğ•\‰æ–Ê‚É”½‰f
 		while (GetNowCount() - RefreshTime < 17);
 	}
-	DxLib_End();	//DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªä½¿ç”¨ã®çµ‚äº†å‡¦ç†
+	DxLib_End();	//DXƒ‰ƒCƒuƒ‰ƒŠg—p‚ÌI—¹ˆ—
 
-	return 0;	//ã‚½ãƒ•ãƒˆã®çµ‚äº†
+	return 0;	//ƒ\ƒtƒg‚ÌI—¹
 }
 
 
 void FpsTimeFanction() {
 	if (FpsTime_i == 0)
-		FpsTime[0] = GetNowCount();               //1å‘¨ç›®ã®æ™‚é–“å–å¾—
+		FpsTime[0] = GetNowCount();               //1ü–Ú‚ÌŠÔæ“¾
 	if (FpsTime_i == 49) {
-		FpsTime[1] = GetNowCount();               //50å‘¨ç›®ã®æ™‚é–“å–å¾—
-		Fps = 1000.0f / ((FpsTime[1] - FpsTime[0]) / 50.0f);//æ¸¬å®šã—ãŸå€¤ã‹ã‚‰fpsã‚’è¨ˆç®—
-		FpsTime_i = 0;//ã‚«ã‚¦ãƒ³ãƒˆã‚’åˆæœŸåŒ–
+		FpsTime[1] = GetNowCount();               //50ü–Ú‚ÌŠÔæ“¾
+		Fps = 1000.0f / ((FpsTime[1] - FpsTime[0]) / 50.0f);//‘ª’è‚µ‚½’l‚©‚çfps‚ğŒvZ
+		FpsTime_i = 0;//ƒJƒEƒ“ƒg‚ğ‰Šú‰»
 	}
 	else
-		FpsTime_i++;//ç¾åœ¨ä½•å‘¨ç›®ã‹ã‚«ã‚¦ãƒ³ãƒˆ
+		FpsTime_i++;//Œ»İ‰½ü–Ú‚©ƒJƒEƒ“ƒg
 	if (Fps != 0)
-		DrawFormatString(565, 460, color_white, "FPS %.1f", Fps); //fpsã‚’è¡¨ç¤º
+		DrawFormatString(565, 460, color_white, "FPS %.1f", Fps); //fps‚ğ•\¦
 	return;
 }
 
 void SetColor() {
-	color_white = GetColor(255, 255, 255);            //ç™½è‰²ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—
+	color_white = GetColor(255, 255, 255);            //”’Fƒnƒ“ƒhƒ‹‚ğæ“¾
 	return;
 }
 ///*********************************************
-//*ã‚²ãƒ¼ãƒ ã‚¿ã‚¤ãƒˆãƒ«è¡¨ç¤ºï¼ˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ï¼‰
+//*ƒQ[ƒ€ƒ^ƒCƒgƒ‹•\¦iƒƒjƒ…[‰æ–Êj
 //**********************************************/
 //void DrawGameTitle(void)
 //{
@@ -233,7 +227,7 @@ void SetColor() {
 //
 //	PlaySoundMem(g_TitleBGM, DX_PLAYTYPE_BACK, FALSE);
 //
-//	//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•å‡¦ç†
+//	//ƒƒjƒ…[ƒJ[ƒ\ƒ‹ˆÚ“®ˆ—
 //	if (input.ThumbLY <= -15000) {
 //		if (g_KeyFLG == TRUE) { 
 //			PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE); 
@@ -261,28 +255,28 @@ void SetColor() {
 //	if (input.ThumbLY > -15000 && input.ThumbLY < 15000) {
 //		g_KeyFLG = TRUE; g_WaitCount = 0;
 //	}
-//	//Zã‚­ãƒ¼ã§ãƒ¡ãƒ‹ãƒ¥ãƒ¼é¸æŠ
+//	//ZƒL[‚Åƒƒjƒ…[‘I‘ğ
 //	if (input.Buttons[12] == 1) {
 //		StopSoundMem(g_TitleBGM);
 //		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);
 //		g_GameState = MenuNo + 1;
 //	}
-//	//ã‚¿ã‚¤ãƒˆãƒ«ç”»åƒè¡¨ç¤º
+//	//ƒ^ƒCƒgƒ‹‰æ‘œ•\¦
 //	DrawGraph(0, 0, g_TitleImage, FALSE);
 //
-//	//ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚«ãƒ¼ã‚½ãƒ«
+//	//ƒƒjƒ…[ƒJ[ƒ\ƒ‹
 //	DrawRotaGraph(150 + x, 240 + MenuNo * 50, 0.7f, M_PI / 2, g_Cone, TRUE);
 //
 //}
 /********************************************
-*ã‚²ãƒ¼ãƒ åˆæœŸåŒ–å‡¦ç†
+*ƒQ[ƒ€‰Šú‰»ˆ—
 *********************************************/
 void GameInit(void)
 {
-	//ã‚¹ã‚³ã‚¢ã®åˆæœŸåŒ–
+	//ƒXƒRƒA‚Ì‰Šú‰»
 	g_Score = 0;
 
-	//èµ°è¡Œè·é›¢ã‚’åˆæœŸåŒ–
+	//‘–s‹——£‚ğ‰Šú‰»
 	g_Mileage = 0;
 	g_player.InitPlayer();
 	apple.InitApple();
@@ -290,82 +284,80 @@ void GameInit(void)
 	Time = GetNowCount();
 	
 
-	//ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³å‡¦ç†ã¸
+	//ƒQ[ƒ€ƒƒCƒ“ˆ—‚Ö
 	g_GameState = 5;
 
-	//éŸ³æºã®åˆæœŸè¨­å®š
+	//‰¹Œ¹‚Ì‰Šúİ’è
 
 
-	//ã‚¨ãƒãƒŸãƒ¼ã®åˆæœŸè¨­å®š
+	//ƒGƒlƒ~[‚Ì‰Šúİ’è
 	/*for (int i = 0; i < Apple_MAX; i++) {
 		g_apple[i].flg = FALSE;
 	}*/
 
 }
 /*******************************************
-*ã‚²ãƒ¼ãƒ ãƒ©ãƒ³ã‚­ãƒ³ã‚°æç”»å‡¦ç†
+*ƒQ[ƒ€ƒ‰ƒ“ƒLƒ“ƒO•`‰æˆ—
 ********************************************/
 void DrawRanking(void)
 {
-	//ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã§ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹
+	//ƒXƒy[ƒXƒL[‚Åƒƒjƒ…[‚É–ß‚é
 	if (g_KeyFlg & PAD_INPUT_M) g_GameState = 0;
 
-	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ç”»åƒå‡¦ç† 
-	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ç”»åƒå‡¦ç†
+	//ƒ‰ƒ“ƒLƒ“ƒO‰æ‘œˆ— 
+	//ƒ‰ƒ“ƒLƒ“ƒO‰æ‘œˆ—
 	DrawGraph(0, 0, g_RankingImage, FALSE);
 
-	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ä¸€è¦§ã‚’è¡¨ç¤º
+	//ƒ‰ƒ“ƒLƒ“ƒOˆê——‚ğ•\¦
 	SetFontSize(18);
 	for (int i = 0; i < RANKING_DATA; i++) {
 		DrawFormatString(50, 170 + i * 25, 0xffffff, "%2d %-10s %10d", g_Ranking[i].no, g_Ranking[i].name, g_Ranking[i].score);
 	}
 
-	DrawString(100, 450, "----ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹ ----", 0xffffff, 0);
+	DrawString(100, 450, "----ƒXƒy[ƒXƒL[‚ğ‰Ÿ‚µ‚Äƒ^ƒCƒgƒ‹‚Ö–ß‚é ----", 0xffffff, 0);
 
 }
 /*******************************************
-*ã‚²ãƒ¼ãƒ ãƒ˜ãƒ«ãƒ—æç”»å‡¦ç†
+*ƒQ[ƒ€ƒwƒ‹ƒv•`‰æˆ—
 ********************************************/
+void DrawHelp(void)
+{
+	// ƒXƒy[ƒXƒL[‚Åƒƒjƒ…[‚É–ß‚é
+	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 0;
 
-//void DrawHelp(void)
-//{
-//	// ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã§ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹
-//	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 0;
-//
-//	//ã‚¿ã‚¤ãƒˆãƒ«ç”»åƒè¡¨ç¤º
-//	DrawGraph(0, 0, title.g_TitleImage, FALSE);
-//	SetFontSize(16);
-//	DrawString(20, 120, "ãƒ˜ãƒ«ãƒ—ç”»é¢", 0xffffff, 0);
-//
-//	DrawString(20, 160, "ã“ã‚Œã¯éšœå®³ç‰©ã‚’é¿ã‘ãªãŒã‚‰", 0xffffff, 0);
-//	DrawString(20, 180, "èµ°ã‚Šç¶šã‘ã‚‹ã‚²ãƒ¼ãƒ ã§ã™", 0xffffff, 0);
-//	DrawString(20, 200, "ç‡ƒæ–™ãŒå°½ãã‚‹ã‹éšœå®³ç‰©ã«", 0xffffff, 0);
-//	DrawString(20, 220, "æ•°å›å½“ãŸã‚‹ã¨ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã§ã™", 0xffffff, 0);
-//	DrawString(20, 250, "ã‚¢ã‚¤ãƒ†ãƒ ä¸€è¦§", 0xffffff, 0);
-//	DrawGraph(20, 260, g_Item[0], TRUE);
-//	DrawString(20, 315, "å–ã‚‹ã¨ç‡ƒæ–™ãŒå›å¾©ã™ã‚‹ã‚ˆ", 0xffffff, 0);
-//	DrawGraph(20, 335, g_Item[1], TRUE);
-//	DrawString(20, 385, "ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ã‚‹ã¨ãã«å–ã‚‹ã¨è€ä¹…å›å¾©", 0xffffff, 0);
-//	DrawString(20, 405, "è€ä¹…ãŒæ¸›ã£ã¦ã„ãªã‹ã£ãŸã‚‰ç‡ƒæ–™ãŒå°‘ã—å›å¾©ã™ã‚‹ã‚ˆ", 0xffffff, 0);
-//	DrawString(20, 450, "---- ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹ ----", 0xffffff, 0);
-//}
+	//ƒ^ƒCƒgƒ‹‰æ‘œ•\¦
+	DrawGraph(0, 0, title.g_TitleImage, FALSE);
+	SetFontSize(16);
+	DrawString(20, 120, "ƒwƒ‹ƒv‰æ–Ê", 0xffffff, 0);
 
+	DrawString(20, 160, "‚±‚ê‚ÍáŠQ•¨‚ğ”ğ‚¯‚È‚ª‚ç", 0xffffff, 0);
+	DrawString(20, 180, "‘–‚è‘±‚¯‚éƒQ[ƒ€‚Å‚·", 0xffffff, 0);
+	DrawString(20, 200, "”R—¿‚ªs‚«‚é‚©áŠQ•¨‚É", 0xffffff, 0);
+	DrawString(20, 220, "”‰ñ“–‚½‚é‚ÆƒQ[ƒ€ƒI[ƒo[‚Å‚·", 0xffffff, 0);
+	DrawString(20, 250, "ƒAƒCƒeƒ€ˆê——", 0xffffff, 0);
+	DrawGraph(20, 260, g_Item[0], TRUE);
+	DrawString(20, 315, "æ‚é‚Æ”R—¿‚ª‰ñ•œ‚·‚é‚æ", 0xffffff, 0);
+	DrawGraph(20, 335, g_Item[1], TRUE);
+	DrawString(20, 385, "ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚é‚Æ‚«‚Éæ‚é‚Æ‘Ï‹v‰ñ•œ", 0xffffff, 0);
+	DrawString(20, 405, "‘Ï‹v‚ªŒ¸‚Á‚Ä‚¢‚È‚©‚Á‚½‚ç”R—¿‚ª­‚µ‰ñ•œ‚·‚é‚æ", 0xffffff, 0);
+	DrawString(20, 450, "---- ƒXƒy[ƒXƒL[‚ğ‰Ÿ‚µ‚Äƒ^ƒCƒgƒ‹‚Ö–ß‚é ----", 0xffffff, 0);
+}
 /*******************************************
-*ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ãƒ‰æç”»å‡¦ç†
+*ƒQ[ƒ€ƒGƒ“ƒh•`‰æˆ—
 ********************************************/
 void DrawEnd(void)
 {
-	//ã‚¨ãƒ³ãƒ‰ç”»åƒè¡¨ç¤º
+	//ƒGƒ“ƒh‰æ‘œ•\¦
 	DrawGraph(0, 0, g_EndImage, FALSE);
 
 	SetFontSize(24);
 	DrawString(360, 480 - 24, "Thank you for Playing", 0xffffff, 0);
 
-	//ã‚¿ã‚¤ãƒ ã®åŠ ç®—å‡¦ç†ï¼†çµ‚äº†ï¼ˆï¼“ç§’å¾Œï¼‰
+	//ƒ^ƒCƒ€‚Ì‰ÁZˆ—•I—¹i‚R•bŒãj
 	if (++g_WaitTime > 180)g_GameState = 99;
 }
 /******************************************
-*ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³
+*ƒQ[ƒ€ƒƒCƒ“
 ******************************************/
 void GameMain(void)
 {
@@ -380,39 +372,35 @@ void GameMain(void)
 
 	
 
-	//ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã§ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹
+	//ƒXƒy[ƒXƒL[‚Åƒƒjƒ…[‚É–ß‚é
 	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
-
-	//SetFontSize(16);
-	//DrawString(20, 20, "ã‚²ãƒ¼ãƒ ãƒ¡ã‚¤ãƒ³", 0xffffff, 0);
-	//DrawString(150, 450, "---- ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã¸ ----", 0xffffff, 0);
 }
 
 
 
 /******************************************
-*èƒŒæ™¯ç”»åƒã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å‡¦ç†
-*å¼•ã€€æ•°ï¼šãªã—
-*æˆ»ã‚Šå€¤ï¼šãªã—
+*”wŒi‰æ‘œƒXƒNƒ[ƒ‹ˆ—
+*ˆø@”F‚È‚µ
+*–ß‚è’lF‚È‚µ
 ********************************************/
 void DrawBackGround()
 {
 	
 
-	DrawGraph(0, 0, g_StageImage, FALSE);		//ç”»åƒï¼šæ¨ª490+150(ã‚¹ã‚³ã‚¢è¡¨ç¤ºåˆ†)=640:ç¸¦480
+	DrawGraph(0, 0, g_StageImage, FALSE);		//‰æ‘œF‰¡490+150(ƒXƒRƒA•\¦•ª)=640:c480
 
 	
 }
 
 /***************************************
-*ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ç”»é¢æç”»å‡¦ç†
+*ƒQ[ƒ€ƒI[ƒo[‰æ–Ê•`‰æˆ—
 ****************************************/
 void DrawGameOver(void)
 {
 	PlaySoundMem(g_GameOverSE, DX_PLAYTYPE_BACK, FALSE);
 	g_Score = (g_Mileage / 10 * 10) + AppleCount3 * 50 + AppleCount1 * 200;
 
-	//ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã§ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹
+	//ƒXƒy[ƒXƒL[‚Åƒƒjƒ…[‚É–ß‚é
 	if (g_KeyFlg & PAD_INPUT_M) {
 		if (g_Ranking[RANKING_DATA].score >= g_Score) {
 			g_GameState = 0;
@@ -426,9 +414,9 @@ void DrawGameOver(void)
 	DrawBox(150, 150, 490, 330, 0x000000, FALSE);
 
 	SetFontSize(20);
-	DrawString(220, 170, "ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼", 0xcc0000);
+	DrawString(220, 170, "ƒQ[ƒ€ƒI[ƒo[", 0xcc0000);
 	SetFontSize(16);
-	DrawString(180, 200, "èµ°è¡Œè·é›¢ã€€ã€€ã€€", 0x000000);
+	DrawString(180, 200, "‘–s‹——£@@@", 0x000000);
 	DrawRotaGraph(230, 230, 0.3f, M_PI / 2, g_Teki[2], TRUE, FALSE);
 
 	DrawRotaGraph(230, 250, 0.3f, M_PI / 2, g_Teki[1], TRUE, FALSE);
@@ -443,46 +431,41 @@ void DrawGameOver(void)
 
 	DrawFormatString(260, 264, 0xFFFFFF, "%6d x  200 = %6d", AppleCount1, AppleCount1 * 200);
 
-	DrawString(310, 290, "ã‚¹ã‚³ã‚¢", 0x000000);
+	DrawString(310, 290, "ƒXƒRƒA", 0x000000);
 
 	DrawFormatString(260, 290, 0xFFFFFF, "          =%6d", g_Score);
 
-	DrawString(150, 450, "---- ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã‚’æŠ¼ã—ã¦ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹ ----", 0xffffff, 0);
+	DrawString(150, 450, "---- ƒXƒy[ƒXƒL[‚ğ‰Ÿ‚µ‚Äƒ^ƒCƒgƒ‹‚Ö–ß‚é ----", 0xffffff, 0);
 
 }
 /****************************************
-*ãƒ©ãƒ³ã‚­ãƒ³ã‚°å…¥åŠ›å‡¦ç†
+*ƒ‰ƒ“ƒLƒ“ƒO“ü—Íˆ—
 ****************************************/
 void InputRanking(void)
 {
-	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ç”»åƒè¡¨ç¤º
+	//ƒ‰ƒ“ƒLƒ“ƒO‰æ‘œ•\¦
 	DrawGraph(0, 0, g_RankingImage, FALSE);
 
-	// ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºã®è¨­å®š
+	// ƒtƒHƒ“ƒgƒTƒCƒY‚Ìİ’è
 	SetFontSize(20);
-
-	// åå‰å…¥åŠ›æŒ‡ç¤ºæ–‡å­—åˆ—ã®æç”»
-	/*DrawString(150, 240,"ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã«ç™»éŒ²ã—ã¾ã™", 0xFFFFFF);
-	DrawString(150, 270, "åå‰ã‚’è‹±å­—ã§å…¥åŠ›ã—ã¦ãã ã•ã„", 0xFFFFFF);*/
-
-	// åå‰ã®å…¥åŠ›
+	// –¼‘O‚Ì“ü—Í
 	DrawString(150, 310, "> ", 0xFFFFFF);
 	DrawBox(160, 305, 300, 335, 0x000055, TRUE);
 	if (KeyInputSingleCharString(170, 310, 10, g_Ranking[RANKING_DATA].name, FALSE) == 1) {
-		g_Ranking[RANKING_DATA].score = g_Score;	// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®ï¼‘ï¼ç•ªç›®ã«ã‚¹ã‚³ã‚¢ã‚’ç™»éŒ²
-		SortRanking();		// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ä¸¦ã¹æ›¿ãˆ
-		SaveRanking();		// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜
-		g_GameState = 2;		// ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´
+		g_Ranking[RANKING_DATA].score = g_Score;	// ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì‚P‚O”Ô–Ú‚ÉƒXƒRƒA‚ğ“o˜^
+		SortRanking();		// ƒ‰ƒ“ƒLƒ“ƒO•À‚×‘Ö‚¦
+		SaveRanking();		// ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì•Û‘¶
+		g_GameState = 2;		// ƒQ[ƒ€ƒ‚[ƒh‚Ì•ÏX
 	}
 }
 /************************************************:
-*ãƒ©ãƒ³ã‚­ãƒ³ã‚°ä¸¦ã³æ›¿ãˆ
+*ƒ‰ƒ“ƒLƒ“ƒO•À‚Ñ‘Ö‚¦
 ***********************************************/
 void SortRanking(void) {
 	int i, j;
 	RankingData work;
 
-	// é¸æŠæ³•ã‚½ãƒ¼ãƒˆ
+	// ‘I‘ğ–@ƒ\[ƒg
 	for (i = 0; i < RANKING_DATA - 1; i++) {
 		for (j = i + 1; j < RANKING_DATA; j++) {
 			if (g_Ranking[i].score <= g_Ranking[j].score) {
@@ -493,12 +476,12 @@ void SortRanking(void) {
 		}
 	}
 
-	// é †ä½ä»˜ã‘
+	// ‡ˆÊ•t‚¯
 	for (i = 0; i < RANKING_DATA; i++) {
 		g_Ranking[i].no = 1;
 	}
-	// å¾—ç‚¹ãŒåŒã˜å ´åˆã¯ã€åŒã˜é †ä½ã¨ã™ã‚‹
-	// åŒé †ä½ãŒã‚ã£ãŸå ´åˆã®æ¬¡ã®é †ä½ã¯ãƒ‡ãƒ¼ã‚¿å€‹æ•°ãŒåŠ ç®—ã•ã‚ŒãŸé †ä½ã¨ã™ã‚‹
+	// “¾“_‚ª“¯‚¶ê‡‚ÍA“¯‚¶‡ˆÊ‚Æ‚·‚é
+	// “¯‡ˆÊ‚ª‚ ‚Á‚½ê‡‚ÌŸ‚Ì‡ˆÊ‚Íƒf[ƒ^ŒÂ”‚ª‰ÁZ‚³‚ê‚½‡ˆÊ‚Æ‚·‚é
 	for (i = 0; i < RANKING_DATA - 1; i++) {
 		for (j = i + 1; j < RANKING_DATA; j++) {
 			if (g_Ranking[i].score > g_Ranking[j].score) {
@@ -508,72 +491,73 @@ void SortRanking(void) {
 	}
 }
 /****************************************
-*ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ä¿å­˜
+*ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^•Û‘¶
 *****************************************/
 int SaveRanking(void) {
 
 	FILE* fp;
 #pragma warning(disable:4996)
 
-	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+	// ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
 	if ((fp = fopen("dat/rankingdata.txt", "w")) == NULL) {
-		/* ã‚¨ãƒ©ãƒ¼å‡¦ç† */
+		/* ƒGƒ‰[ˆ— */
 		printf("Ranking Data Error\n");
 		return -1;
 	}
 
-	// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿åˆ†é…åˆ—ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã‚€
+	// ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^•ª”z—ñƒf[ƒ^‚ğ‘‚«‚Ş
 	for (int i = 0; i < RANKING_DATA; i++) {
 		fprintf(fp, "%2d %10s %10d\n", g_Ranking[i].no, g_Ranking[i].name, g_Ranking[i].score);
 	}
 
-	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
+	//ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
 	fclose(fp);
 
 	return 0;
 
 }
 /*****************************************
-*ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
+*ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^“Ç‚İ‚İ
 ******************************************/
 int ReadRanking(void) {
 	FILE* fp;
 #pragma warning(disable:4996)
 
-	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ¼ãƒ—ãƒ³
+	//ƒtƒ@ƒCƒ‹ƒI[ƒvƒ“
 	if ((fp = fopen("dat/rankingdata.txt", "r")) == NULL) {
-		//ã‚¨ãƒ©ãƒ¼å‡¦ç†
+		//ƒGƒ‰[ˆ—
 		printf("Ranking Data Error\n");
 		return -1;
 	}
 
-	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿é…åˆ†åˆ—ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
+	//ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^”z•ª—ñƒf[ƒ^‚ğ“Ç‚İ‚Ş
 	for (int i = 0; i < RANKING_DATA; i++) {
 		fscanf(fp, "%2d %10s %10d", &g_Ranking[i].no, g_Ranking[i].name, &g_Ranking[i].score);
 	}
 
-	//ãƒ•ã‚¡ã‚¤ãƒ«ã‚¯ãƒ­ãƒ¼ã‚º
+	//ƒtƒ@ƒCƒ‹ƒNƒ[ƒY
 	fclose(fp);
 
 	return 0;
 }
 /***************************************
-*ã‚µã‚¦ãƒ³ãƒ‰èª­ã¿è¾¼ã¿
+*ƒTƒEƒ“ƒh“Ç‚İ‚İ
 ****************************************/
 int LoadSounds()
 {
 	if ((title.g_TitleBGM = LoadSoundMem("sounds/Title.mp3")) == -1)return -1;
-	//initial DéŸ³æº
+	//initial DéŸ³æºE
 	if ((g_MusicBGM = LoadSoundMem("sounds/Playing.mp3")) == -1)return -1;
 	if ((g_GameOverSE = LoadSoundMem("sounds/ani_ta_biyon02.mp3")) == -1)return -1;
 
-	//SE1 ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
+
+	//SE1 ƒf[ƒ^“Ç‚İ‚İ
 	if ((g_SE1 = LoadSoundMem("sounds/SE1.mp3")) == -1)return -1;
-	//SE2 ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
+	//SE2 ƒf[ƒ^“Ç‚İ‚İ
 	if ((g_SE2 = LoadSoundMem("sounds/SE2.mp3")) == -1)return -1;
 
 
-	//SEã®éŸ³é‡èª¿æ•´
+	//SE‚Ì‰¹—Ê’²®
 	ChangeVolumeSoundMem(80, g_SE2);
 
 	ChangeVolumeSoundMem(120, g_SE1);
@@ -581,24 +565,23 @@ int LoadSounds()
 	return 0;
 }
 /****************************************
-*ç”»åƒèª­ã¿è¾¼ã¿
+*‰æ‘œ“Ç‚İ‚İ
 *****************************************/
 int LoadImages()
 {
-	//ãƒ˜ãƒ«ãƒ—
-	if ((help.g_HelpImage = LoadGraph("images/BackGround_help.png")) == -1)return -1;
-	//ã‚¿ã‚¤ãƒˆãƒ«
+	//ƒ^ƒCƒgƒ‹
 	if ((title.g_TitleImage = LoadGraph("images/BackGround_title.png")) == -1)return -1;
-	//ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+	//ƒƒjƒ…[
 	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;
-	//ãƒªãƒ³ã‚´
+	//ƒŠƒ“ƒS
 	if ((Apple_Img[0] = LoadGraph("images/RedApple.png")) == -1)return -1;
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;
 	if ((Apple_Img[2] = LoadGraph("images/YellowApple.png")) == -1)return -1;
 	if ((Apple_Img[3] = LoadGraph("images/PurpleApple.png")) == -1)return -1;	
-	//ã‚¹ãƒ†ãƒ¼ã‚¸èƒŒæ™¯
+
+	//ƒXƒe[ƒW”wŒi
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;
-	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+	//ƒvƒŒƒCƒ„[
 	if ((g_Car_left = LoadGraph("images/PlayerA.png")) == -1)return -1;
 	if ((g_Car_right = LoadGraph("images/PlayerA_2.png")) == -1)return -1;
 	if ((g_Car_Nowangle = LoadGraph("images/PlayerA_2.png")) == -1)return -1;

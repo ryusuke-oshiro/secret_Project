@@ -213,6 +213,11 @@ void GameInit(void)
 	g_Mileage = 0;
 	g_player.InitPlayer();
 	apple.InitApple();
+	pose.initPose();
+	AppleCount1 = 0;
+	AppleCount2 = 0;
+	AppleCount3 = 0;
+	
 
 	Time = GetNowCount();
 	
@@ -283,6 +288,7 @@ void GameMain(void)
 ********************************************/
 void DrawBackGround()
 {
+	DrawBox(0, 0, 640, 480, GetColor(143, 188, 143), TRUE);
 	DrawGraph(0, 0, g_StageImage, FALSE);		//画像：横490+150(スコア表示分)=640:縦480
 }
 

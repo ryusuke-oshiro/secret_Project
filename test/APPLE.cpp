@@ -20,15 +20,17 @@ APPLE::APPLE() {
 }
 
 void APPLE::InitApple() {
-	flg = FALSE;
-	type = 0;
-	img = 0;
-	x = 0;
-	y = 0;
-	w = 50;
-	h = 50;
-	speed = 0;
-	point = 0;
+	for (int i = 0; i < Apple_MAX; i++) {
+		g_apple[i].flg = FALSE;
+		g_apple[i].type = 0;
+		g_apple[i].img = 0;
+		g_apple[i].x = 0;
+		g_apple[i].y = 0;
+		g_apple[i].w = 50;
+		g_apple[i].h = 50;
+		g_apple[i].speed = 0;
+		g_apple[i].point = 0;
+	}
 }
 
 void APPLE::SelectApple(int x) {

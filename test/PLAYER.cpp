@@ -154,14 +154,10 @@ void PLAYER::PlayerControl() {
 	/*pose.PoseTime = 0;*/
 	DrawFormatString(510, 200, 0xFFFFFF, "%02d", StartTime);
 	
-	
-
 	if (StartTime <= 0) {		//§ŒÀŠÔ30•b‚½‚Á‚½‚çGameState=6 -> ƒ‰ƒ“ƒLƒ“ƒO“ü—Í‚ÖI
-		g_GameState = 6;
 		StopSoundMem(g_MusicBGM);
+		g_GameState = 6;
 	}
-
-
 }
 
 int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)

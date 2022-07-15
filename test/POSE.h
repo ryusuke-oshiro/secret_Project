@@ -5,6 +5,7 @@ public:
 	int PoseCount;
 public:
 	POSE();
+	void initPose();
 	void DrawPose();
 };
 extern POSE pose;

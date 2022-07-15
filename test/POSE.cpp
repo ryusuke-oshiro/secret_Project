@@ -10,6 +10,11 @@ POSE::POSE() {
 	PoseCount = 0;
 }
 
+void POSE::initPose() {
+	PoseCount = 0;
+	PoseTime = 0;
+}
+
 void POSE::DrawPose() {
 	if (++PoseCount > 60) {
 		++PoseTime;

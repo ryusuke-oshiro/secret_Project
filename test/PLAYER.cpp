@@ -42,124 +42,75 @@ void PLAYER::InitPlayer() {
 }
 
 void PLAYER::PlayerControl() {
-	////ã‰º¶‰EˆÚ“®
-	//if (g_player.flg == TRUE) {
-	//	if (g_NowKey & PAD_INPUT_LEFT)g_player.x -= g_player.speed;
-	//	if (g_NowKey & PAD_INPUT_RIGHT)g_player.x += g_player.speed;
-	//}
-
-	//‰æ–Ê‚ğ‚Í‚İo‚³‚È‚¢‚æ‚¤‚É‚·‚é
-	if (g_player.x < 32)g_player.x = 32;
-	if (g_player.x > 460)g_player.x = 460;
-
-	//Å‘å‘¬“x‚Ìİ’è
-	if (g_player.speed < -5) {
-		g_player.speed -= -0.5;
-	}
-	if (g_player.speed > 5) {
-		g_player.speed += 0.5;
-	}
 
 	//Šµ«ˆÚ“®
 	if (input.ThumbLX < -17500) {	//¶“ü—Í
-		if (g_player.speed > -3 && g_player.speed <= 0) {	//speed‚ª 0 ` -2.9 ‚Í-0.1‚¸‚Â
+		if (g_player.speed > -3) {	//speed‚ª 0 ` -2.9 ‚Í-0.1‚¸‚Â
 			g_player.speed -= 0.1;
 		}
-		if (g_player.speed > -4 && g_player.speed <= -3) {	//speed‚ª -3 ` -3.9 ‚Í-0.2‚¸‚Â
+		if (g_player.speed > -4) {	//speed‚ª -3 ` -3.9 ‚Í-0.2‚¸‚Â
 			g_player.speed -= 0.2;
 		}
-		if (g_player.speed >= -5 && g_player.speed <= -4) {	//speed‚ª -4 ` -5 ‚Í-0.4‚¸‚Â
-			g_player.speed -= 0.4;
+		if (g_player.speed >= -5) {	//speed‚ª -4 ` -5 ‚Í-0.3‚¸‚Â
+			g_player.speed -= 0.3;
+		}
+		if (g_player.speed < -5) {							//Å‘å‘¬“x‚Ìİ’è
+			g_player.speed -= 0.6;
+		}
+		if (g_player.speed < -7) {
+			g_player.speed = -7;
 		}
 		g_Car_Nowangle = g_Car_left;						//¶“ü—Í‚ª“ü‚Á‚½‚çplayer‚ğ¶‚ÉŒü‚¯‚é
 	}
-	else if (input.ThumbLX > -17500 && input.ThumbLX < 128) {	//¶“ü—Í‚©‚ç—£‚µ‚½
-		if (g_player.speed < 0) {								//‰Á‘¬‚ªƒ}ƒCƒiƒX‚¾‚Á‚½‚ç‘«‚µ‚Ä‚¢‚­
-			g_player.speed += 0.4;	
-			if (g_player.speed > 0) {							//‚à‚µspeed‚ª0‚É‚È‚Á‚½‚ç~‚ß‚é							
-				g_player.speed = 0;
-			}
-		}
-		else if (g_player.speed > 0) {							//‰Á‘¬‚ªƒvƒ‰ƒX‚¾‚Á‚½‚çˆø‚¢‚Ä‚¢‚­
-			g_player.speed -= 0.4;
-			if (g_player.speed < 0) {							//‚à‚µspeed‚ª0‚É‚È‚Á‚½‚ç~‚ß‚é
-				g_player.speed = 0;
-			}
-		}
-	}
-
 
 	if (input.ThumbLX > 17500) {	//‰E“ü—Í
-		if (g_player.speed < 3 && g_player.speed >= 0) {	//speed‚ª0`2.9‚Í+0.1‚¸‚Â
+		if (g_player.speed < 3) {	//speed‚ª0`2.9‚Í+0.1‚¸‚Â
 			g_player.speed += 0.1;
 		}
-		if (g_player.speed < 4 && g_player.speed >= 3) {	//speed‚ª3`3.9‚Í+0.2‚¸‚Â
+		if (g_player.speed < 4) {	//speed‚ª3`3.9‚Í+0.2‚¸‚Â
 			g_player.speed += 0.2;
 		}
-		if (g_player.speed <= 5 && g_player.speed >= 4) {	//speed‚ª4`5‚Í+0.4‚¸‚Â
-			g_player.speed += 0.4;
+		if (g_player.speed <= 5) {	//speed‚ª4`5‚Í+0.3‚¸‚Â
+			g_player.speed += 0.3;
+		}
+		if (g_player.speed > 5) {							//Å‘å‘¬“x‚Ìİ’è
+			g_player.speed += 0.6;
+		}
+		if (g_player.speed > 7) {
+			g_player.speed = 7;
 		}
 		g_Car_Nowangle = g_Car_right;						//‰E“ü—Í‚ª“ü‚Á‚½‚çplayer‚ğ‰E‚ÉŒü‚¯‚é
 	}
-	else if (input.ThumbLX < 17500 && input.ThumbLX > 128) {	//‰E“ü—Í‚©‚ç—£‚µ‚½
+
+
+	if (input.ThumbLX >= -17500 && input.ThumbLX <= 17500) {	//—£‚µ‚½
 		if (g_player.speed < 0) {								//‰Á‘¬‚ªƒ}ƒCƒiƒX‚¾‚Á‚½‚ç‘«‚µ‚Ä‚¢‚­
-			g_player.speed += 0.4;
+			g_player.speed += 0.7;	
 			if (g_player.speed > 0) {							//‚à‚µspeed‚ª0‚É‚È‚Á‚½‚ç~‚ß‚é							
 				g_player.speed = 0;
 			}
 		}
 		else if (g_player.speed > 0) {							//‰Á‘¬‚ªƒvƒ‰ƒX‚¾‚Á‚½‚çˆø‚¢‚Ä‚¢‚­
-			g_player.speed -= 0.4;
+			g_player.speed -= 0.7;
 			if (g_player.speed < 0) {							//‚à‚µspeed‚ª0‚É‚È‚Á‚½‚ç~‚ß‚é
 				g_player.speed = 0;
 			}
 		}
 	}
 
-	//ƒvƒŒƒCƒ„[‚Ì•\¦
-	//if (input.ThumbLX < -17500) {		//¶“ü—Í
- //           if (g_player.speed > -10) {
- //               g_player.speed -= 0.5;
- //           }
- //           g_player.x += g_player.speed;
- //       }
- //       else if (input.ThumbLX > -17500 && input.ThumbLX < 128) {		//—£‚µ‚½‚Æ‚«
- //           if (g_player.speed > 0) {			//h—£‚·h‚©‚Â‰Á‘¬‚ª³‚Ì”
- //               g_player.speed -= 0.5;
- //               g_player.x += g_player.speed;
- //           }
- //           else if (g_player.speed < 0) {	//h—£‚·h‚©‚Â‰Á‘¬‚ª•‰‚Ì
- //               g_player.speed += 0.5;
- //               g_player.x += g_player.speed;
- //           }
- //       }
- //       if (input.ThumbLX > 17500) {		//‰E“ü—Í
- //           if (g_player.speed < 10) {
- //               g_player.speed += 0.5;
- //           }
- //           g_player.x += g_player.speed;
- //       }
- //       else if (input.ThumbLX < 17500 && input.ThumbLX>128) {	//—£‚µ‚½‚Æ‚«
-
- //           if (g_player.speed > 0) {			//h—£‚·h‚©‚Â‰Á‘¬‚ª³‚Ì
- //               g_player.speed -= 0.5;
- //               g_player.x -= g_player.speed;
- //           }
- //           else if (g_player.speed < 0) {	//h—£‚·h‚©‚Â‰Á‘¬‚ª•‰‚Ì
- //               g_player.speed += 0.5;
- //               g_player.x += g_player.speed;
- //           }
- //       }
-	/*if (input.ThumbLX < 128) {
-			g_player.x -= g_player.speed;
-			
-	}
-	if (input.ThumbLX > 128) {
-			g_player.x += g_player.speed;
-			g_Car_Nowangle = g_Car_right;
-		}*/
 	g_player.x += g_player.speed;
-	
+
+	//‰æ–Ê‚ğ‚Í‚İo‚³‚È‚¢‚æ‚¤‚É‚·‚é
+	if (g_player.x < 32) {
+		g_player.x = 32;
+		g_player.speed = 0;
+	}
+
+	if (g_player.x > 460) {
+		g_player.x = 460;
+		g_player.speed = 0;
+	}
+
 	if (g_player.flg == TRUE) {		//TRUE‚ÌŠÔA•\¦
 		DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
 	}
@@ -219,50 +170,3 @@ int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)
 	}
 	return FALSE;
 }
-
-
-//
-//void PlayerControl::MovePlayer() {
-//
-//    //¶‰EˆÚ“®
-//    if (player.flg == TRUE) {
-//        if (input.ThumbLX < -17500) {		//¶“ü—Í
-//            if (player.speed > -10) {
-//                player.speed -= 0.5;
-//            }
-//            player.x += player.speed;
-//        }
-//        else if (input.ThumbLX > -17500 && input.ThumbLX < 128) {		//—£‚µ‚½‚Æ‚«
-//            if (player.speed > 0) {			//h—£‚·h‚©‚Â‰Á‘¬‚ª³‚Ì”
-//                player.speed -= 0.5;
-//                player.x += player.speed;
-//            }
-//            else if (player.speed < 0) {	//h—£‚·h‚©‚Â‰Á‘¬‚ª•‰‚Ì
-//                player.speed += 0.5;
-//                player.x += player.speed;
-//            }
-//        }
-//        if (input.ThumbLX > 17500) {		//‰E“ü—Í
-//            if (player.speed < 10) {
-//                player.speed += 0.5;
-//            }
-//            player.x += player.speed;
-//        }
-//        else if (input.ThumbLX < 17500 && input.ThumbLX>128) {	//—£‚µ‚½‚Æ‚«
-//
-//            if (player.speed > 0) {			//h—£‚·h‚©‚Â‰Á‘¬‚ª³‚Ì
-//                player.speed -= 0.5;
-//                player.x -= player.speed;
-//            }
-//            else if (player.speed < 0) {	//h—£‚·h‚©‚Â‰Á‘¬‚ª•‰‚Ì
-//                player.speed += 0.5;
-//                player.x += player.speed;
-//            }
-//        }
-//    }
-//
-//    //‰æ–Ê‚ğ‚Í‚İo‚³‚È‚¢‚æ‚¤‚É‚·‚é
-//    if (player.x < 32)player.x = 32;
-//    if (player.x >460)player.x = 460;
-//}
-

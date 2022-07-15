@@ -33,8 +33,8 @@ void APPLE::InitApple() {
 
 void APPLE::SelectApple(int x) {
 	int i = x;
-	int select = GetRand(15) + 1;
-	if (select <= 4) {
+	int select = GetRand(9) + 1;
+	if (select <= 6) {
 		g_apple[i].type=0;
 		g_apple[i].speed=2;
 		g_apple[i].point=150;
@@ -44,7 +44,7 @@ void APPLE::SelectApple(int x) {
 		g_apple[i].speed = 5;
 		g_apple[i].point=300;
 	}
-	else if (select <= 12) {
+	else if (select <= 9) {
 		g_apple[i].type = 2;
 		g_apple[i].speed = 10;
 		g_apple[i].point=500;
@@ -97,9 +97,6 @@ void APPLE::AppleControl() {
 			case 3:g_apple[i].y += g_apple[i].speed;
 				break;
 			}
-
-			//‚Ü‚Á‚·‚®‰º‚ÉˆÚ“®
-			/*g_apple[i].y += g_apple[i].speed + g_player.speed - GameInit.getPLAYER_SPEED() + 1;*/
 
 			//‰æ–Ê‚ð‚Í‚Ýo‚µ‚½‚çÁ‹Ž
 			if (g_apple[i].y > SCREEN_HEIGHT + g_apple[i].h) {

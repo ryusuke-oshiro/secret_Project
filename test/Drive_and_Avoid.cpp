@@ -463,8 +463,8 @@ void InputRanking(void)
 	SetFontSize(20);
 
 	// 名前入力指示文字列の描画
-	DrawString(150, 240,"ランキングに登録します", 0xFFFFFF);
-	DrawString(150, 270, "名前を英字で入力してください", 0xFFFFFF);
+	//DrawString(150, 240,"ランキングに登録します", 0xFFFFFF);
+	//DrawString(150, 270, "名前を英字で入力してください", 0xFFFFFF);
 
 	// 名前の入力
 	DrawString(150, 310, "> ", 0xFFFFFF);

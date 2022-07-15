@@ -50,7 +50,7 @@ void PLAYER::PlayerControl() {
 
 	//画面をはみ出さないようにする
 	if (g_player.x < 32)g_player.x = 32;
-	if (g_player.x > SCREEN_WIDTH - 180)g_player.x = SCREEN_WIDTH - 180;
+	if (g_player.x > 460)g_player.x = 460;
 
 
 	//プレイヤーの表示

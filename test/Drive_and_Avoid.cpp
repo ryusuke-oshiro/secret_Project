@@ -165,9 +165,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			GameMain();				//ゲームメイン処理
 			break;
 		case 6:
-			DrawGameOver();			//ゲームオーバー描画処理
-			break;
-		case 7:
 			InputRanking();			//ランキング入力処理
 			break;
 		}
@@ -370,11 +367,6 @@ void GameMain(void)
 
 		g_player.PlayerControl();
 
-
-	
-
-	//スペースキーでメニューに戻る
-	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
 }
 
 
@@ -396,49 +388,49 @@ void DrawBackGround()
 /***************************************
 *ゲームオーバー画面描画処理
 ****************************************/
-void DrawGameOver(void)
-{
-	PlaySoundMem(g_GameOverSE, DX_PLAYTYPE_BACK, FALSE);
-	g_Score = (g_Mileage / 10 * 10) + AppleCount3 * 50 + AppleCount1 * 200;
-
-	//スペースキーでメニューに戻る
-	if (g_KeyFlg & PAD_INPUT_M) {
-		if (g_Ranking[RANKING_DATA].score >= g_Score) {
-			g_GameState = 0;
-		}
-		else {
-			g_GameState = 7;
-		}
-	}
-
-	DrawBox(150, 150, 490, 330, 0x009900, TRUE);
-	DrawBox(150, 150, 490, 330, 0x000000, FALSE);
-
-	SetFontSize(20);
-	DrawString(220, 170, "ゲームオーバー", 0xcc0000);
-	SetFontSize(16);
-	DrawString(180, 200, "走行距離　　　", 0x000000);
-	DrawRotaGraph(230, 230, 0.3f, M_PI / 2, g_Teki[2], TRUE, FALSE);
-
-	DrawRotaGraph(230, 250, 0.3f, M_PI / 2, g_Teki[1], TRUE, FALSE);
-
-	DrawRotaGraph(230, 270, 0.3f, M_PI / 2, g_Teki[0], TRUE, FALSE);
-
-	DrawFormatString(260, 200, 0xFFFFFF, "%6d x  10 = %6d", g_Mileage / 10, g_Mileage / 10 * 10);
-
-	DrawFormatString(260, 222, 0xFFFFFF, "%6d x  50 = %6d", AppleCount3, AppleCount3 * 50);
-
-	DrawFormatString(260, 243, 0xFFFFFF, "%6d x  100 = %6d", AppleCount2, AppleCount2 * 100);
-
-	DrawFormatString(260, 264, 0xFFFFFF, "%6d x  200 = %6d", AppleCount1, AppleCount1 * 200);
-
-	DrawString(310, 290, "スコア", 0x000000);
-
-	DrawFormatString(260, 290, 0xFFFFFF, "          =%6d", g_Score);
-
-	DrawString(150, 450, "---- スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
-
-}
+//void DrawGameOver(void)
+//{
+//	PlaySoundMem(g_GameOverSE, DX_PLAYTYPE_BACK, FALSE);
+//	g_Score = (g_Mileage / 10 * 10) + AppleCount3 * 50 + AppleCount1 * 200;
+//
+//	//スペースキーでメニューに戻る
+//	if (g_KeyFlg & PAD_INPUT_M) {
+//		if (g_Ranking[RANKING_DATA].score >= g_Score) {
+//			g_GameState = 0;
+//		}
+//		else {
+//			g_GameState = 7;
+//		}
+//	}
+//
+//	DrawBox(150, 150, 490, 330, 0x009900, TRUE);
+//	DrawBox(150, 150, 490, 330, 0x000000, FALSE);
+//
+//	SetFontSize(20);
+//	DrawString(220, 170, "ゲームオーバー", 0xcc0000);
+//	SetFontSize(16);
+//	DrawString(180, 200, "走行距離　　　", 0x000000);
+//	DrawRotaGraph(230, 230, 0.3f, M_PI / 2, g_Teki[2], TRUE, FALSE);
+//
+//	DrawRotaGraph(230, 250, 0.3f, M_PI / 2, g_Teki[1], TRUE, FALSE);
+//
+//	DrawRotaGraph(230, 270, 0.3f, M_PI / 2, g_Teki[0], TRUE, FALSE);
+//
+//	DrawFormatString(260, 200, 0xFFFFFF, "%6d x  10 = %6d", g_Mileage / 10, g_Mileage / 10 * 10);
+//
+//	DrawFormatString(260, 222, 0xFFFFFF, "%6d x  50 = %6d", AppleCount3, AppleCount3 * 50);
+//
+//	DrawFormatString(260, 243, 0xFFFFFF, "%6d x  100 = %6d", AppleCount2, AppleCount2 * 100);
+//
+//	DrawFormatString(260, 264, 0xFFFFFF, "%6d x  200 = %6d", AppleCount1, AppleCount1 * 200);
+//
+//	DrawString(310, 290, "スコア", 0x000000);
+//
+//	DrawFormatString(260, 290, 0xFFFFFF, "          =%6d", g_Score);
+//
+//	DrawString(150, 450, "---- スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
+//
+//}
 /****************************************
 *ランキング入力処理
 ****************************************/

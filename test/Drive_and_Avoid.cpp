@@ -31,7 +31,12 @@ int g_RankingImage;		//画像用変数
 int g_WaitTime = 0;
 
 int Time = 0;     //待ち時間
+int SaveTime;
+int SaveTime_2;
+int SaveTime_3;
+int ST_flg=TRUE;
 int StartTime;
+int StartTime_2;
 int RefreshTime;
 
 int g_EndImage;        //エンド画面
@@ -57,7 +62,6 @@ int g_SE2;
 int counter = 0, FpsTime[2] = { 0, }, FpsTime_i = 0;
 int color_white;
 double Fps = 0.0;
-
 
 //ランキングデータ（構造体）
 struct RankingData {
@@ -136,7 +140,7 @@ void DrawGameTitle(void);//タイトル描画処理
 void DrawGameOver(void);//ゲームオーバー画面描画処理
 void DrawEnd(void);//ゲームエンド描画処理
 void DrawHelp(void);//ゲームヘルプ描画処理
-
+void GamePause(void);//ゲームポーズ描画処理
 void DrawRanking(void);//ランキング描画処理
 void InputRanking(void);//ランキング入力
 
@@ -188,6 +192,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 	if (ReadRanking() == -1) return -1;		//ランキングデータの読み込み
 
+	enum Screen{case5,case8};
+	g_GameState = case5;
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		RefreshTime = GetNowCount();
@@ -224,6 +230,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 		case 7:
 			InputRanking();			//ランキング入力処理
 			break;
+		case 8:
+			GamePause();           //ポーズ画面描画処理
+			break;                  
 		}
 		ScreenFlip();	//裏画面の内容を表画面に反映
 		while (GetNowCount() - RefreshTime < 17);
@@ -324,7 +333,6 @@ void GameInit(void)
 
 	//ゲームメイン処理へ
 	g_GameState = 5;
-
 	//音源の初期設定
 
 
@@ -412,9 +420,10 @@ void GameMain(void)
 
 		g_player.PlayerControl();
 
-
-	
-
+		//if (CheckHitKey(KEY_INPUT_SPACE)) {
+		//	SaveTime = StartTime;
+		//	g_GameState = 8;
+		//}
 	//スペースキーでメニューに戻る
 	//if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
 
@@ -423,6 +432,38 @@ void GameMain(void)
 	//DrawString(150, 450, "---- スペースキーを押してゲームオーバーへ ----", 0xffffff, 0);
 }
 
+/******************************************
+*ゲームポーズ
+******************************************/
+void GamePause(void)
+{
+	
+//	if (CheckHitKey(KEY_INPUT_Z)) { g_GameState = 5; ST_flg = TRUE;
+//	}
+//	if (ST_flg == TRUE) {
+//		StartTime = SaveTime;
+//		ST_flg = FALSE;
+//	}
+//	
+//		DrawGraph(0, 0, g_StageImage, FALSE);
+//		DrawString(150, 150, "ポーズメニュー画面です。", 0x330033);
+//		DrawString(150, 190, "Zキーでゲームに戻る。", 0x330033);
+//
+//		if (g_player.flg == TRUE) {		//TRUEの間、表示
+//			DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
+//		}
+//		
+//		DrawRotaGraph(520, 110, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
+//		DrawRotaGraph(570, 110, 0.9f, 0, Apple_Img[1], TRUE, FALSE);
+//		DrawRotaGraph(620, 110, 0.9f, 0, Apple_Img[2], TRUE, FALSE);
+//
+//		DrawFormatString(510, 140, 0xFFFFFF, "%03d", AppleCount1);
+//		DrawFormatString(560, 140, 0xFFFFFF, "%03d", AppleCount2);
+//		DrawFormatString(610, 140, 0xFFFFFF, "%03d", AppleCount3);
+//		DrawFormatString(561, 200, 0xffffff, "%d", g_Score);
+//		DrawFormatString(510, 200, 0xFFFFFF, "%02d", 30 - StartTime / 1000);
+//	
+}
 
 /*******************************************
 *アイテムの制御

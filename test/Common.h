@@ -17,6 +17,10 @@ extern int g_Mileage;
 
 extern int g_GameState;
 
+extern int SaveTime;
+extern int SaveTime_2;
+extern int SaveTime_3;
+extern int StartTime_2;
 extern int g_OldKey;	
 extern int g_NowKey;	
 extern int g_KeyFlg;	

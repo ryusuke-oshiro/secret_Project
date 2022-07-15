@@ -91,17 +91,32 @@ void PLAYER::PlayerControl() {
 	DrawFormatString(560, 140, 0xFFFFFF, "%03d", AppleCount2);
 	DrawFormatString(610, 140, 0xFFFFFF, "%03d", AppleCount3);
 
+
 	StartTime = GetNowCount()-Time;
-	
-	DrawFormatString(510, 200, 0xFFFFFF, "%02d", 30-StartTime/1000);
+	StartTime_2 = 30 - StartTime / 1000;
+	DrawFormatString(510, 200, 0xFFFFFF, "%02d",StartTime_2 + SaveTime_3);
 	
 	if (StartTime >= 30000) {		//§ŒÀŠÔ30•b‚½‚Á‚½‚çGameState=6 -> ƒ‰ƒ“ƒLƒ“ƒO“ü—Í‚ÖI
 		g_GameState = 6;
 		StopSoundMem(g_MusicBGM);
 	}
 	
+	//if(WaitKey()==CheckHitKey(KEY_INPUT_SPACE))
+	if (CheckHitKey(KEY_INPUT_SPACE)) {
+		SaveTime_3 = 0;
+		SaveTime = GetNowCount();
+		while (1) {
+			/*SaveTime_2 = GetNowCount() - SaveTime;*/
+			/*SaveTime_3 = SaveTime_2 / 1000;*/
+			if (WaitKey()) {
+				/*StartTime = SaveTime;*/
+				break;
+			}
+		}
+		SaveTime_2 = GetNowCount();
+		SaveTime_3 = (SaveTime_2 - SaveTime) / 1000;
+	}
 	
-
 }
 
 int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)

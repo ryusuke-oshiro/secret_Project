@@ -140,17 +140,23 @@ void PLAYER::PlayerControl() {
 	DrawFormatString(510, 140, 0xFFFFFF, "%03d", AppleCount1);
 	DrawFormatString(560, 140, 0xFFFFFF, "%03d", AppleCount2);
 	DrawFormatString(610, 140, 0xFFFFFF, "%03d", AppleCount3);
-
-	StartTime = GetNowCount()-Time;
-	StartTime = 30 - StartTime / 1000 - pose.PoseTime;
-	DrawFormatString(510, 200, 0xFFFFFF, "%02d", StartTime);
 	
-	if (input.Buttons[XINPUT_BUTTON_START] == 1) {
+	if (input.Buttons[XINPUT_BUTTON_START] == 0) {
+		g_KeyFLG = TRUE;
+	}
+	if (input.Buttons[XINPUT_BUTTON_START] == 1 && g_KeyFLG==TRUE) {
 		g_KeyFLG = FALSE;
 		g_GameState = 7;
 	}
 
-	if (StartTime >= 30000) {		//制限時間30秒たったらGameState=6 -> ランキング入力へ！
+	StartTime = GetNowCount()-Time;
+	StartTime = 30 - StartTime / 1000 + pose.PoseTime;
+	/*pose.PoseTime = 0;*/
+	DrawFormatString(510, 200, 0xFFFFFF, "%02d", StartTime);
+	
+	
+
+	if (StartTime <= 0) {		//制限時間30秒たったらGameState=6 -> ランキング入力へ！
 		g_GameState = 6;
 		StopSoundMem(g_MusicBGM);
 	}

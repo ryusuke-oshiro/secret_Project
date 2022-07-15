@@ -2,7 +2,6 @@
 #include"Common.h"
 #include"DxLib.h"
 
-
 POSE pose;
 
 POSE::POSE() {

@@ -137,6 +137,8 @@ void APPLE::AppleControl() {
 }
 
 void APPLE::AppleScore() {
-
+	if (g_Score < 0) {
+		g_Score = 0;
+	}
 	DrawFormatString(561, 200, 0xffffff,"%d", g_Score);
 }

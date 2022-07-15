@@ -7,7 +7,7 @@ APPLE:::
 
 SelectAppleの確立操作見直し		//clear
 
-Playerとの当たり判定の座標見直し 
+Playerとの当たり判定の座標見直し 	//clear
 
 GameOver処理の判定確認  //clear
 制限時間の実装 

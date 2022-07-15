@@ -7,6 +7,7 @@
     <ClCompile Include="HELP.cpp" />
     <ClCompile Include="PLAYER.cpp" />
     <ClCompile Include="TITLE.cpp" />
+    <ClCompile Include="POSE.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APPLE.h" />
@@ -14,5 +15,6 @@
     <ClInclude Include="HELP.h" />
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="TITLE.h" />
+    <ClInclude Include="POSE.h" />
   </ItemGroup>
 </Project>

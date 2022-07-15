@@ -33,3 +33,5 @@ extern int g_Car_left,g_Car_right,g_Car_Nowangle;
 extern int Apple_Img[4];
 
 extern int g_Score;
+
+extern void DrawBackGround();

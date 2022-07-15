@@ -10,6 +10,7 @@
 #include"PLAYER.h"
 #include"APPLE.h"
 #include"TITLE.h"
+#include"POSE.h"
 #include"Common.h"
 #include"Help.h"
 
@@ -167,6 +168,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 		case 6:
 			InputRanking();			//ランキング入力処理
 			break;
+		case 7:
+			pose.DrawPose();
+			break;
 		}
 		ScreenFlip();	//裏画面の内容を表画面に反映
 		while (GetNowCount() - RefreshTime < 17);
@@ -196,76 +200,7 @@ void SetColor() {
 	color_white = GetColor(255, 255, 255);            //白色ハンドルを取得
 	return;
 }
-///*********************************************
-//*ゲームタイトル表示（メニュー画面）
-//**********************************************/
-//void DrawGameTitle(void)
-//{
-//	static int MenuNo = 0;
-//	
-//		if (x_flg == TRUE) {
-//			++x;
-//		}
-//		else {
-//			--x;
-//		}
-//			if (x >= 10) {
-//				for (int j = 0; j <= 10; j++) {
-//					x = 10;
-//				}
-//				x_flg = FALSE;
-//			}
-//			if (x <= -10) {
-//				for (int k = 0; k <= 10; k++) {
-//					x = -10;
-//				}
-//				x_flg = TRUE;
-//			}
-//
-//
-//	PlaySoundMem(g_TitleBGM, DX_PLAYTYPE_BACK, FALSE);
-//
-//	//メニューカーソル移動処理
-//	if (input.ThumbLY <= -15000) {
-//		if (g_KeyFLG == TRUE) { 
-//			PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE); 
-//			++MenuNo;
-//			if (MenuNo > 3) {
-//				MenuNo = 0;
-//			}
-//			g_KeyFLG = FALSE;
-//		}
-//		++g_WaitCount;
-//		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
-//	}
-//	if (input.ThumbLY >= 15000) {
-//		if (g_KeyFLG == TRUE) {
-//			PlaySoundMem(g_SE1, DX_PLAYTYPE_BACK, TRUE);
-//			--MenuNo;
-//			if (MenuNo < 0) {
-//				MenuNo = 3;
-//			}
-//			g_KeyFLG = FALSE;
-//		}
-//		++g_WaitCount;
-//		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
-//	}
-//	if (input.ThumbLY > -15000 && input.ThumbLY < 15000) {
-//		g_KeyFLG = TRUE; g_WaitCount = 0;
-//	}
-//	//Zキーでメニュー選択
-//	if (input.Buttons[12] == 1) {
-//		StopSoundMem(g_TitleBGM);
-//		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);
-//		g_GameState = MenuNo + 1;
-//	}
-//	//タイトル画像表示
-//	DrawGraph(0, 0, g_TitleImage, FALSE);
-//
-//	//メニューカーソル
-//	DrawRotaGraph(150 + x, 240 + MenuNo * 50, 0.7f, M_PI / 2, g_Cone, TRUE);
-//
-//}
+
 /********************************************
 *ゲーム初期化処理
 *********************************************/
@@ -286,12 +221,6 @@ void GameInit(void)
 	g_GameState = 5;
 
 	//音源の初期設定
-
-
-	//エネミーの初期設定
-	/*for (int i = 0; i < Apple_MAX; i++) {
-		g_apple[i].flg = FALSE;
-	}*/
 
 }
 /*******************************************
@@ -315,31 +244,7 @@ void DrawRanking(void)
 	DrawString(100, 450, "----スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
 
 }
-/*******************************************
-*ゲームヘルプ描画処理
-********************************************/
-//void DrawHelp(void)
-//{
-//	// スペースキーでメニューに戻る
-//	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 0;
-//
-//	//タイトル画像表示
-//	DrawGraph(0, 0, title.g_TitleImage, FALSE);
-//	SetFontSize(16);
-//	DrawString(20, 120, "ヘルプ画面", 0xffffff, 0);
-//
-//	DrawString(20, 160, "これは障害物を避けながら", 0xffffff, 0);
-//	DrawString(20, 180, "走り続けるゲームです", 0xffffff, 0);
-//	DrawString(20, 200, "燃料が尽きるか障害物に", 0xffffff, 0);
-//	DrawString(20, 220, "数回当たるとゲームオーバーです", 0xffffff, 0);
-//	DrawString(20, 250, "アイテム一覧", 0xffffff, 0);
-//	DrawGraph(20, 260, g_Item[0], TRUE);
-//	DrawString(20, 315, "取ると燃料が回復するよ", 0xffffff, 0);
-//	DrawGraph(20, 335, g_Item[1], TRUE);
-//	DrawString(20, 385, "ダメージを受けているときに取ると耐久回復", 0xffffff, 0);
-//	DrawString(20, 405, "耐久が減っていなかったら燃料が少し回復するよ", 0xffffff, 0);
-//	DrawString(20, 450, "---- スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
-//}
+
 /*******************************************
 *ゲームエンド描画処理
 ********************************************/
@@ -372,65 +277,15 @@ void GameMain(void)
 
 
 /******************************************
-*背景画像スクロール処理
+*背景画像描画処理
 *引　数：なし
 *戻り値：なし
 ********************************************/
 void DrawBackGround()
 {
-	
-
 	DrawGraph(0, 0, g_StageImage, FALSE);		//画像：横490+150(スコア表示分)=640:縦480
-
-	
 }
 
-/***************************************
-*ゲームオーバー画面描画処理
-****************************************/
-//void DrawGameOver(void)
-//{
-//	PlaySoundMem(g_GameOverSE, DX_PLAYTYPE_BACK, FALSE);
-//	g_Score = (g_Mileage / 10 * 10) + AppleCount3 * 50 + AppleCount1 * 200;
-//
-//	//スペースキーでメニューに戻る
-//	if (g_KeyFlg & PAD_INPUT_M) {
-//		if (g_Ranking[RANKING_DATA].score >= g_Score) {
-//			g_GameState = 0;
-//		}
-//		else {
-//			g_GameState = 7;
-//		}
-//	}
-//
-//	DrawBox(150, 150, 490, 330, 0x009900, TRUE);
-//	DrawBox(150, 150, 490, 330, 0x000000, FALSE);
-//
-//	SetFontSize(20);
-//	DrawString(220, 170, "ゲームオーバー", 0xcc0000);
-//	SetFontSize(16);
-//	DrawString(180, 200, "走行距離　　　", 0x000000);
-//	DrawRotaGraph(230, 230, 0.3f, M_PI / 2, g_Teki[2], TRUE, FALSE);
-//
-//	DrawRotaGraph(230, 250, 0.3f, M_PI / 2, g_Teki[1], TRUE, FALSE);
-//
-//	DrawRotaGraph(230, 270, 0.3f, M_PI / 2, g_Teki[0], TRUE, FALSE);
-//
-//	DrawFormatString(260, 200, 0xFFFFFF, "%6d x  10 = %6d", g_Mileage / 10, g_Mileage / 10 * 10);
-//
-//	DrawFormatString(260, 222, 0xFFFFFF, "%6d x  50 = %6d", AppleCount3, AppleCount3 * 50);
-//
-//	DrawFormatString(260, 243, 0xFFFFFF, "%6d x  100 = %6d", AppleCount2, AppleCount2 * 100);
-//
-//	DrawFormatString(260, 264, 0xFFFFFF, "%6d x  200 = %6d", AppleCount1, AppleCount1 * 200);
-//
-//	DrawString(310, 290, "スコア", 0x000000);
-//
-//	DrawFormatString(260, 290, 0xFFFFFF, "          =%6d", g_Score);
-//
-//	DrawString(150, 450, "---- スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
-//
-//}
 /****************************************
 *ランキング入力処理
 ****************************************/
@@ -539,7 +394,6 @@ int ReadRanking(void) {
 int LoadSounds()
 {
 	if ((title.g_TitleBGM = LoadSoundMem("sounds/Title.mp3")) == -1)return -1;
-	//initial D髻ｳ貅・
 	if ((g_MusicBGM = LoadSoundMem("sounds/Playing.mp3")) == -1)return -1;
 	if ((g_GameOverSE = LoadSoundMem("sounds/ani_ta_biyon02.mp3")) == -1)return -1;
 

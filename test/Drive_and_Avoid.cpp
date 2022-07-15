@@ -578,7 +578,7 @@ int LoadImages()
 	if ((Apple_Img[0] = LoadGraph("images/RedApple.png")) == -1)return -1;
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;
 	if ((Apple_Img[2] = LoadGraph("images/YellowApple.png")) == -1)return -1;
-	if ((Apple_Img[3] = LoadGraph("images/PurpleApple.png")) == -1)return -1;	
+	if ((Apple_Img[3] = LoadGraph("images/PurpleApple.png")) == -1)return -1;
 
 	//ÉXÉeÅ[ÉWîwåi
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;

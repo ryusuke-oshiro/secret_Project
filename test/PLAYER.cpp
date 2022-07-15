@@ -3,6 +3,7 @@
 #include<math.h>
 #include"PLAYER.h"
 #include"APPLE.h"
+#include"POSE.h"
 #include"Common.h"
 
 PLAYER g_player;
@@ -141,13 +142,17 @@ void PLAYER::PlayerControl() {
 	DrawFormatString(610, 140, 0xFFFFFF, "%03d", AppleCount3);
 
 	StartTime = GetNowCount()-Time;
+	StartTime = 30 - StartTime / 1000 - pose.PoseTime;
+	DrawFormatString(510, 200, 0xFFFFFF, "%02d", StartTime);
 	
-	DrawFormatString(510, 200, 0xFFFFFF, "%02d", 30-StartTime/1000);
-	
+	if(input.Buttons[XINPUT_BUTTON_START]==1)
+
 	if (StartTime >= 30000) {		//§ŒÀŠÔ30•b‚½‚Á‚½‚çGameState=6 -> ƒ‰ƒ“ƒLƒ“ƒO“ü—Í‚ÖI
 		g_GameState = 6;
 		StopSoundMem(g_MusicBGM);
 	}
+
+
 }
 
 int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)

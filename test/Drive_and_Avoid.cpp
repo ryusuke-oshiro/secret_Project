@@ -10,8 +10,8 @@
 #include"PLAYER.h"
 #include"APPLE.h"
 #include"TITLE.h"
-#include"Common.h"
 #include"HELP.h"
+#include"Common.h"
 
 /******************************************************
 *変数宣言
@@ -83,7 +83,7 @@ struct RankingData g_Ranking[RANKING_DATA];
 void GameInit(void);	//ゲーム初期化処理
 void GameMain(void);	//ゲームメイン処理
 
-void DrawGameTitle(void);//タイトル描画処理
+//void DrawGameTitle(void);//タイトル描画処理
 void DrawGameOver(void);//ゲームオーバー画面描画処理
 void DrawEnd(void);//ゲームエンド描画処理
 /*void DrawHelp(void);*///ゲームヘルプ描画処理
@@ -135,9 +135,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
 		RefreshTime = GetNowCount();
-
-		GetJoypadXInputState(DX_INPUT_PAD1, &input);
-
 		//入力キー取得
 		/*g_OldKey = g_NewKey;*/
 		GetJoypadXInputState(DX_INPUT_PAD1, &input);
@@ -145,7 +142,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 		g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-		//g_NowKey = GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		g_KeyFlg = g_NowKey & ~g_OldKey;
 
 		ClearDrawScreen();			//画面の初期化
@@ -597,9 +593,7 @@ int LoadImages()
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;
 	if ((Apple_Img[2] = LoadGraph("images/YellowApple.png")) == -1)return -1;
 	if ((Apple_Img[3] = LoadGraph("images/PurpleApple.png")) == -1)return -1;
-	//アイテム
-	if ((g_Item[0] = LoadGraph("images/gasoline.bmp")) == -1)return -1;
-	if ((g_Item[1] = LoadGraph("images/supana.bmp")) == -1)return -1;
+	
 	
 	//ステージ背景
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;

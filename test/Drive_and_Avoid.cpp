@@ -101,7 +101,6 @@ void DrawBackGround();		//背景画像スクロール処理
 
 int LoadSounds();	//ステージ
 
-int LoadSounds();	//ステージ
 
 void SetColor();
 void FpsTimeFanction();
@@ -384,9 +383,9 @@ void GameMain(void)
 	//スペースキーでメニューに戻る
 	if (g_KeyFlg & PAD_INPUT_M)g_GameState = 6;
 
-	SetFontSize(16);
-	DrawString(20, 20, "ゲームメイン", 0xffffff, 0);
-	DrawString(150, 450, "---- スペースキーを押してゲームオーバーへ ----", 0xffffff, 0);
+	//SetFontSize(16);
+	//DrawString(20, 20, "ゲームメイン", 0xffffff, 0);
+	//DrawString(150, 450, "---- スペースキーを押してゲームオーバーへ ----", 0xffffff, 0);
 }
 
 
@@ -563,10 +562,10 @@ int ReadRanking(void) {
 ****************************************/
 int LoadSounds()
 {
-	if ((title.g_TitleBGM = LoadSoundMem("sounds/Initial D - Night Of Fire.mp3")) == -1)return -1;
+	if ((title.g_TitleBGM = LoadSoundMem("sounds/Title.mp3")) == -1)return -1;
 	//initial D音源
-	if ((g_MusicBGM = LoadSoundMem("sounds/Daisuke full ver. (歌詞・和訳付き).mp3")) == -1)return -1;
-	if ((g_GameOverSE = LoadSoundMem("sounds/GameOver.mp3")) == -1)return -1;
+	if ((g_MusicBGM = LoadSoundMem("sounds/Playing.mp3")) == -1)return -1;
+	if ((g_GameOverSE = LoadSoundMem("sounds/ani_ta_biyon02.mp3")) == -1)return -1;
 
 	//SE1 データ読み込み
 	if ((g_SE1 = LoadSoundMem("sounds/SE1.mp3")) == -1)return -1;
@@ -596,18 +595,13 @@ int LoadImages()
 	if ((Apple_Img[0] = LoadGraph("images/RedApple.png")) == -1)return -1;
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;
 	if ((Apple_Img[2] = LoadGraph("images/YellowApple.png")) == -1)return -1;
-	if ((Apple_Img[3] = LoadGraph("images/PurpleApple.png")) == -1)return -1;
-	//アイテム
-	if ((g_Item[0] = LoadGraph("images/gasoline.bmp")) == -1)return -1;
-	if ((g_Item[1] = LoadGraph("images/supana.bmp")) == -1)return -1;
-	
+	if ((Apple_Img[3] = LoadGraph("images/PurpleApple.png")) == -1)return -1;	
 	//ステージ背景
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;
 	//プレイヤー
 	if ((g_Car_left = LoadGraph("images/PlayerA.png")) == -1)return -1;
 	if ((g_Car_right = LoadGraph("images/PlayerA_2.png")) == -1)return -1;
 	if ((g_Car_Nowangle = LoadGraph("images/PlayerA_2.png")) == -1)return -1;
-	if ((g_Barrier = LoadGraph("images/barrier.png")) == -1)return -1;
 
 	return 0;
 }

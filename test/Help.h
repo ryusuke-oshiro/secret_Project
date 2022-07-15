@@ -1,12 +1,12 @@
 #pragma once
 #include "DxLib.h"
 
-class Help {
+class HELP{
 public:
 	int g_HelpImage;
 public:
-	Help();
+	HELP();
 	void DrawHelp();
 };
 
-extern Help help;
+extern HELP help;

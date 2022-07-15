@@ -1,14 +1,14 @@
-#include "Help.h"
+#include "HELP.h"
 #include "Common.h"
 #include "DxLib.h"
 
-Help help;
+HELP help;
 
-Help::Help() {
+HELP::HELP() {
 	g_HelpImage = 0;
 }
 
-void Help::DrawHelp() {
+void HELP::DrawHelp() {
 
 	if (input.Buttons[XINPUT_BUTTON_B]) {
 		g_GameState = 0;

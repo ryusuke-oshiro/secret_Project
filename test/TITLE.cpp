@@ -71,6 +71,7 @@ void TITLE::DrawGameTitle(void)
 	if (input.Buttons[12] == 1) {
 		StopSoundMem(g_TitleBGM);
 		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);
+		g_KeyFLG = FALSE;
 		g_GameState = MenuNo + 1;
 	}
 	//タイトル画像表示

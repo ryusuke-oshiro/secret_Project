@@ -11,6 +11,7 @@
 #include"APPLE.h"
 #include"TITLE.h"
 #include"Common.h"
+#include"Help.h"
 
 /******************************************************
 *変数宣言
@@ -155,7 +156,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			DrawRanking();			//ランキング描画処理
 			break;
 		case 3:
-			DrawHelp();				//ゲームヘルプ描画処理
+			help.DrawHelp();				//ゲームヘルプ描画処理
 			break;
 		case 4:
 			DrawEnd();				//ゲームエンド描画処理

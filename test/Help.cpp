@@ -9,13 +9,15 @@ HELP::HELP() {
 }
 
 void HELP::DrawHelp() {
-
-	if (input.Buttons[XINPUT_BUTTON_B]) {
-		g_GameState = 0;
+	if (input.Buttons[XINPUT_BUTTON_A] == 0) {
+		g_KeyFLG = TRUE;
+	}
+	if(input.Buttons[XINPUT_BUTTON_A] && g_KeyFLG==TRUE){
+		g_GameState = 1;
 	}
 
-	if (input.Buttons[XINPUT_BUTTON_A]) {
-		g_GameState = 1;
+	if (input.Buttons[XINPUT_BUTTON_B] && g_KeyFLG == TRUE) {
+		g_GameState = 0;
 	}
 	DrawGraph(0, 0, g_HelpImage, FALSE);
 	SetFontSize(16);

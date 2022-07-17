@@ -4,6 +4,7 @@
 #define ITEM_MAX  3
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
+#define RANKING_DATA 5
 
 extern XINPUT_STATE input;
 extern int g_KeyFLG;
@@ -14,6 +15,8 @@ extern int g_NowKey;
 extern int Time;
 
 extern int g_WaitCount;
+
+extern int g_WaitTime;
 
 extern int StartTime;
 

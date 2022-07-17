@@ -4,6 +4,7 @@
 #include"PLAYER.h"
 #include"APPLE.h"
 #include"POSE.h"
+#include"RANKING.h"
 #include"Common.h"
 
 PLAYER g_player;
@@ -150,13 +151,18 @@ void PLAYER::PlayerControl() {
 	}
 
 	StartTime = GetNowCount()-Time;
-	StartTime = 30 - StartTime / 1000 + pose.PoseTime;
+	StartTime = 3 - StartTime / 1000 + pose.PoseTime;	//制限時間調整
 	/*pose.PoseTime = 0;*/
 	DrawFormatString(510, 200, 0xFFFFFF, "%02d", StartTime);
 	
-	if (StartTime <= 0) {		//制限時間30秒たったらGameState=6 -> ランキング入力へ！
-		StopSoundMem(g_MusicBGM);
-		g_GameState = 6;
+	if (StartTime <= 0) {
+		StopSoundMem(g_MusicBGM);		//制限時間30秒たったらGameState=6 -> ランキング入力へ！
+		if (g_Score >= ranking.getScore(4)) {
+			g_GameState = 6;
+		}else {
+			g_GameState = 2;
+		}
+		
 	}
 }
 

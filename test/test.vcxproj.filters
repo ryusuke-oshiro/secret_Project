@@ -8,6 +8,9 @@
     <ClCompile Include="PLAYER.cpp" />
     <ClCompile Include="TITLE.cpp" />
     <ClCompile Include="POSE.cpp" />
+    <ClCompile Include="InputRANKING.cpp" />
+    <ClCompile Include="RANKING.cpp" />
+    <ClCompile Include="DrawRANKING.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APPLE.h" />
@@ -16,5 +19,8 @@
     <ClInclude Include="PLAYER.h" />
     <ClInclude Include="TITLE.h" />
     <ClInclude Include="POSE.h" />
+    <ClInclude Include="InputRANKING.h" />
+    <ClInclude Include="RANKING.h" />
+    <ClInclude Include="DrawRANKING.h" />
   </ItemGroup>
 </Project>

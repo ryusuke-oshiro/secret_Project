@@ -6,11 +6,13 @@
 #include"Common.h"
 #define _USE_MATH_DEFINES
 #include<math.h>
-#define RANKING_DATA 5
 #include"PLAYER.h"
 #include"APPLE.h"
 #include"TITLE.h"
 #include"POSE.h"
+#include"RANKING.h"
+#include"InputRANKING.h"
+#include"DrawRANKING.h"
 #include"Common.h"
 #include"Help.h"
 
@@ -69,34 +71,14 @@ double Fps = 0.0;
 int x;
 int x_flg = TRUE;
 
-//ランキングデータ（構造体）
-struct RankingData {
-	int no;
-	char name[11];
-	long score;
-};
-//ランキングデータ変数宣言
-struct RankingData g_Ranking[RANKING_DATA];
-
 /***************************************************
 *関数のプロトタイプ宣言
 ****************************************************/
 void GameInit(void);	//ゲーム初期化処理
 void GameMain(void);	//ゲームメイン処理
-
-//void DrawGameTitle(void);//タイトル描画処理
-void DrawGameOver(void);//ゲームオーバー画面描画処理
 void DrawEnd(void);//ゲームエンド描画処理
-//void DrawHelp(void);//ゲームヘルプ描画処理
-
-void DrawRanking(void);//ランキング描画処理
-void InputRanking(void);//ランキング入力
 
 int LoadImages(); //画像読み込み
-
-void SortRanking(void);	//ランキング並び替え
-int SaveRanking(void);	//ランキングデータの保存
-int ReadRanking(void);	//ランキングデータ読み込み
 
 void DrawBackGround();		//背景画像スクロール処理
 
@@ -120,7 +102,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 
 
-	if ((g_RankingImage = LoadGraph("images/Ranking.bmp")) == -1)return -1;
+	if ((drawranking.RankingImage = LoadGraph("images/Ranking.bmp")) == -1)return -1;
 
 	SetDrawScreen(DX_SCREEN_BACK);			//描画先画面を裏にする
 	SetColor();
@@ -129,7 +111,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 	if (LoadSounds() == -1)return -1;		//サウンド読み込み関数を呼び出し
 
-	if (ReadRanking() == -1) return -1;		//ランキングデータの読み込み
+	if (ranking.ReadRanking() == -1) return -1;		//ランキングデータの読み込み
 
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
@@ -154,7 +136,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			GameInit();				//ゲーム初期処理
 			break;
 		case 2:
-			DrawRanking();			//ランキング描画処理
+			drawranking.DrawRanking();			//ランキング描画処理
 			break;
 		case 3:
 			help.DrawHelp();				//ゲームヘルプ描画処理
@@ -166,7 +148,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			GameMain();				//ゲームメイン処理
 			break;
 		case 6:
-			InputRanking();			//ランキング入力処理
+			inputranking.InputRanking();			//ランキング入力処理
 			break;
 		case 7:
 			pose.DrawPose();
@@ -228,27 +210,6 @@ void GameInit(void)
 	//音源の初期設定
 
 }
-/*******************************************
-*ゲームランキング描画処理
-********************************************/
-void DrawRanking(void)
-{
-	//スペースキーでメニューに戻る
-	if (g_KeyFlg & PAD_INPUT_M) g_GameState = 0;
-
-	//ランキング画像処理 
-	//ランキング画像処理
-	DrawGraph(0, 0, g_RankingImage, FALSE);
-
-	//ランキング一覧を表示
-	SetFontSize(18);
-	for (int i = 0; i < RANKING_DATA; i++) {
-		DrawFormatString(50, 170 + i * 25, 0xffffff, "%2d %-10s %10d", g_Ranking[i].no, g_Ranking[i].name, g_Ranking[i].score);
-	}
-
-	DrawString(100, 450, "----スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
-
-}
 
 /*******************************************
 *ゲームエンド描画処理
@@ -279,8 +240,6 @@ void GameMain(void)
 
 }
 
-
-
 /******************************************
 *背景画像描画処理
 *引　数：なし
@@ -292,108 +251,6 @@ void DrawBackGround()
 	DrawGraph(0, 0, g_StageImage, FALSE);		//画像：横490+150(スコア表示分)=640:縦480
 }
 
-/****************************************
-*ランキング入力処理
-****************************************/
-void InputRanking(void)
-{
-	//ランキング画像表示
-	DrawGraph(0, 0, g_RankingImage, FALSE);
-
-	// フォントサイズの設定
-	SetFontSize(20);
-	// 名前の入力
-	DrawString(150, 310, "> ", 0xFFFFFF);
-	DrawBox(160, 305, 300, 335, 0x000055, TRUE);
-	if (KeyInputSingleCharString(170, 310, 10, g_Ranking[RANKING_DATA].name, FALSE) == 1) {
-		g_Ranking[RANKING_DATA].score = g_Score;	// ランキングデータの１０番目にスコアを登録
-		SortRanking();		// ランキング並べ替え
-		SaveRanking();		// ランキングデータの保存
-		g_GameState = 2;		// ゲームモードの変更
-	}
-}
-/************************************************:
-*ランキング並び替え
-***********************************************/
-void SortRanking(void) {
-	int i, j;
-	RankingData work;
-
-	// 選択法ソート
-	for (i = 0; i < RANKING_DATA - 1; i++) {
-		for (j = i + 1; j < RANKING_DATA; j++) {
-			if (g_Ranking[i].score <= g_Ranking[j].score) {
-				work = g_Ranking[i];
-				g_Ranking[i] = g_Ranking[j];
-				g_Ranking[j] = work;
-			}
-		}
-	}
-
-	// 順位付け
-	for (i = 0; i < RANKING_DATA; i++) {
-		g_Ranking[i].no = 1;
-	}
-	// 得点が同じ場合は、同じ順位とする
-	// 同順位があった場合の次の順位はデータ個数が加算された順位とする
-	for (i = 0; i < RANKING_DATA - 1; i++) {
-		for (j = i + 1; j < RANKING_DATA; j++) {
-			if (g_Ranking[i].score > g_Ranking[j].score) {
-				g_Ranking[j].no++;
-			}
-		}
-	}
-}
-/****************************************
-*ランキングデータ保存
-*****************************************/
-int SaveRanking(void) {
-
-	FILE* fp;
-#pragma warning(disable:4996)
-
-	// ファイルオープン
-	if ((fp = fopen("dat/rankingdata.txt", "w")) == NULL) {
-		/* エラー処理 */
-		printf("Ranking Data Error\n");
-		return -1;
-	}
-
-	// ランキングデータ分配列データを書き込む
-	for (int i = 0; i < RANKING_DATA; i++) {
-		fprintf(fp, "%2d %10s %10d\n", g_Ranking[i].no, g_Ranking[i].name, g_Ranking[i].score);
-	}
-
-	//ファイルクローズ
-	fclose(fp);
-
-	return 0;
-
-}
-/*****************************************
-*ランキングデータ読み込み
-******************************************/
-int ReadRanking(void) {
-	FILE* fp;
-#pragma warning(disable:4996)
-
-	//ファイルオープン
-	if ((fp = fopen("dat/rankingdata.txt", "r")) == NULL) {
-		//エラー処理
-		printf("Ranking Data Error\n");
-		return -1;
-	}
-
-	//ランキングデータ配分列データを読み込む
-	for (int i = 0; i < RANKING_DATA; i++) {
-		fscanf(fp, "%2d %10s %10d", &g_Ranking[i].no, g_Ranking[i].name, &g_Ranking[i].score);
-	}
-
-	//ファイルクローズ
-	fclose(fp);
-
-	return 0;
-}
 /***************************************
 *サウンド読み込み
 ****************************************/

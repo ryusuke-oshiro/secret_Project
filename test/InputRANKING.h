@@ -1,11 +1,12 @@
 #pragma once
 class InputRANKING {
-private:
-	
+public:
 	int flg;
-	int ascii;
+	int count;
+	int upper;
+	int rower;
+	int number;
 	char moji;
-
 	int cursor_X, cursor_Y;
 public:
 	InputRANKING();
@@ -13,4 +14,4 @@ public:
 };
 
 extern InputRANKING inputranking;
-extern InputRANKING Alfabet[3][10];
+extern InputRANKING Alfabet[5][13];

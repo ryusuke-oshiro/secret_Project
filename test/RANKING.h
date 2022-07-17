@@ -21,6 +21,8 @@ public:
     void setScore(int n);
     int getNomber(int n);
     char* getName(int n);
+    int getName2(int c,int n);
+    void setName(int c,int n);
 };
 
 extern RANKING ranking;

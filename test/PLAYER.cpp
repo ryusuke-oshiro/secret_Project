@@ -157,8 +157,10 @@ void PLAYER::PlayerControl() {
 	
 	if (StartTime <= 0) {
 		StopSoundMem(g_MusicBGM);		//§ŒÀŽžŠÔ30•b‚½‚Á‚½‚çGameState=6 -> ƒ‰ƒ“ƒLƒ“ƒO“ü—Í‚ÖI
+		g_KeyFLG = TRUE;
 		if (g_Score >= ranking.getScore(4)) {
 			g_GameState = 6;
+
 		}else {
 			g_GameState = 2;
 		}

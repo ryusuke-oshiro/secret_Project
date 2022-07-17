@@ -100,3 +100,11 @@ int RANKING::getNomber(int n) {
 char* RANKING::getName(int n) {
 	return data[n].name;
 }
+
+int RANKING::getName2(int c,int n) {
+	return data[c].name[n];
+}
+
+void RANKING::setName(int c,int n) {
+	data[4].name[c] = n;
+}

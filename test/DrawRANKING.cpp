@@ -23,6 +23,11 @@ void DrawRANKING::DrawRanking(){
 		DrawFormatString(80, 170 + i * 25, 0xFFFFFF, "%1d   %10s     %10d",
 			ranking.getNomber(i), ranking.getName(i), ranking.getScore(i));
 	}
+	for (int i = 0; i < RANKING_DATA; i++) {
+		for (int j = 0; j < 10; j++) {
+			DrawFormatString(200+j*30, 300 + i * 25, 0xFFFFFF, "%c", ranking.getName2(i, j));
+		}
+	}
 
 // •¶Žš‚Ì•\Ž¦(“_–Å)
 	if (++g_WaitTime < 30) {

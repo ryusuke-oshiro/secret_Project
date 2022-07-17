@@ -64,9 +64,11 @@ void TITLE::DrawGameTitle(void)
 		++g_WaitCount;
 		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
 	}
+
 	if (input.ThumbLY > -15000 && input.ThumbLY < 15000) {
 		g_KeyFLG = TRUE; g_WaitCount = 0;
 	}
+
 	//Aキーでメニュー選択
 	if (input.Buttons[12] == 1) {
 		StopSoundMem(g_TitleBGM);

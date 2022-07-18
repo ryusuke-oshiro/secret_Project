@@ -23,14 +23,8 @@ XINPUT_STATE input;
 int g_KeyFLG = TRUE;	//入力キー情報
 int ButtonFLG = FALSE;
 
-
-//int g_OldKey;
-//int g_NowKey;
-//int g_KeyFlg;
-
 int g_GameState = 0;	//ゲームモード
 
-/*int g_TitleImage;*/		//画像用変数
 int g_Menu;		//メニュー画像変数
 
 int g_Score = 0;		//スコア
@@ -104,7 +98,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 
 
-	if ((drawranking.RankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;
+	if ((drawranking.RankingImage = LoadGraph("images/BackGround_ranking2.png")) == -1)return -1;
 
 	SetDrawScreen(DX_SCREEN_BACK);			//描画先画面を裏にする
 	SetColor();
@@ -118,14 +112,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	//ゲームループ
 	while (ProcessMessage() == 0 && g_GameState != 99 && !input.Buttons[XINPUT_BUTTON_BACK]) {
 		RefreshTime = GetNowCount();
-		//入力キー取得
-		/*g_OldKey = g_NewKey;*/
-		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		
-
-		/*g_OldKey = g_NowKey;
-		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-		g_KeyFlg = g_NowKey & ~g_OldKey;*/
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 
 		ClearDrawScreen();			//画面の初期化
 		FpsTimeFanction();
@@ -294,6 +282,7 @@ int LoadImages()
 
 	//ステージ背景
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;
+	if ((inputranking.g_InputRankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;
 	//プレイヤー
 	if ((g_Car_left = LoadGraph("images/PlayerA.png")) == -1)return -1;
 	if ((g_Car_right = LoadGraph("images/PlayerA_2.png")) == -1)return -1;

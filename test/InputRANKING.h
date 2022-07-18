@@ -1,6 +1,7 @@
 #pragma once
 class InputRANKING {
 public:
+	int g_InputRankingImage;
 	int count;
 	int upper;
 	int rower;

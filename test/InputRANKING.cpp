@@ -8,6 +8,7 @@ InputRANKING inputranking;
 InputRANKING Alfabet[5][13];
 
 InputRANKING::InputRANKING() {
+	g_InputRankingImage = 0;
 	count = 0;
 	moji = 0;
 

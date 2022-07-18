@@ -17,11 +17,12 @@ void HELP::DrawHelp() {
 	}
 
 	if (input.Buttons[XINPUT_BUTTON_B] && g_KeyFLG == TRUE) {
+		PlaySoundMem(g_SE3, DX_PLAYTYPE_BACK, TRUE);
 		g_GameState = 0;
 	}
 	DrawGraph(0, 0, g_HelpImage, FALSE);
 	SetFontSize(16);
-	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
+	/*DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);*/
 
 	DrawString(20, 120, "ƒwƒ‹ƒv‰æ–Ê", 0xffffff, 0);
 	

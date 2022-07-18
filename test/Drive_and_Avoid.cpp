@@ -130,7 +130,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			help.DrawHelp();				//ゲームヘルプ描画処理
 			break;
 		case 4:
-			DrawEnd();				//ゲームエンド描画処理
+			end.DrawEnd();				//ゲームエンド描画処理
 			break;
 		case 5:
 			GameMain();				//ゲームメイン処理
@@ -199,20 +199,7 @@ void GameInit(void)
 
 }
 
-/*******************************************
-*ゲームエンド描画処理
-********************************************/
-//void DrawEnd(void)
-//{
-//	//エンド画像表示
-//	DrawGraph(0, 0, g_EndImage, FALSE);
-//
-//	SetFontSize(24);
-//	DrawString(360, 480 - 24, "Thank you for Playing", 0xffffff, 0);
-//
-//	//タイムの加算処理＆終了（３秒後）
-//	if (++g_WaitTime > 180)g_GameState = 99;
-//}
+
 /******************************************
 *ゲームメイン
 ******************************************/

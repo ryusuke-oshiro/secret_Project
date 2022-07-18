@@ -70,7 +70,7 @@ int x_flg = TRUE;
 ****************************************************/
 void GameInit(void);	//ゲーム初期化処理
 void GameMain(void);	//ゲームメイン処理
-void DrawEnd(void);//ゲームエンド描画処理
+//void DrawEnd(void);//ゲームエンド描画処理
 
 int LoadImages(); //画像読み込み
 

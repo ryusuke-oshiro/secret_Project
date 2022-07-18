@@ -8,7 +8,6 @@ InputRANKING inputranking;
 InputRANKING Alfabet[5][13];
 
 InputRANKING::InputRANKING() {
-	flg = TRUE;
 	count = 0;
 	moji = 0;
 
@@ -40,7 +39,22 @@ void InputRANKING::InputRanking()
 {
 	//ランキング画像表示
 	DrawGraph(0, 0, drawranking.RankingImage, FALSE);
-
+	
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X < 10 || cursor_Y != 4) {	//Aボタン押したときのカーソル位置
+		ButtonFLG = TRUE;
+		if (ButtonFLG == TRUE) {
+			/*count++;*/										//にあるアルファベットのアスキーコードをランキングに入れる
+			if (count > 9) {
+				count = 9;
+			}
+			ranking.setName(count, Alfabet[cursor_Y][cursor_X].moji);
+			count++;
+			ButtonFLG = FALSE;
+		}
+	}
+	if (input.Buttons[XINPUT_BUTTON_A] == 0) {
+		ButtonFLG = TRUE;
+	}
 	// フォントサイズの設定
 	SetFontSize(40);
 	for (int i = 1; i <= 5; i++) {
@@ -96,7 +110,7 @@ void InputRANKING::InputRanking()
 		++g_WaitCount;
 		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
 	}
-
+	
 	if (input.ThumbLY > -17500 && input.ThumbLY < 17500 && input.ThumbLX > -17500 && input.ThumbLX < 17500) {
 		g_KeyFLG = TRUE; g_WaitCount = 0;
 	}
@@ -118,24 +132,27 @@ void InputRANKING::InputRanking()
 	DrawString(150, 210, "> ", 0xFFFFFF);
 	DrawBox(160, 205, 300, 235, 0x000055, TRUE);
 
-
-	/*if (input.Buttons[XINPUT_BUTTON_B] == 1) {
-		
-	}*/
-
 	
-	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X!=12 || cursor_Y != 4) {	//Aボタン押したときのカーソル位置
-		if (flg == TRUE) {								//にあるアルファベットのアスキーコードをランキングに入れる
-			if (count > 9)count = 9;
-			ranking.setName(count++, Alfabet[cursor_X][cursor_Y].moji);
-			flg = FALSE;
-		}
-		++g_WaitCount;
-		if (g_WaitCount >= 30) { flg = TRUE; g_WaitCount = 0; }
+	//if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 10 && cursor_Y == 4) {
+	//	if (ButtonFLG == TRUE) {
+	//		if (count < 0) {
+	//			count = 0;
+	//		}
+	//		ranking.setName()
+	//	}
+	//}
+
+
+	for (int i = 0; i < count + 1; i++) {
+		DrawFormatString(150+i*20, 200, 0xFFFFFF, "%c", ranking.getName2(4,i));		//今入力している文字
 	}
-	if (input.Buttons[XINPUT_BUTTON_A] == 0)flg = TRUE;
 
-	
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//決定押したとき
+		ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録
+		ranking.SortRanking();		// ランキング並べ替え
+		ranking.SaveRanking();		// ランキングデータの保存
+		g_GameState = 2;			// ゲームモードの変更
+	}
 
 	//if (KeyInputSingleCharString(170, 210, 10, ranking.getName(4), FALSE) == 1) {
 	//	ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録

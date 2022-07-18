@@ -8,6 +8,7 @@
 
 extern XINPUT_STATE input;
 extern int g_KeyFLG;
+extern int ButtonFLG;
 
 extern int g_KeyFlg;
 extern int g_NowKey;

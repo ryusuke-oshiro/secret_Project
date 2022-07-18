@@ -1,7 +1,6 @@
 #pragma once
 class InputRANKING {
 public:
-	int flg;
 	int count;
 	int upper;
 	int rower;

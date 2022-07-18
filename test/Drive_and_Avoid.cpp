@@ -21,6 +21,7 @@
 *******************************************************/
 XINPUT_STATE input;
 int g_KeyFLG = TRUE;	//入力キー情報
+int ButtonFLG = FALSE;
 
 
 int g_OldKey;
@@ -262,15 +263,15 @@ int LoadSounds()
 
 
 	//SE1 データ読み込み
-	if ((g_SE1 = LoadSoundMem("sounds/SE1.mp3")) == -1)return -1;
+	if ((g_SE1 = LoadSoundMem("sounds/SE01.wav")) == -1)return -1;
 	//SE2 データ読み込み
-	if ((g_SE2 = LoadSoundMem("sounds/SE2.mp3")) == -1)return -1;
+	if ((g_SE2 = LoadSoundMem("sounds/SE02.wav")) == -1)return -1;
 
 
 	//SEの音量調整
-	ChangeVolumeSoundMem(80, g_SE2);
+	ChangeVolumeSoundMem(250, g_SE2);
 
-	ChangeVolumeSoundMem(120, g_SE1);
+	ChangeVolumeSoundMem(250, g_SE1);
 
 	return 0;
 }
@@ -282,7 +283,7 @@ int LoadImages()
 	//タイトル
 	if ((title.g_TitleImage = LoadGraph("images/BackGround_title.png")) == -1)return -1;
 	//メニュー
-	if ((g_Cone = LoadGraph("images/cone.bmp")) == -1)return -1;
+	if ((g_Cone = LoadGraph("images/cursor.png")) == -1)return -1;
 	//リンゴ
 	if ((Apple_Img[0] = LoadGraph("images/RedApple.png")) == -1)return -1;
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;

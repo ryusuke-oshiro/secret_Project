@@ -21,19 +21,19 @@ void HELP::DrawHelp() {
 		g_GameState = 0;
 	}
 	DrawGraph(0, 0, g_HelpImage, FALSE);
-	SetFontSize(16);
-	/*DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);*/
 
-	DrawString(20, 120, "ヘルプ画面", 0xffffff, 0);
-	
-	DrawString(20, 160, "これは障害物を避けながら", 0xffffff, 0);
-	DrawString(20, 180, "走り続けるゲームです", 0xffffff, 0);
-	DrawString(20, 200, "燃料が尽きるか障害物に", 0xffffff, 0);
-	DrawString(20, 220, "数回当たるとゲームオーバーです", 0xffffff, 0);
-	DrawString(20, 250, "アイテム一覧", 0xffffff, 0);
-	DrawString(20, 315, "取ると燃料が回復するよ", 0xffffff, 0);
-	DrawString(20, 385, "ダメージを受けているときに取ると耐久回復", 0xffffff, 0);
-	DrawString(20, 405, "耐久が減っていなかったら燃料が少し回復するよ", 0xffffff, 0);
-	DrawString(20, 450, "---- スペースキーを押してタイトルへ戻る ----", 0xffffff, 0);
+	DrawOval(95, 374, 14, 7, GetColor(0, 0, 0), TRUE);
+	DrawBox(89, 375, 102, 388, GetColor(0, 0, 0), TRUE);
+	DrawOval(95, 391, 17, 7, GetColor(0, 0, 0), TRUE);
+	DrawString(92, 367, "L", GetColor(255, 255, 255));
+
+	DrawOval(330, 381, 34, 14, GetColor(0, 0, 0), TRUE);
+	DrawString(310, 374, "START", GetColor(255, 255, 255));
+
+	DrawCircle(100, 465, 10, GetColor(0, 0, 0), TRUE);
+	DrawString(97, 458, "B", GetColor(255, 255, 255));
+
+	DrawCircle(445, 465, 10, GetColor(0, 0, 0), TRUE);
+	DrawString(442, 458, "A", GetColor(255, 255, 255));
 
 }

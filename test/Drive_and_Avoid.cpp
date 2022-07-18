@@ -24,9 +24,9 @@ int g_KeyFLG = TRUE;	//入力キー情報
 int ButtonFLG = FALSE;
 
 
-int g_OldKey;
-int g_NowKey;
-int g_KeyFlg;
+//int g_OldKey;
+//int g_NowKey;
+//int g_KeyFlg;
 
 int g_GameState = 0;	//ゲームモード
 
@@ -116,16 +116,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	if (ranking.ReadRanking() == -1) return -1;		//ランキングデータの読み込み
 
 	//ゲームループ
-	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
+	while (ProcessMessage() == 0 && g_GameState != 99 && !input.Buttons[XINPUT_BUTTON_BACK]) {
 		RefreshTime = GetNowCount();
 		//入力キー取得
 		/*g_OldKey = g_NewKey;*/
 		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		
 
-		g_OldKey = g_NowKey;
+		/*g_OldKey = g_NowKey;
 		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-		g_KeyFlg = g_NowKey & ~g_OldKey;
+		g_KeyFlg = g_NowKey & ~g_OldKey;*/
 
 		ClearDrawScreen();			//画面の初期化
 		FpsTimeFanction();

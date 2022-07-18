@@ -139,5 +139,5 @@ void APPLE::AppleScore() {
 	if (g_Score < 0) {
 		g_Score = 0;
 	}
-	DrawFormatString(520, 110, 0xffffff,"%05d", g_Score);
+	DrawFormatString(520, 100, 0xffffff,"%05d", g_Score);
 }

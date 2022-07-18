@@ -39,7 +39,7 @@ InputRANKING::InputRANKING() {
 void InputRANKING::InputRanking()
 {
 	//ƒ‰ƒ“ƒLƒ“ƒO‰æ‘œ•\Ž¦
-	DrawGraph(0, 0, drawranking.RankingImage, FALSE);
+	DrawGraph(0, 0, g_InputRankingImage, FALSE);
 
 
 	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);

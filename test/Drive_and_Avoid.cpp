@@ -13,9 +13,9 @@
 #include"RANKING.h"
 #include"InputRANKING.h"
 #include"DrawRANKING.h"
-#include"Common.h"
 #include"Help.h"
-
+#include"END.h"
+#include"Common.h"
 /******************************************************
 *変数宣言
 *******************************************************/
@@ -38,8 +38,6 @@ int g_WaitCount = 0;
 int Time = 0;     //待ち時間
 int StartTime;
 int RefreshTime;
-
-int g_EndImage;        //エンド画面
 
 int g_Mileage;          //走行距離
 
@@ -204,17 +202,17 @@ void GameInit(void)
 /*******************************************
 *ゲームエンド描画処理
 ********************************************/
-void DrawEnd(void)
-{
-	//エンド画像表示
-	DrawGraph(0, 0, g_EndImage, FALSE);
-
-	SetFontSize(24);
-	DrawString(360, 480 - 24, "Thank you for Playing", 0xffffff, 0);
-
-	//タイムの加算処理＆終了（３秒後）
-	if (++g_WaitTime > 180)g_GameState = 99;
-}
+//void DrawEnd(void)
+//{
+//	//エンド画像表示
+//	DrawGraph(0, 0, g_EndImage, FALSE);
+//
+//	SetFontSize(24);
+//	DrawString(360, 480 - 24, "Thank you for Playing", 0xffffff, 0);
+//
+//	//タイムの加算処理＆終了（３秒後）
+//	if (++g_WaitTime > 180)g_GameState = 99;
+//}
 /******************************************
 *ゲームメイン
 ******************************************/
@@ -283,6 +281,7 @@ int LoadImages()
 	//ステージ背景
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;
 	if ((inputranking.g_InputRankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;
+	if ((end.g_EndImage = LoadGraph("images/BackGround_end.png")) == -1)return -1;
 	//プレイヤー
 	if ((g_Car_left = LoadGraph("images/PlayerA.png")) == -1)return -1;
 	if ((g_Car_right = LoadGraph("images/PlayerA_2.png")) == -1)return -1;

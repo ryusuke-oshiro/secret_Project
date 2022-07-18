@@ -39,7 +39,9 @@ void InputRANKING::InputRanking()
 {
 	//ランキング画像表示
 	DrawGraph(0, 0, drawranking.RankingImage, FALSE);
-	
+
+
+	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X < 10 || cursor_Y != 4) {	//Aボタン押したときのカーソル位置
 		ButtonFLG = TRUE;
 		if (ButtonFLG == TRUE) {
@@ -55,6 +57,8 @@ void InputRANKING::InputRanking()
 	if (input.Buttons[XINPUT_BUTTON_A] == 0) {
 		ButtonFLG = TRUE;
 	}
+
+
 	// フォントサイズの設定
 	SetFontSize(40);
 	for (int i = 1; i <= 5; i++) {

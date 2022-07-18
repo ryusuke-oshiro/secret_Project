@@ -31,7 +31,7 @@ int g_KeyFlg;
 int g_GameState = 0;	//ゲームモード
 
 /*int g_TitleImage;*/		//画像用変数
-int g_Menu, g_Cone;		//メニュー画像変数
+int g_Menu;		//メニュー画像変数
 
 int g_Score = 0;		//スコア
 
@@ -64,6 +64,7 @@ int g_MusicBGM;	//ステージ音源
 int g_GameOverSE;
 int g_SE1;
 int g_SE2;
+int g_SE3;
 
 int counter = 0, FpsTime[2] = { 0, }, FpsTime_i = 0;
 int color_white;
@@ -103,7 +104,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 
 
-	if ((drawranking.RankingImage = LoadGraph("images/Ranking.bmp")) == -1)return -1;
+	if ((drawranking.RankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;
 
 	SetDrawScreen(DX_SCREEN_BACK);			//描画先画面を裏にする
 	SetColor();
@@ -257,21 +258,21 @@ void DrawBackGround()
 ****************************************/
 int LoadSounds()
 {
-	if ((title.g_TitleBGM = LoadSoundMem("sounds/Title.mp3")) == -1)return -1;
-	if ((g_MusicBGM = LoadSoundMem("sounds/Playing.mp3")) == -1)return -1;
-	if ((g_GameOverSE = LoadSoundMem("sounds/ani_ta_biyon02.mp3")) == -1)return -1;
-
-
-	//SE1 データ読み込み
+	if ((title.g_TitleBGM = LoadSoundMem("sounds/Title.wav")) == -1)return -1;
+	if ((g_MusicBGM = LoadSoundMem("sounds/Playing.wav")) == -1)return -1;
+	
+	
+	ChangeVolumeSoundMem(130, title.g_TitleBGM);
+	
+	//SE データ読み込み
 	if ((g_SE1 = LoadSoundMem("sounds/SE01.wav")) == -1)return -1;
-	//SE2 データ読み込み
 	if ((g_SE2 = LoadSoundMem("sounds/SE02.wav")) == -1)return -1;
-
+	if ((g_SE3 = LoadSoundMem("sounds/SE03.wav")) == -1)return -1;
 
 	//SEの音量調整
-	ChangeVolumeSoundMem(250, g_SE2);
-
-	ChangeVolumeSoundMem(250, g_SE1);
+	ChangeVolumeSoundMem(255, g_SE1);
+	ChangeVolumeSoundMem(255, g_SE2);
+	ChangeVolumeSoundMem(255, g_SE3);
 
 	return 0;
 }
@@ -282,8 +283,9 @@ int LoadImages()
 {
 	//タイトル
 	if ((title.g_TitleImage = LoadGraph("images/BackGround_title.png")) == -1)return -1;
+	if ((help.g_HelpImage = LoadGraph("images/BackGround_help.png")) == -1)return -1;
 	//メニュー
-	if ((g_Cone = LoadGraph("images/cursor.png")) == -1)return -1;
+	if ((title.g_CursorImage = LoadGraph("images/cursor.png")) == -1)return -1;
 	//リンゴ
 	if ((Apple_Img[0] = LoadGraph("images/RedApple.png")) == -1)return -1;
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;

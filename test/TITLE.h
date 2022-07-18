@@ -3,6 +3,7 @@ class TITLE {
 public:
 	int x;
 	int x_flg;
+	int g_CursorImage;
 	int g_TitleImage;
 	int g_TitleBGM;
 public:

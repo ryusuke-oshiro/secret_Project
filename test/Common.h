@@ -13,6 +13,10 @@ extern int ButtonFLG;
 extern int g_KeyFlg;
 extern int g_NowKey;
 
+extern int g_SE1;
+extern int g_SE2;
+extern int g_SE3;
+
 extern int Time;
 
 extern int g_WaitCount;

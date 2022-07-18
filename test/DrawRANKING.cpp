@@ -11,6 +11,7 @@ DrawRANKING::DrawRANKING() {
 void DrawRANKING::DrawRanking(){
 	// Bキーでメニューに戻る
 	if (input.Buttons[XINPUT_BUTTON_B]) {
+		PlaySoundMem(g_SE3, DX_PLAYTYPE_BACK, TRUE);
 		g_GameState = 0;
 	}
 

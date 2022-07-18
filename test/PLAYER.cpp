@@ -134,13 +134,13 @@ void PLAYER::PlayerControl() {
 	}
 
 
-	DrawRotaGraph(520, 110, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
-	DrawRotaGraph(570, 110, 0.9f, 0, Apple_Img[1], TRUE, FALSE);
-	DrawRotaGraph(620, 110, 0.9f, 0, Apple_Img[2], TRUE, FALSE);
+	DrawRotaGraph(515, 320, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
+	DrawRotaGraph(565, 320, 0.9f, 0, Apple_Img[1], TRUE, FALSE);
+	DrawRotaGraph(615, 320, 0.9f, 0, Apple_Img[2], TRUE, FALSE);
 
-	DrawFormatString(510, 140, 0xFFFFFF, "%03d", AppleCount1);
-	DrawFormatString(560, 140, 0xFFFFFF, "%03d", AppleCount2);
-	DrawFormatString(610, 140, 0xFFFFFF, "%03d", AppleCount3);
+	DrawFormatString(505, 350, 0xFFFFFF, "%03d", AppleCount1);
+	DrawFormatString(555, 350, 0xFFFFFF, "%03d", AppleCount2);
+	DrawFormatString(605, 350, 0xFFFFFF, "%03d", AppleCount3);
 	
 	if (input.Buttons[XINPUT_BUTTON_START] == 0) {
 		g_KeyFLG = TRUE;

@@ -2,10 +2,8 @@
 class InputRANKING {
 public:
 	int count;
-	int upper;
-	int rower;
-	int number;
-	char moji;
+	
+	char moji=0;
 	int cursor_X, cursor_Y;
 public:
 	InputRANKING();
@@ -13,4 +11,3 @@ public:
 };
 
 extern InputRANKING inputranking;
-extern InputRANKING Alfabet[5][13];

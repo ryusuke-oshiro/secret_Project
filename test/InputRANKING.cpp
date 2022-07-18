@@ -5,7 +5,7 @@
 #include"InputRANKING.h"
 
 InputRANKING inputranking;
-InputRANKING Alfabet[5][13];
+char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789?*@" };
 
 InputRANKING::InputRANKING() {
 	count = 0;
@@ -13,26 +13,25 @@ InputRANKING::InputRANKING() {
 
 	cursor_X = 0;
 	cursor_Y = 0;
-
-	upper = 65;
-	rower = 97;
-	number = 48;
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; j < 13; j++) {
-			if (i <= 1) {
-				Alfabet[i][j].moji = upper++;
-			}
-			else if (i <= 3) {
-				Alfabet[i][j].moji = rower++;
-			}
-			else {
-				Alfabet[i][j].moji = number++;
-			}
-		}
-	}
-	Alfabet[4][10].moji = 127;	//delete
-	Alfabet[4][11].moji = 0;	//nothing(NULL)
-	Alfabet[4][12].moji = 64;	//enter(@)
+	//upper = 65;
+	//rower = 97;
+	//number = 48;
+	//for (int i = 0; i < 5; i++) {
+	//	for (int j = 0; j < 13; j++) {
+	//		if (i <= 1) {
+	//			Alfabet[i][j].moji = upper++;
+	//		}
+	//		else if (i <= 3) {
+	//			Alfabet[i][j].moji = rower++;
+	//		}
+	//		else {
+	//			Alfabet[i][j].moji = number++;
+	//		}
+	//	}
+	//}
+	//Alfabet[4][10].moji = 127;	//delete
+	//Alfabet[4][11].moji = 0;	//nothing(NULL)
+	//Alfabet[4][12].moji = 64;	//enter(@)
 }
 
 void InputRANKING::InputRanking()
@@ -49,7 +48,7 @@ void InputRANKING::InputRanking()
 			if (count > 9) {
 				count = 9;
 			}
-			ranking.setName(count, Alfabet[cursor_Y][cursor_X].moji);
+			ranking.setName(count, Alfabet[cursor_Y][cursor_X]);
 			count++;
 			ButtonFLG = FALSE;
 		}
@@ -63,7 +62,7 @@ void InputRANKING::InputRanking()
 	SetFontSize(40);
 	for (int i = 1; i <= 5; i++) {
 		for (int j = 1; j <= 13; j++) {
-			DrawFormatString(70 + j * 35, 225 + i * 40, 0xFFFFFF, "%c", Alfabet[i - 1][j - 1].moji);
+			DrawFormatString(70 + j * 35, 225 + i * 40, 0xFFFFFF, "%c", Alfabet[i - 1][j - 1]);
 		}
 	}
 

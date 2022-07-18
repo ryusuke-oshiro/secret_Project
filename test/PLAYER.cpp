@@ -133,11 +133,12 @@ void PLAYER::PlayerControl() {
 		}
 	}
 
+	/*DrawString*/
 
 	DrawRotaGraph(515, 320, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
 	DrawRotaGraph(565, 320, 0.9f, 0, Apple_Img[1], TRUE, FALSE);
 	DrawRotaGraph(615, 320, 0.9f, 0, Apple_Img[2], TRUE, FALSE);
-
+	SetFontSize(20);
 	DrawFormatString(505, 350, 0xFFFFFF, "%03d", AppleCount1);
 	DrawFormatString(555, 350, 0xFFFFFF, "%03d", AppleCount2);
 	DrawFormatString(605, 350, 0xFFFFFF, "%03d", AppleCount3);
@@ -152,8 +153,9 @@ void PLAYER::PlayerControl() {
 
 	StartTime = GetNowCount()-Time;
 	StartTime = 3 - StartTime / 1000 + pose.PoseTime;	//êßå¿éûä‘í≤êÆ
-	/*pose.PoseTime = 0;*/
-	DrawFormatString(510, 200, 0xFFFFFF, "%02d", StartTime);
+	
+	SetFontSize(36);
+	DrawFormatString(550, 240, 0xFFFFFF, "%02d", StartTime);
 	
 	if (StartTime <= 0) {
 		StopSoundMem(g_MusicBGM);		//êßå¿éûä‘30ïbÇΩÇ¡ÇΩÇÁGameState=6 -> ÉâÉìÉLÉìÉOì¸óÕÇ÷ÅI

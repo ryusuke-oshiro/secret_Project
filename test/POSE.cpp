@@ -33,14 +33,14 @@ void POSE::DrawPose() {
 	DrawRotaGraph(515, 320, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
 	DrawRotaGraph(565, 320, 0.9f, 0, Apple_Img[1], TRUE, FALSE);
 	DrawRotaGraph(615, 320, 0.9f, 0, Apple_Img[2], TRUE, FALSE);
-
+	SetFontSize(20);
 	DrawFormatString(505, 350, 0xFFFFFF, "%02d", AppleCount1);
 	DrawFormatString(555, 350, 0xFFFFFF, "%02d", AppleCount2);
 	DrawFormatString(605, 350, 0xFFFFFF, "%02d", AppleCount3);
-
+	
+	SetFontSize(36);
 	apple.AppleScore();
-
-	DrawFormatString(510, 200, 0xFFFFFF, "%02d", StartTime);
+	DrawFormatString(550, 240, 0xFFFFFF, "%02d", StartTime);
 	
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
 	DrawBox(0, 0, 640, 480, GetColor(0, 0, 0), TRUE);

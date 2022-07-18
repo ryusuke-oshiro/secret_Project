@@ -33,7 +33,7 @@ void DrawRANKING::DrawRanking(){
 // 文字の表示(点滅)
 	if (++g_WaitTime < 30) {
 		SetFontSize(24);
-		DrawString(150, 450, "--  Press [SPACE] Key  --", 0xFF0000);
+		DrawString(150, 450, "--  Bを押してタイトルへ  --", 0xFFFFFF);
 	}
 	else if (g_WaitTime > 60) {
 		g_WaitTime = 0;

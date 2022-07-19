@@ -13,9 +13,9 @@
 #include"RANKING.h"
 #include"InputRANKING.h"
 #include"DrawRANKING.h"
-#include"Common.h"
 #include"Help.h"
-
+#include"END.h"
+#include"Common.h"
 /******************************************************
 *変数宣言
 *******************************************************/
@@ -23,14 +23,8 @@ XINPUT_STATE input;
 int g_KeyFLG = TRUE;	//入力キー情報
 int ButtonFLG = FALSE;
 
-
-int g_OldKey;
-int g_NowKey;
-int g_KeyFlg;
-
 int g_GameState = 0;	//ゲームモード
 
-/*int g_TitleImage;*/		//画像用変数
 int g_Menu;		//メニュー画像変数
 
 int g_Score = 0;		//スコア
@@ -44,8 +38,6 @@ int g_WaitCount = 0;
 int Time = 0;     //待ち時間
 int StartTime;
 int RefreshTime;
-
-int g_EndImage;        //エンド画面
 
 int g_Mileage;          //走行距離
 
@@ -80,7 +72,7 @@ char Name[11];
 ****************************************************/
 void GameInit(void);	//ゲーム初期化処理
 void GameMain(void);	//ゲームメイン処理
-void DrawEnd(void);//ゲームエンド描画処理
+//void DrawEnd(void);//ゲームエンド描画処理
 
 int LoadImages(); //画像読み込み
 
@@ -106,7 +98,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 
 
 
-	if ((drawranking.RankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;
+	if ((drawranking.RankingImage = LoadGraph("images/BackGround_ranking2.png")) == -1)return -1;
 
 	SetDrawScreen(DX_SCREEN_BACK);			//描画先画面を裏にする
 	SetColor();
@@ -118,16 +110,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 	if (ranking.ReadRanking() == -1) return -1;		//ランキングデータの読み込み
 
 	//ゲームループ
-	while (ProcessMessage() == 0 && g_GameState != 99 && !(g_KeyFlg & PAD_INPUT_START)) {
+	while (ProcessMessage() == 0 && g_GameState != 99 && !input.Buttons[XINPUT_BUTTON_BACK]) {
 		RefreshTime = GetNowCount();
-		//入力キー取得
-		/*g_OldKey = g_NewKey;*/
-		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 		
-
-		g_OldKey = g_NowKey;
-		g_NowKey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
-		g_KeyFlg = g_NowKey & ~g_OldKey;
+		GetJoypadXInputState(DX_INPUT_PAD1, &input);
 
 		ClearDrawScreen();			//画面の初期化
 		FpsTimeFanction();
@@ -146,7 +132,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInssance, _In_opt_ HINSTANCE
 			help.DrawHelp();				//ゲームヘルプ描画処理
 			break;
 		case 4:
-			DrawEnd();				//ゲームエンド描画処理
+			end.DrawEnd();				//ゲームエンド描画処理
 			break;
 		case 5:
 			GameMain();				//ゲームメイン処理
@@ -217,20 +203,7 @@ void GameInit(void)
 
 }
 
-/*******************************************
-*ゲームエンド描画処理
-********************************************/
-void DrawEnd(void)
-{
-	//エンド画像表示
-	DrawGraph(0, 0, g_EndImage, FALSE);
 
-	SetFontSize(24);
-	DrawString(360, 480 - 24, "Thank you for Playing", 0xffffff, 0);
-
-	//タイムの加算処理＆終了（３秒後）
-	if (++g_WaitTime > 180)g_GameState = 99;
-}
 /******************************************
 *ゲームメイン
 ******************************************/
@@ -298,6 +271,8 @@ int LoadImages()
 
 	//ステージ背景
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;
+	if ((inputranking.g_InputRankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;
+	if ((end.g_EndImage = LoadGraph("images/BackGround_end.png")) == -1)return -1;
 	//プレイヤー
 	if ((g_Car_left = LoadGraph("images/PlayerA.png")) == -1)return -1;
 	if ((g_Car_right = LoadGraph("images/PlayerA_2.png")) == -1)return -1;

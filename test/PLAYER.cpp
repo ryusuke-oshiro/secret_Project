@@ -156,7 +156,7 @@ void PLAYER::PlayerControl() {
 	StartTime = 3 - StartTime / 1000 + pose.PoseTime;	//§ŒÀŠÔ’²®
 	
 	SetFontSize(36);
-	DrawFormatString(550, 240, 0xFFFFFF, "%02d", StartTime);
+	DrawFormatString(550, 250, 0xFFFFFF, "%02d", StartTime);
 	
 	if (StartTime <= 0) {
 		StopSoundMem(g_MusicBGM);		//§ŒÀŠÔ30•b‚½‚Á‚½‚çGameState=6 -> ƒ‰ƒ“ƒLƒ“ƒO“ü—Í‚ÖI

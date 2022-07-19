@@ -40,13 +40,17 @@ void POSE::DrawPose() {
 	
 	SetFontSize(36);
 	apple.AppleScore();
-	DrawFormatString(550, 240, 0xFFFFFF, "%02d", StartTime);
+	DrawFormatString(550, 250, 0xFFFFFF, "%02d", StartTime);
 	
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
 	DrawBox(0, 0, 640, 480, GetColor(0, 0, 0), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	DrawString(320, 240, "POSE", 0xffffff, 0);
+	DrawString(125, 230, "-- P O S E --", 0xffffff, 0);
+
+	SetFontSize(16);
+	DrawOval(220, 465, 28,12, GetColor(0, 0, 0), TRUE);
+	DrawString(199, 458, "START   再開", GetColor(255, 255, 255));
 
 	if (input.Buttons[XINPUT_BUTTON_START] == 1 && g_KeyFLG == TRUE) {
 		g_KeyFLG = FALSE;

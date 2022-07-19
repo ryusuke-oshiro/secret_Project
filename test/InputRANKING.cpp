@@ -10,6 +10,7 @@ char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrst
 
 
 InputRANKING::InputRANKING() {
+	g_InputRankingImage = 0;
 	count = 0;
 	moji = 0;
 	cursor_X = 0;
@@ -19,24 +20,25 @@ InputRANKING::InputRANKING() {
 
 void InputRANKING::InputRanking()
 {
-	//ƒ‰ƒ“ƒLƒ“ƒO‰æ‘œ•\¦
-	DrawGraph(0, 0, drawranking.RankingImage, FALSE);
+	//ãƒ©ãƒ³ã‚­ãƒ³ã‚°ç”»åƒè¡¨ç¤º
+	DrawGraph(0, 0, g_InputRankingImage, FALSE);
 
 
 	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
 
-	if (input.Buttons[XINPUT_BUTTON_A] == 1 && (cursor_X < 10 || cursor_Y < 4)) {	//Aƒ{ƒ^ƒ“‰Ÿ‚µ‚½‚Æ‚«‚ÌƒJ[ƒ\ƒ‹ˆÊ’u
-		if (ButtonFLG == TRUE) {													//‚É‚ ‚éƒAƒ‹ƒtƒ@ƒxƒbƒg‚ÌƒAƒXƒL[ƒR[ƒh‚ğƒ‰ƒ“ƒLƒ“ƒO‚É“ü‚ê‚é
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && (cursor_X < 10 || cursor_Y < 4)) {	//Aãƒœã‚¿ãƒ³æŠ¼ã—ãŸã¨ãã®ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®
+		if (ButtonFLG == TRUE) {													//ã«ã‚ã‚‹ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆã®ã‚¢ã‚¹ã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã«å…¥ã‚Œã‚‹
 			if (count > 9) {
 				count = 9;
 			}
 			Name[count] = Alfabet[cursor_Y][cursor_X];
 			count++;
+
 			ButtonFLG = FALSE;
 		}
 	}
 
-	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 10 && cursor_Y == 4) {	//‚P•¶šíœ‰Ÿ‚µ‚½‚Æ‚«
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 10 && cursor_Y == 4) {	//ï¼‘æ–‡å­—å‰Šé™¤æŠ¼ã—ãŸã¨ã
 		if (ButtonFLG == TRUE && count>0) {
 			if (count < 0) {
 				count=0;
@@ -46,6 +48,7 @@ void InputRANKING::InputRanking()
 			ButtonFLG = FALSE;
 		}
 	}
+
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 0) {
 		ButtonFLG = TRUE;
@@ -59,7 +62,9 @@ void InputRANKING::InputRanking()
 		}
 	}
 
-	if (input.ThumbLX > 17500) {	//‰E“ü—Í
+	
+	//////////////////////////////////////////////////////////// ãƒ‘ãƒƒãƒ‰å…¥åŠ›
+	if (input.ThumbLX > 17500) {	//å³å…¥åŠ›
 		if (g_KeyFLG == TRUE) {
 			++cursor_X;
 			if (cursor_X > 12) {
@@ -71,7 +76,7 @@ void InputRANKING::InputRanking()
 		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
 	}
 
-	if (input.ThumbLX < -17500) {		//¶“ü—Í
+	if (input.ThumbLX < -17500) {		//å·¦å…¥åŠ›
 		if (g_KeyFLG == TRUE) {
 			--cursor_X;
 			if (cursor_X < 0) {
@@ -83,7 +88,7 @@ void InputRANKING::InputRanking()
 		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
 	}
 
-	if (input.ThumbLY > 17500) {		//ã“ü—Í
+	if (input.ThumbLY > 17500) {		//ä¸Šå…¥åŠ›
 		if (g_KeyFLG == TRUE) {
 			--cursor_Y;
 			if (cursor_Y < 0) {
@@ -95,7 +100,7 @@ void InputRANKING::InputRanking()
 		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
 	}
 
-	if (input.ThumbLY < -17500) {		//‰º“ü—Í
+	if (input.ThumbLY < -17500) {		//ä¸‹å…¥åŠ›
 		if (g_KeyFLG == TRUE) {
 			++cursor_Y;
 			if (cursor_Y > 4) {
@@ -110,27 +115,28 @@ void InputRANKING::InputRanking()
 	if (input.ThumbLY > -17500 && input.ThumbLY < 17500 && input.ThumbLX > -17500 && input.ThumbLX < 17500) {
 		g_KeyFLG = TRUE; g_WaitCount = 0;
 	}
+	//////////////////////////////////////////////////////ãƒ‘ãƒƒãƒ‰å…¥åŠ›
 
 
-	//ƒJ[ƒ\ƒ‹•`‰æ
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ƒuƒŒƒ“ƒhƒ‚[ƒh‚ğƒ¿(128/255)‚Éİ’è
+	//ã‚«ãƒ¼ã‚½ãƒ«æç”»
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã‚’Î±(128/255)ã«è¨­å®š
 	DrawBox(100 + cursor_X * 35, 265 + cursor_Y * 40, 130 + cursor_X * 35, 305 + cursor_Y * 40, GetColor(0, 250, 154), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 
 
-	// ƒtƒHƒ“ƒgƒTƒCƒY‚Ìİ’è
+	
 	SetFontSize(20);
-	// –¼‘O“ü—Íw¦•¶š—ñ‚Ì•`‰æ
-	DrawString(150, 140, "ƒ‰ƒ“ƒLƒ“ƒO‚É“o˜^‚µ‚Ü‚·", 0xFFFFFF);
-	DrawString(150, 170, "–¼‘O‚ğ‰pš‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢", 0xFFFFFF);
-	// –¼‘O‚Ì“ü—Í
+	// åå‰å…¥åŠ›æŒ‡ç¤ºæ–‡å­—åˆ—ã®æç”»
+	DrawString(150, 140, "ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã«ç™»éŒ²ã—ã¾ã™", 0xFFFFFF);
+	DrawString(150, 170, "åå‰ã‚’è‹±å­—ã§å…¥åŠ›ã—ã¦ãã ã•ã„", 0xFFFFFF);
+	// åå‰ã®å…¥åŠ›
 	DrawString(150, 210, "> ", 0xFFFFFF);
 	DrawBox(160, 205, 300, 235, 0x000055, TRUE);
 
 	
 	
-	DrawFormatString(160 + 0 * 20, 210, 0xFFFFFF, "%c", Name[0]);		//¡“ü—Í‚µ‚Ä‚¢‚é•¶š
+	DrawFormatString(160 + 0 * 20, 210, 0xFFFFFF, "%c", Name[0]);		//ä»Šå…¥åŠ›ã—ã¦ã„ã‚‹æ–‡å­—
 	DrawFormatString(160 + 1 * 20, 210, 0xFFFFFF, "%c", Name[1]);
 	DrawFormatString(160 + 2 * 20, 210, 0xFFFFFF, "%c", Name[2]);
 	DrawFormatString(160 + 3 * 20, 210, 0xFFFFFF, "%c", Name[3]);
@@ -141,18 +147,19 @@ void InputRANKING::InputRanking()
 	DrawFormatString(160 + 8 * 20, 210, 0xFFFFFF, "%c", Name[8]);
 	DrawFormatString(160 + 9 * 20, 210, 0xFFFFFF, "%c", Name[9]);
 
-	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//Œˆ’è‰Ÿ‚µ‚½‚Æ‚«
+
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//æ±ºå®šæŠ¼ã—ãŸã¨ã
 		strcpy_s(ranking.getName(4),12,Name);
-		ranking.setScore(g_Score);	// ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì5”Ô–Ú‚ÉƒXƒRƒA‚ğ“o˜^
-		ranking.SortRanking();		// ƒ‰ƒ“ƒLƒ“ƒO•À‚×‘Ö‚¦
-		ranking.SaveRanking();		// ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì•Û‘¶
-		g_GameState = 2;			// ƒQ[ƒ€ƒ‚[ƒh‚Ì•ÏX
+		ranking.setScore(g_Score);	// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®5ç•ªç›®ã«ã‚¹ã‚³ã‚¢ã‚’ç™»éŒ²
+		ranking.SortRanking();		// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ä¸¦ã¹æ›¿ãˆ
+		ranking.SaveRanking();		// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜
+		g_GameState = 2;			// ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´
 	}
 
 	//if (KeyInputSingleCharString(170, 210, 10, ranking.getName(4), FALSE) == 1) {
-	//	ranking.setScore(g_Score);	// ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì5”Ô–Ú‚ÉƒXƒRƒA‚ğ“o˜^
-	//	ranking.SortRanking();		// ƒ‰ƒ“ƒLƒ“ƒO•À‚×‘Ö‚¦
-	//	ranking.SaveRanking();		// ƒ‰ƒ“ƒLƒ“ƒOƒf[ƒ^‚Ì•Û‘¶
-	//	g_GameState = 2;		// ƒQ[ƒ€ƒ‚[ƒh‚Ì•ÏX
+	//	ranking.setScore(g_Score);	// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®5ç•ªç›®ã«ã‚¹ã‚³ã‚¢ã‚’ç™»éŒ²
+	//	ranking.SortRanking();		// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ä¸¦ã¹æ›¿ãˆ
+	//	ranking.SaveRanking();		// ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒ‡ãƒ¼ã‚¿ã®ä¿å­˜
+	//	g_GameState = 2;		// ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´
 	//}
 }

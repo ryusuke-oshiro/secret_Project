@@ -29,13 +29,15 @@ void DrawRANKING::DrawRanking(){
 			DrawFormatString(145+j*15, 170 + i * 25, 0xFFFFFF, "%c", ranking.getName2(i, j));
 		}
 	}
-
-// 文字の表示(点滅)
-	if (++g_WaitTime < 30) {
-		SetFontSize(24);
-		DrawString(150, 450, "--  Bを押してタイトルへ  --", 0xFFFFFF);
-	}
-	else if (g_WaitTime > 60) {
-		g_WaitTime = 0;
-	}
+	SetFontSize(16);
+	DrawCircle(210, 463, 10, GetColor(0, 0, 0), TRUE);
+	DrawString(207, 456, "B", GetColor(255, 255, 255));
+//// 文字の表示(点滅)
+//	if (++g_WaitTime < 30) {
+//		SetFontSize(24);
+//		DrawString(150, 450, "--  Bを押してタイトルへ  --", 0xFFFFFF);
+//	}
+//	else if (g_WaitTime > 60) {
+//		g_WaitTime = 0;
+//	}
 }

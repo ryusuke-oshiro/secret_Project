@@ -11,6 +11,7 @@
     <ClCompile Include="InputRANKING.cpp" />
     <ClCompile Include="RANKING.cpp" />
     <ClCompile Include="DrawRANKING.cpp" />
+    <ClCompile Include="END.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APPLE.h" />
@@ -22,5 +23,6 @@
     <ClInclude Include="InputRANKING.h" />
     <ClInclude Include="RANKING.h" />
     <ClInclude Include="DrawRANKING.h" />
+    <ClInclude Include="END.h" />
   </ItemGroup>
 </Project>

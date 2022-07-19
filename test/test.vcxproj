@@ -23,6 +23,7 @@
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="DrawRANKING.cpp" />
     <ClCompile Include="Drive_and_Avoid.cpp" />
+    <ClCompile Include="END.cpp" />
     <ClCompile Include="HELP.cpp" />
     <ClCompile Include="InputRANKING.cpp" />
     <ClCompile Include="PLAYER.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="APPLE.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DrawRANKING.h" />
+    <ClInclude Include="END.h" />
     <ClInclude Include="HELP.h" />
     <ClInclude Include="InputRANKING.h" />
     <ClInclude Include="PLAYER.h" />

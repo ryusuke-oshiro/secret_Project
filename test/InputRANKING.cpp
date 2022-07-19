@@ -33,7 +33,6 @@ void InputRANKING::InputRanking()
 			}
 			Name[count] = Alfabet[cursor_Y][cursor_X];
 			count++;
-
 			ButtonFLG = FALSE;
 		}
 	}

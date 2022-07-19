@@ -43,7 +43,8 @@ void InputRANKING::InputRanking()
 
 
 	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
-	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X < 10 || cursor_Y </*!=*/ 4) {	//Aボタン押したときのカーソル位置
+
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && (cursor_X < 10 || cursor_Y < 4)) {	//Aボタン押したときのカーソル位置
 		if (ButtonFLG == TRUE) {													//にあるアルファベットのアスキーコードをランキングに入れる
 			if (count > 9) {
 				count = 9;
@@ -76,6 +77,8 @@ void InputRANKING::InputRanking()
 		}
 	}
 
+	
+	//////////////////////////////////////////////////////////// パッド入力
 	if (input.ThumbLX > 17500) {	//右入力
 		if (g_KeyFLG == TRUE) {
 			++cursor_X;
@@ -127,6 +130,7 @@ void InputRANKING::InputRanking()
 	if (input.ThumbLY > -17500 && input.ThumbLY < 17500 && input.ThumbLX > -17500 && input.ThumbLX < 17500) {
 		g_KeyFLG = TRUE; g_WaitCount = 0;
 	}
+	//////////////////////////////////////////////////////パッド入力
 
 
 	//カーソル描画
@@ -136,7 +140,7 @@ void InputRANKING::InputRanking()
 
 
 
-	// フォントサイズの設定
+	
 	SetFontSize(20);
 	// 名前入力指示文字列の描画
 	DrawString(150, 140, "ランキングに登録します", 0xFFFFFF);

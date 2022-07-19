@@ -43,18 +43,26 @@ void InputRANKING::InputRanking()
 
 
 	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
-	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X < 10 || cursor_Y != 4) {	//Aボタン押したときのカーソル位置
-		ButtonFLG = TRUE;
-		if (ButtonFLG == TRUE) {
-			/*count++;*/										//にあるアルファベットのアスキーコードをランキングに入れる
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X < 10 || cursor_Y </*!=*/ 4) {	//Aボタン押したときのカーソル位置
+		if (ButtonFLG == TRUE) {													//にあるアルファベットのアスキーコードをランキングに入れる
 			if (count > 9) {
 				count = 9;
 			}
 			ranking.setName(count, Alfabet[cursor_Y][cursor_X].moji);
-			count++;
+			count=count+1;
 			ButtonFLG = FALSE;
 		}
 	}
+
+	/*if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 10 && cursor_Y == 4) {
+		if (ButtonFLG == TRUE) {
+			if (count < 0) {
+				count = 0;
+			}
+			ranking.setName()
+		}
+	}*/
+
 	if (input.Buttons[XINPUT_BUTTON_A] == 0) {
 		ButtonFLG = TRUE;
 	}
@@ -136,16 +144,6 @@ void InputRANKING::InputRanking()
 	// 名前の入力
 	DrawString(150, 210, "> ", 0xFFFFFF);
 	DrawBox(160, 205, 300, 235, 0x000055, TRUE);
-
-	
-	//if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 10 && cursor_Y == 4) {
-	//	if (ButtonFLG == TRUE) {
-	//		if (count < 0) {
-	//			count = 0;
-	//		}
-	//		ranking.setName()
-	//	}
-	//}
 
 
 	for (int i = 0; i < count + 1; i++) {

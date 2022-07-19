@@ -6,16 +6,17 @@
 #include<string.h>
 
 InputRANKING inputranking;
-char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789? @" };
+char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789   " };
 
 
 InputRANKING::InputRANKING() {
 	g_InputRankingImage = 0;
+	g_EnterImage = 0;
+	g_BackSpaceImage = 0;
 	count = 0;
 	moji = 0;
 	cursor_X = 0;
 	cursor_Y = 0;
-	
 }
 
 void InputRANKING::InputRanking()
@@ -57,7 +58,8 @@ void InputRANKING::InputRanking()
 			DrawFormatString(70 + j * 35, 225 + i * 40, 0xFFFFFF, "%c", Alfabet[i - 1][j - 1]);
 		}
 	}
-
+	DrawRotaGraph(470, 440, 0.9f, 0, g_BackSpaceImage, TRUE, FALSE);
+	DrawRotaGraph(537, 447, 0.9f, 0, g_EnterImage, TRUE, FALSE);
 	
 	//////////////////////////////////////////////////////////// パッド入力
 	if (input.ThumbLX > 17500) {	//右入力

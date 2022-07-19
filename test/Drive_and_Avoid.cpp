@@ -268,7 +268,9 @@ int LoadImages()
 	if ((Apple_Img[1] = LoadGraph("images/GreenApple.png")) == -1)return -1;
 	if ((Apple_Img[2] = LoadGraph("images/YellowApple.png")) == -1)return -1;
 	if ((Apple_Img[3] = LoadGraph("images/PurpleApple.png")) == -1)return -1;
-
+	//キーボード
+	if ((inputranking.g_EnterImage = LoadGraph("images/Enter_3.png")) == -1)return -1;
+	if ((inputranking.g_BackSpaceImage = LoadGraph("images/BackSpace.png")) == -1)return -1;
 	//ステージ背景
 	if ((g_StageImage = LoadGraph("images/BackGround.png")) == -1)return -1;
 	if ((inputranking.g_InputRankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;

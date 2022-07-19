@@ -37,6 +37,7 @@ int g_WaitCount = 0;
 
 int Time = 0;     //‘Ò‚¿ŠÔ
 int StartTime;
+int NowTime = 0;
 int RefreshTime;
 
 int g_Mileage;          //‘–s‹——£

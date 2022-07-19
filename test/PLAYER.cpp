@@ -136,29 +136,32 @@ void PLAYER::PlayerControl() {
 
 	/*DrawString*/
 
-	DrawRotaGraph(515, 320, 0.9f, 0, Apple_Img[0], TRUE, FALSE);
-	DrawRotaGraph(565, 320, 0.9f, 0, Apple_Img[1], TRUE, FALSE);
-	DrawRotaGraph(615, 320, 0.9f, 0, Apple_Img[2], TRUE, FALSE);
-	SetFontSize(20);
-	DrawFormatString(505, 350, 0xFFFFFF, "%03d", AppleCount1);
-	DrawFormatString(555, 350, 0xFFFFFF, "%03d", AppleCount2);
-	DrawFormatString(605, 350, 0xFFFFFF, "%03d", AppleCount3);
+	DrawRotaGraph(520, 310, 1.1f, 0, Apple_Img[0], TRUE, FALSE);
+	DrawRotaGraph(520, 375, 1.1f, 0, Apple_Img[1], TRUE, FALSE);
+	DrawRotaGraph(520, 440, 1.1f, 0, Apple_Img[2], TRUE, FALSE);
+	SetFontSize(24);
+	DrawFormatString(580, 300, 0xFFFFFF, "%03d", AppleCount1);
+	DrawFormatString(580, 365, 0xFFFFFF, "%03d", AppleCount2);
+	DrawFormatString(580, 430, 0xFFFFFF, "%03d", AppleCount3);
 	
+	StartTime = GetNowCount() - Time;
+
 	if (input.Buttons[XINPUT_BUTTON_START] == 0) {
 		g_KeyFLG = TRUE;
 	}
 	if (input.Buttons[XINPUT_BUTTON_START] == 1 && g_KeyFLG==TRUE) {
 		g_KeyFLG = FALSE;
+		pose.initPose();
 		g_GameState = 7;
 	}
 
-	StartTime = GetNowCount()-Time;
-	StartTime = 3 - StartTime / 1000 + pose.PoseTime;	//êßå¿éûä‘í≤êÆ
+	
+	NowTime = 3 - StartTime / 1000 + pose.PoseTime;	//êßå¿éûä‘í≤êÆ
 	
 	SetFontSize(36);
-	DrawFormatString(550, 250, 0xFFFFFF, "%02d", StartTime);
+	DrawFormatString(550, 250, 0xFFFFFF, "%02d", NowTime);
 	
-	if (StartTime <= 0) {
+	if (NowTime <= 0) {
 		StopSoundMem(g_MusicBGM);		//êßå¿éûä‘30ïbÇΩÇ¡ÇΩÇÁGameState=6 -> ÉâÉìÉLÉìÉOì¸óÕÇ÷ÅI
 		g_KeyFLG = TRUE;
 		if (g_Score >= ranking.getScore(4)) {

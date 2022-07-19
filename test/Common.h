@@ -26,6 +26,7 @@ extern int g_WaitCount;
 extern int g_WaitTime;
 
 extern int StartTime;
+extern int NowTime;
 
 extern int g_MusicBGM;
 extern int g_SE1;

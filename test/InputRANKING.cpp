@@ -58,8 +58,8 @@ void InputRANKING::InputRanking()
 			DrawFormatString(70 + j * 35, 225 + i * 40, 0xFFFFFF, "%c", Alfabet[i - 1][j - 1]);
 		}
 	}
-	DrawRotaGraph(470, 440, 0.9f, 0, g_BackSpaceImage, TRUE, FALSE);
-	DrawRotaGraph(537, 447, 0.9f, 0, g_EnterImage, TRUE, FALSE);
+	DrawRotaGraph(465, 443, 0.7f, 0, g_BackSpaceImage, TRUE, FALSE);
+	DrawRotaGraph(535, 445, 0.8f, 0, g_EnterImage, TRUE, FALSE);
 	
 	//////////////////////////////////////////////////////////// パッド入力
 	if (input.ThumbLX > 17500) {	//右入力
@@ -130,7 +130,7 @@ void InputRANKING::InputRanking()
 
 	//カーソル描画
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
-	DrawBox(100 + cursor_X * 35, 265 + cursor_Y * 40, 130 + cursor_X * 35, 305 + cursor_Y * 40, GetColor(0, 250, 154), TRUE);
+	DrawBox(97 + cursor_X * 35, 262 + cursor_Y * 40, 133 + cursor_X * 35, 308 + cursor_Y * 40, GetColor(0, 250, 154), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	SetFontSize(30);

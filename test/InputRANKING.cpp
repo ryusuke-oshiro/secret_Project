@@ -123,22 +123,17 @@ void InputRANKING::InputRanking()
 	DrawBox(100 + cursor_X * 35, 265 + cursor_Y * 40, 130 + cursor_X * 35, 305 + cursor_Y * 40, GetColor(0, 250, 154), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	SetFontSize(20);
-	/*DrawString(150, 140, "ランキングに登録します", 0xFFFFFF);
-	DrawString(150, 170, "名前を入力してください", 0xFFFFFF);
-	DrawString(150, 210, "> ", 0xFFFFFF);
-	DrawBox(160, 205, 300, 235, 0x000055, TRUE);*/
-
-	DrawFormatString(160 + 0 * 20, 210, 0xFFFFFF, "%c", Name[0]);		//今入力している文字
-	DrawFormatString(160 + 1 * 20, 210, 0xFFFFFF, "%c", Name[1]);
-	DrawFormatString(160 + 2 * 20, 210, 0xFFFFFF, "%c", Name[2]);
-	DrawFormatString(160 + 3 * 20, 210, 0xFFFFFF, "%c", Name[3]);
-	DrawFormatString(160 + 4 * 20, 210, 0xFFFFFF, "%c", Name[4]);
-	DrawFormatString(160 + 5 * 20, 210, 0xFFFFFF, "%c", Name[5]);
-	DrawFormatString(160 + 6 * 20, 210, 0xFFFFFF, "%c", Name[6]);
-	DrawFormatString(160 + 7 * 20, 210, 0xFFFFFF, "%c", Name[7]);
-	DrawFormatString(160 + 8 * 20, 210, 0xFFFFFF, "%c", Name[8]);
-	DrawFormatString(160 + 9 * 20, 210, 0xFFFFFF, "%c", Name[9]);
+	SetFontSize(30);
+	DrawFormatString(185 + 0 * 28, 200, 0xFFFFFF, "%c", Name[0]);		//今入力している文字
+	DrawFormatString(185 + 1 * 28, 200, 0xFFFFFF, "%c", Name[1]);
+	DrawFormatString(185 + 2 * 28, 200, 0xFFFFFF, "%c", Name[2]);
+	DrawFormatString(185 + 3 * 28, 200, 0xFFFFFF, "%c", Name[3]);
+	DrawFormatString(185 + 4 * 28, 200, 0xFFFFFF, "%c", Name[4]);
+	DrawFormatString(185 + 5 * 28, 200, 0xFFFFFF, "%c", Name[5]);
+	DrawFormatString(185 + 6 * 28, 200, 0xFFFFFF, "%c", Name[6]);
+	DrawFormatString(185 + 7 * 28, 200, 0xFFFFFF, "%c", Name[7]);
+	DrawFormatString(185 + 8 * 28, 200, 0xFFFFFF, "%c", Name[8]);
+	DrawFormatString(185 + 9 * 28, 200, 0xFFFFFF, "%c", Name[9]);
 
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//決定押したとき

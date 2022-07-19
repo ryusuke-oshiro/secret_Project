@@ -50,14 +50,22 @@ int g_StageImage;//ステージ画像
 
 int AppleCount1, AppleCount2, AppleCount3, AppleCount4; //リンゴカウント
 
-int g_Car_left, g_Car_right, g_Car_Nowangle, g_Barrier;	//キャラ画像変数
+
+int g_Player_left, g_Player_right, g_Player_Nowangle;	//キャラ画像変数
 
 int g_TitleBGM;
 int g_MusicBGM;	//ステージ音源
-int g_GameOverSE;
+
+int g_HitRedApple;
+int g_HitGreenApple;
+int g_HitYellowApple;
+int g_HitPoisonApple;
+
 int g_SE1;
 int g_SE2;
 int g_SE3;
+
+int g_Warning;
 
 int counter = 0, FpsTime[2] = { 0, }, FpsTime_i = 0;
 int color_white;
@@ -197,6 +205,8 @@ void GameInit(void)
 	inputranking.count = 0;
 	inputranking.cursor_X = 0;
 	inputranking.cursor_Y = 0;
+
+	SetCurrentPositionSoundMem(0, g_MusicBGM);		//BGMの初期化
 	//ゲームメイン処理へ
 	g_GameState = 5;
 
@@ -246,6 +256,11 @@ int LoadSounds()
 	if ((g_SE1 = LoadSoundMem("sounds/SE01.wav")) == -1)return -1;
 	if ((g_SE2 = LoadSoundMem("sounds/SE02.wav")) == -1)return -1;
 	if ((g_SE3 = LoadSoundMem("sounds/SE03.wav")) == -1)return -1;
+	if ((g_HitRedApple = LoadSoundMem("sounds/GetRedApple.wav")) == -1)return -1;
+	if ((g_HitGreenApple = LoadSoundMem("sounds/GetGreenApple.wav")) == -1)return -1;
+	if ((g_HitYellowApple = LoadSoundMem("sounds/GetYellowApple.wav")) == -1)return -1;
+	if ((g_HitPoisonApple = LoadSoundMem("sounds/GetPoisonApple.wav")) == -1)return -1;
+	if ((g_Warning = LoadSoundMem("sounds/Warning.wav")) == -1)return -1;
 
 	//SEの音量調整
 	ChangeVolumeSoundMem(255, g_SE1);
@@ -277,9 +292,9 @@ int LoadImages()
 	if ((inputranking.g_InputRankingImage = LoadGraph("images/BackGround_ranking.png")) == -1)return -1;
 	if ((end.g_EndImage = LoadGraph("images/BackGround_end.png")) == -1)return -1;
 	//プレイヤー
-	if ((g_Car_left = LoadGraph("images/PlayerA.png")) == -1)return -1;
-	if ((g_Car_right = LoadGraph("images/PlayerA_2.png")) == -1)return -1;
-	if ((g_Car_Nowangle = LoadGraph("images/PlayerA_2.png")) == -1)return -1;
+	if ((g_Player_left = LoadGraph("images/PlayerA.png")) == -1)return -1;
+	if ((g_Player_right = LoadGraph("images/PlayerA_2.png")) == -1)return -1;
+	if ((g_Player_Nowangle = LoadGraph("images/PlayerA_2.png")) == -1)return -1;
 
 	return 0;
 }

@@ -63,7 +63,7 @@ void PLAYER::PlayerControl() {
 		if (g_player.speed < -7) {
 			g_player.speed = -7;
 		}
-		g_Car_Nowangle = g_Car_left;						//左入力が入ったらplayerを左に向ける
+		g_Player_Nowangle = g_Player_left;						//左入力が入ったらplayerを左に向ける
 	}
 
 	if (input.ThumbLX > 17500) {	//右入力
@@ -82,7 +82,7 @@ void PLAYER::PlayerControl() {
 		if (g_player.speed > 7) {
 			g_player.speed = 7;
 		}
-		g_Car_Nowangle = g_Car_right;						//右入力が入ったらplayerを右に向ける
+		g_Player_Nowangle = g_Player_right;						//右入力が入ったらplayerを右に向ける
 	}
 
 
@@ -115,7 +115,7 @@ void PLAYER::PlayerControl() {
 	}
 
 	if (g_player.flg == TRUE) {		//TRUEの間、表示
-		DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
+		DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Player_Nowangle, TRUE, FALSE);
 	}
 	
 	
@@ -151,16 +151,28 @@ void PLAYER::PlayerControl() {
 	}
 	if (input.Buttons[XINPUT_BUTTON_START] == 1 && g_KeyFLG==TRUE) {
 		g_KeyFLG = FALSE;
+		StopSoundMem(g_MusicBGM);
 		pose.initPose();
+
 		g_GameState = 7;
 	}
 
 	
-	NowTime = 3 - StartTime / 1000 + pose.PoseTime;	//制限時間調整
+	NowTime = 30 - StartTime / 1000 + pose.PoseTime;	//制限時間調整
 	
 	SetFontSize(36);
-	DrawFormatString(550, 250, 0xFFFFFF, "%02d", NowTime);
-	
+	if (NowTime > 10) {
+		DrawFormatString(550, 250, 0xFFFFFF, "%02d", NowTime);
+	}
+	if (NowTime == 10) {
+		PlaySoundMem(g_Warning, DX_PLAYTYPE_BACK, TRUE);
+	}
+	if (NowTime <= 10) {
+		DrawFormatString(550, 250, 0xFFFF00, "%02d", NowTime);
+	}
+	if (NowTime <= 5) {
+		DrawFormatString(550, 250, 0xFF0000, "%02d", NowTime);
+	}
 	if (NowTime <= 0) {
 		StopSoundMem(g_MusicBGM);		//制限時間30秒たったらGameState=6 -> ランキング入力へ！
 		g_KeyFLG = TRUE;

@@ -26,7 +26,7 @@ void POSE::DrawPose() {
 	
 	
 	DrawBackGround();
-	DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Car_Nowangle, TRUE, FALSE);
+	DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Player_Nowangle, TRUE, FALSE);
 	for (int i = 0; i < Apple_MAX; i++) { 
 		DrawRotaGraph(g_apple[i].x, g_apple[i].y, 1.0f, 0, g_apple[i].img, TRUE, FALSE); 
 	}
@@ -54,6 +54,7 @@ void POSE::DrawPose() {
 
 	if (input.Buttons[XINPUT_BUTTON_START] == 1 && g_KeyFLG == TRUE) {
 		g_KeyFLG = FALSE;
+		PlaySoundMem(g_MusicBGM, DX_PLAYTYPE_BACK, FALSE);
 		g_GameState = 5;
 	}
 }

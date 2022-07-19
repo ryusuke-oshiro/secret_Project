@@ -31,6 +31,12 @@ extern int NowTime;
 extern int g_MusicBGM;
 extern int g_SE1;
 extern int g_SE2;
+extern int g_HitRedApple;
+extern int g_HitGreenApple;
+extern int g_HitYellowApple;
+extern int g_HitPoisonApple;
+extern int g_Warning;
+
 extern int g_Cone;
 
 extern int g_Mileage;
@@ -39,7 +45,7 @@ extern int g_GameState;
 
 extern int AppleCount1, AppleCount2, AppleCount3;
 
-extern int g_Car_left,g_Car_right,g_Car_Nowangle;
+extern int g_Player_left,g_Player_right,g_Player_Nowangle;
 
 extern int Apple_Img[4];
 

@@ -110,18 +110,22 @@ void APPLE::AppleControl() {
 				if (g_apple[i].type == 0) { 
 					AppleCount1++;
 					g_Score += g_apple[i].point;
+					PlaySoundMem(g_HitRedApple, DX_PLAYTYPE_BACK, TRUE);
 				}
 				if (g_apple[i].type == 1) { 
 					AppleCount2++; 
 					g_Score += g_apple[i].point;
+					PlaySoundMem(g_HitGreenApple, DX_PLAYTYPE_BACK, TRUE);
 				}
 				if (g_apple[i].type == 2){
 					AppleCount3++;
 					g_Score += g_apple[i].point;
+					PlaySoundMem(g_HitYellowApple, DX_PLAYTYPE_BACK, TRUE);
 				}
 				if (g_apple[i].type == 3) {
 					g_Score += g_apple[i].point;
 					g_player.tenmetu = TRUE;
+					PlaySoundMem(g_HitPoisonApple, DX_PLAYTYPE_BACK, TRUE);
 				}	
 				g_apple[i].flg = FALSE;			//ÉäÉìÉSÇè¡Ç∑
 			}

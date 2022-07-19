@@ -51,11 +51,13 @@ void InputRANKING::InputRanking()
 		ButtonFLG = TRUE;
 	}
 
-
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
+	DrawBox(90, 250, 560, 470, GetColor(0, 0, 0), TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	SetFontSize(40);
 	for (int i = 1; i <= 5; i++) {
 		for (int j = 1; j <= 13; j++) {
-			DrawFormatString(70 + j * 35, 225 + i * 40, 0xFFFFFF, "%c", Alfabet[i - 1][j - 1]);
+			DrawFormatString(70 + j * 35, 215 + i * 42, 0xFFFFFF, "%c", Alfabet[i - 1][j - 1]);
 		}
 	}
 	DrawRotaGraph(465, 443, 0.7f, 0, g_BackSpaceImage, TRUE, FALSE);
@@ -130,7 +132,7 @@ void InputRANKING::InputRanking()
 
 	//カーソル描画
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
-	DrawBox(97 + cursor_X * 35, 262 + cursor_Y * 40, 133 + cursor_X * 35, 308 + cursor_Y * 40, GetColor(0, 250, 154), TRUE);
+	DrawBox(97 + cursor_X * 35, 258 + cursor_Y * 42, 133 + cursor_X * 35, 293 + cursor_Y * 42, GetColor(0, 250, 154), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 	SetFontSize(30);

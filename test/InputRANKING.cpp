@@ -123,19 +123,12 @@ void InputRANKING::InputRanking()
 	DrawBox(100 + cursor_X * 35, 265 + cursor_Y * 40, 130 + cursor_X * 35, 305 + cursor_Y * 40, GetColor(0, 250, 154), TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-
-
-	
 	SetFontSize(20);
-	// 名前入力指示文字列の描画
-	DrawString(150, 140, "ランキングに登録します", 0xFFFFFF);
-	DrawString(150, 170, "名前を英字で入力してください", 0xFFFFFF);
-	// 名前の入力
+	/*DrawString(150, 140, "ランキングに登録します", 0xFFFFFF);
+	DrawString(150, 170, "名前を入力してください", 0xFFFFFF);
 	DrawString(150, 210, "> ", 0xFFFFFF);
-	DrawBox(160, 205, 300, 235, 0x000055, TRUE);
+	DrawBox(160, 205, 300, 235, 0x000055, TRUE);*/
 
-	
-	
 	DrawFormatString(160 + 0 * 20, 210, 0xFFFFFF, "%c", Name[0]);		//今入力している文字
 	DrawFormatString(160 + 1 * 20, 210, 0xFFFFFF, "%c", Name[1]);
 	DrawFormatString(160 + 2 * 20, 210, 0xFFFFFF, "%c", Name[2]);

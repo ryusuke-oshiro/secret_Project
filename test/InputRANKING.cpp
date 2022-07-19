@@ -7,10 +7,10 @@
 
 InputRANKING inputranking;
 char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789?*@" };
-char Name[11];
+
 
 InputRANKING::InputRANKING() {
-	count = 1;
+	count = 0;
 	moji = 0;
 	cursor_X = 0;
 	cursor_Y = 0;
@@ -25,12 +25,12 @@ void InputRANKING::InputRanking()
 
 	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
 
-	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X < 10 || cursor_Y != 4) {	//Aボタン押したときのカーソル位置
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && (cursor_X < 10 || cursor_Y < 4)) {	//Aボタン押したときのカーソル位置
 		if (ButtonFLG == TRUE) {													//にあるアルファベットのアスキーコードをランキングに入れる
 			if (count > 9) {
 				count = 9;
 			}
-			Name[count-1] = Alfabet[cursor_Y][cursor_X];
+			Name[count] = Alfabet[cursor_Y][cursor_X];
 			count++;
 			ButtonFLG = FALSE;
 		}
@@ -41,7 +41,7 @@ void InputRANKING::InputRanking()
 			if (count < 0) {
 				count=0;
 			}
-			strncpy_s(Name, 11,Name, count);
+			strncpy_s(Name, 11,Name, count-1);
 			count--;
 			ButtonFLG = FALSE;
 		}
@@ -95,7 +95,7 @@ void InputRANKING::InputRanking()
 		if (g_WaitCount >= 30) { g_KeyFLG = TRUE; g_WaitCount = 0; }
 	}
 
-	if (input.ThumbLY < -17500) {
+	if (input.ThumbLY < -17500) {		//下入力
 		if (g_KeyFLG == TRUE) {
 			++cursor_Y;
 			if (cursor_Y > 4) {
@@ -130,19 +130,19 @@ void InputRANKING::InputRanking()
 
 	
 	
-	DrawFormatString(150 + 0 * 20, 200, 0xFFFFFF, "%c", Name[0]);		//今入力している文字
-	DrawFormatString(150 + 1 * 20, 200, 0xFFFFFF, "%c", Name[1]);
-	DrawFormatString(150 + 2 * 20, 200, 0xFFFFFF, "%c", Name[2]);
-	DrawFormatString(150 + 3 * 20, 200, 0xFFFFFF, "%c", Name[3]);
-	DrawFormatString(150 + 4 * 20, 200, 0xFFFFFF, "%c", Name[4]);
-	DrawFormatString(150 + 5 * 20, 200, 0xFFFFFF, "%c", Name[5]);
-	DrawFormatString(150 + 6 * 20, 200, 0xFFFFFF, "%c", Name[6]);
-	DrawFormatString(150 + 7 * 20, 200, 0xFFFFFF, "%c", Name[7]);
-	DrawFormatString(150 + 8 * 20, 200, 0xFFFFFF, "%c", Name[8]);
-	DrawFormatString(150 + 9 * 20, 200, 0xFFFFFF, "%c", Name[9]);
+	DrawFormatString(160 + 0 * 20, 210, 0xFFFFFF, "%c", Name[0]);		//今入力している文字
+	DrawFormatString(160 + 1 * 20, 210, 0xFFFFFF, "%c", Name[1]);
+	DrawFormatString(160 + 2 * 20, 210, 0xFFFFFF, "%c", Name[2]);
+	DrawFormatString(160 + 3 * 20, 210, 0xFFFFFF, "%c", Name[3]);
+	DrawFormatString(160 + 4 * 20, 210, 0xFFFFFF, "%c", Name[4]);
+	DrawFormatString(160 + 5 * 20, 210, 0xFFFFFF, "%c", Name[5]);
+	DrawFormatString(160 + 6 * 20, 210, 0xFFFFFF, "%c", Name[6]);
+	DrawFormatString(160 + 7 * 20, 210, 0xFFFFFF, "%c", Name[7]);
+	DrawFormatString(160 + 8 * 20, 210, 0xFFFFFF, "%c", Name[8]);
+	DrawFormatString(160 + 9 * 20, 210, 0xFFFFFF, "%c", Name[9]);
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//決定押したとき
-		strcpy_s(ranking.getName(4),11,Name);
+		strcpy_s(ranking.getName(4),12,Name);
 		ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録
 		ranking.SortRanking();		// ランキング並べ替え
 		ranking.SaveRanking();		// ランキングデータの保存

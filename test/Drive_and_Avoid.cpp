@@ -73,6 +73,8 @@ double Fps = 0.0;
 int x;
 int x_flg = TRUE;
 
+char Name[11];
+
 /***************************************************
 *関数のプロトタイプ宣言
 ****************************************************/
@@ -204,8 +206,10 @@ void GameInit(void)
 	
 
 	Time = GetNowCount();
-	
-
+	strncpy_s(Name, 11, Name, 0);
+	inputranking.count = 0;
+	inputranking.cursor_X = 0;
+	inputranking.cursor_Y = 0;
 	//ゲームメイン処理へ
 	g_GameState = 5;
 

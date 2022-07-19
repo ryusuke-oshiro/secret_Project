@@ -4,6 +4,7 @@
 #include"PLAYER.h"
 #include"APPLE.h"
 #include"POSE.h"
+#include"InputRANKING.h"
 #include"RANKING.h"
 #include"Common.h"
 
@@ -152,7 +153,7 @@ void PLAYER::PlayerControl() {
 	}
 
 	StartTime = GetNowCount()-Time;
-	StartTime = 30 - StartTime / 1000 + pose.PoseTime;	//§ŒÀŽžŠÔ’²®
+	StartTime = 3 - StartTime / 1000 + pose.PoseTime;	//§ŒÀŽžŠÔ’²®
 	
 	SetFontSize(36);
 	DrawFormatString(550, 240, 0xFFFFFF, "%02d", StartTime);
@@ -162,7 +163,6 @@ void PLAYER::PlayerControl() {
 		g_KeyFLG = TRUE;
 		if (g_Score >= ranking.getScore(4)) {
 			g_GameState = 6;
-
 		}else {
 			g_GameState = 2;
 		}

@@ -26,8 +26,8 @@ void InputRANKING::InputRanking()
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && (cursor_X < 10 || cursor_Y < 4)) {	//Aボタン押したときのカーソル位置
 		if (ButtonFLG == TRUE) {													//にあるアルファベットのアスキーコードをランキングに入れる
-			if (count > 9) {
-				count = 9;
+			if (count > 8) {
+				count = 8;
 			}
 			Name[count] = Alfabet[cursor_Y][cursor_X];
 			count++;
@@ -145,7 +145,7 @@ void InputRANKING::InputRanking()
 	DrawFormatString(185 + 6 * 28, 200, 0xFFFFFF, "%c", Name[6]);
 	DrawFormatString(185 + 7 * 28, 200, 0xFFFFFF, "%c", Name[7]);
 	DrawFormatString(185 + 8 * 28, 200, 0xFFFFFF, "%c", Name[8]);
-	DrawFormatString(185 + 9 * 28, 200, 0xFFFFFF, "%c", Name[9]);
+	
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//決定押したとき
 		strcpy_s(ranking.getName(4),12,Name);

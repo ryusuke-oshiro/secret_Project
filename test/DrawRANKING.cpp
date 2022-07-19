@@ -18,6 +18,10 @@ void DrawRANKING::DrawRanking(){
 //ランキング画像表示
 	DrawGraph(0, 0, RankingImage, FALSE);
 
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
+	DrawBox(60, 120, 560, 390, GetColor(0, 0, 0), TRUE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
 // ランキング一覧を表示
 	SetFontSize(30);
 	for (int i = 0; i < RANKING_DATA; i++) {
@@ -26,7 +30,7 @@ void DrawRANKING::DrawRanking(){
 	}
 	for (int i = 0; i < RANKING_DATA; i++) {
 		for (int j = 0; j < 10; j++) {
-			DrawFormatString(145+j*15, 140 + i * 50, 0xFFFFFF, "%c", ranking.getName2(i, j));
+			DrawFormatString(145+j*20, 140 + i * 50, 0xFFFFFF, "%c", ranking.getName2(i, j));
 		}
 	}
 	SetFontSize(16);

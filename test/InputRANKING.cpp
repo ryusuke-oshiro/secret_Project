@@ -6,6 +6,7 @@
 
 InputRANKING inputranking;
 char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789?*@" };
+char Name[10];
 
 InputRANKING::InputRANKING() {
 	count = 0;
@@ -48,7 +49,8 @@ void InputRANKING::InputRanking()
 			if (count > 9) {
 				count = 9;
 			}
-			ranking.setName(count, Alfabet[cursor_Y][cursor_X]);
+			Name[count] = Alfabet[cursor_Y][cursor_X];
+			/*ranking.setName(count, Alfabet[cursor_Y][cursor_X]);*/
 			count++;
 			ButtonFLG = FALSE;
 		}
@@ -146,8 +148,9 @@ void InputRANKING::InputRanking()
 	//}
 
 
-	for (int i = 0; i < count + 1; i++) {
-		DrawFormatString(150+i*20, 200, 0xFFFFFF, "%c", ranking.getName2(4,i));		//¡“ü—Í‚µ‚Ä‚¢‚é•¶Žš
+	
+	for (int i = 0; i < 10; i++) {
+		DrawFormatString(150 + i * 20, 200, 0xFFFFFF, "%c", Name[i]);		//¡“ü—Í‚µ‚Ä‚¢‚é•¶Žš
 	}
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//Œˆ’è‰Ÿ‚µ‚½‚Æ‚«

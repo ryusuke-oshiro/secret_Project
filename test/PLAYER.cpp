@@ -152,7 +152,7 @@ void PLAYER::PlayerControl() {
 	}
 
 	StartTime = GetNowCount()-Time;
-	StartTime = 3 - StartTime / 1000 + pose.PoseTime;	//êßå¿éûä‘í≤êÆ
+	StartTime = 30 - StartTime / 1000 + pose.PoseTime;	//êßå¿éûä‘í≤êÆ
 	
 	SetFontSize(36);
 	DrawFormatString(550, 240, 0xFFFFFF, "%02d", StartTime);

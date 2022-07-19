@@ -3,15 +3,12 @@ class InputRANKING {
 public:
 	int g_InputRankingImage;
 	int count;
-	int upper;
-	int rower;
-	int number;
-	char moji;
-	int cursor_X, cursor_Y;
+	char moji=0;
+	int cursor_X;
+	int cursor_Y;
 public:
 	InputRANKING();
 	void InputRanking();
 };
 
 extern InputRANKING inputranking;
-extern InputRANKING Alfabet[5][13];

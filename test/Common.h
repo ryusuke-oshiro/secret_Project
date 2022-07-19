@@ -17,6 +17,8 @@ extern int g_SE1;
 extern int g_SE2;
 extern int g_SE3;
 
+extern char Name[11];
+
 extern int Time;
 
 extern int g_WaitCount;

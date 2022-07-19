@@ -3,36 +3,18 @@
 #include"RANKING.h"
 #include"DrawRANKING.h"
 #include"InputRANKING.h"
+#include<string.h>
 
 InputRANKING inputranking;
 char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789?*@" };
-char Name[10];
+char Name[11];
 
 InputRANKING::InputRANKING() {
-	count = 0;
+	count = 1;
 	moji = 0;
-
 	cursor_X = 0;
 	cursor_Y = 0;
-	//upper = 65;
-	//rower = 97;
-	//number = 48;
-	//for (int i = 0; i < 5; i++) {
-	//	for (int j = 0; j < 13; j++) {
-	//		if (i <= 1) {
-	//			Alfabet[i][j].moji = upper++;
-	//		}
-	//		else if (i <= 3) {
-	//			Alfabet[i][j].moji = rower++;
-	//		}
-	//		else {
-	//			Alfabet[i][j].moji = number++;
-	//		}
-	//	}
-	//}
-	//Alfabet[4][10].moji = 127;	//delete
-	//Alfabet[4][11].moji = 0;	//nothing(NULL)
-	//Alfabet[4][12].moji = 64;	//enter(@)
+	
 }
 
 void InputRANKING::InputRanking()
@@ -42,25 +24,34 @@ void InputRANKING::InputRanking()
 
 
 	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
+
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X < 10 || cursor_Y != 4) {	//Aボタン押したときのカーソル位置
-		ButtonFLG = TRUE;
-		if (ButtonFLG == TRUE) {
-			/*count++;*/										//にあるアルファベットのアスキーコードをランキングに入れる
+		if (ButtonFLG == TRUE) {													//にあるアルファベットのアスキーコードをランキングに入れる
 			if (count > 9) {
 				count = 9;
 			}
-			Name[count] = Alfabet[cursor_Y][cursor_X];
-			/*ranking.setName(count, Alfabet[cursor_Y][cursor_X]);*/
+			Name[count-1] = Alfabet[cursor_Y][cursor_X];
 			count++;
 			ButtonFLG = FALSE;
 		}
 	}
+
+	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 10 && cursor_Y == 4) {	//１文字削除押したとき
+		if (ButtonFLG == TRUE && count>0) {
+			if (count < 0) {
+				count=0;
+			}
+			strncpy_s(Name, 11,Name, count);
+			count--;
+			ButtonFLG = FALSE;
+		}
+	}
+
 	if (input.Buttons[XINPUT_BUTTON_A] == 0) {
 		ButtonFLG = TRUE;
 	}
 
 
-	// フォントサイズの設定
 	SetFontSize(40);
 	for (int i = 1; i <= 5; i++) {
 		for (int j = 1; j <= 13; j++) {
@@ -138,22 +129,20 @@ void InputRANKING::InputRanking()
 	DrawBox(160, 205, 300, 235, 0x000055, TRUE);
 
 	
-	//if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 10 && cursor_Y == 4) {
-	//	if (ButtonFLG == TRUE) {
-	//		if (count < 0) {
-	//			count = 0;
-	//		}
-	//		ranking.setName()
-	//	}
-	//}
-
-
 	
-	for (int i = 0; i < 10; i++) {
-		DrawFormatString(150 + i * 20, 200, 0xFFFFFF, "%c", Name[i]);		//今入力している文字
-	}
+	DrawFormatString(150 + 0 * 20, 200, 0xFFFFFF, "%c", Name[0]);		//今入力している文字
+	DrawFormatString(150 + 1 * 20, 200, 0xFFFFFF, "%c", Name[1]);
+	DrawFormatString(150 + 2 * 20, 200, 0xFFFFFF, "%c", Name[2]);
+	DrawFormatString(150 + 3 * 20, 200, 0xFFFFFF, "%c", Name[3]);
+	DrawFormatString(150 + 4 * 20, 200, 0xFFFFFF, "%c", Name[4]);
+	DrawFormatString(150 + 5 * 20, 200, 0xFFFFFF, "%c", Name[5]);
+	DrawFormatString(150 + 6 * 20, 200, 0xFFFFFF, "%c", Name[6]);
+	DrawFormatString(150 + 7 * 20, 200, 0xFFFFFF, "%c", Name[7]);
+	DrawFormatString(150 + 8 * 20, 200, 0xFFFFFF, "%c", Name[8]);
+	DrawFormatString(150 + 9 * 20, 200, 0xFFFFFF, "%c", Name[9]);
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//決定押したとき
+		strcpy_s(ranking.getName(4),11,Name);
 		ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録
 		ranking.SortRanking();		// ランキング並べ替え
 		ranking.SaveRanking();		// ランキングデータの保存

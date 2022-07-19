@@ -1,5 +1,5 @@
- 1 BBBBBBBBBz          0
+ 1          A       6050
  2 AABBBBBBBz          0
- 3 AAAAAAAAAz          0
- 4 AMMMMMMMMz          0
- 5 AMMMMMMMMz          0
+ 2 AAAAAAAAAz          0
+ 2 AMMMMMMMMz          0
+ 2  BBBBBBBBx          0

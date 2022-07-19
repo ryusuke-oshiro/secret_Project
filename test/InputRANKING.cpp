@@ -6,7 +6,7 @@
 #include<string.h>
 
 InputRANKING inputranking;
-char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789?*@" };
+char Alfabet[5][14] = { "ABCDEFGHIJKLM","NOPQRSTUVWXYZ","abcdefghijklm","nopqrstuvwxyz","0123456789? @" };
 
 
 InputRANKING::InputRANKING() {
@@ -22,9 +22,6 @@ void InputRANKING::InputRanking()
 {
 	//ランキング画像表示
 	DrawGraph(0, 0, g_InputRankingImage, FALSE);
-
-
-	DrawFormatString(300, 100, 0x000000, "%d", input.Buttons[XINPUT_BUTTON_A]);
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && (cursor_X < 10 || cursor_Y < 4)) {	//Aボタン押したときのカーソル位置
 		if (ButtonFLG == TRUE) {													//にあるアルファベットのアスキーコードをランキングに入れる
@@ -69,6 +66,9 @@ void InputRANKING::InputRanking()
 			if (cursor_X > 12) {
 				cursor_X = 0;
 			}
+			if (cursor_X == 11 && cursor_Y == 4) {
+				cursor_X = 12;
+			}
 			g_KeyFLG = FALSE;
 		}
 		++g_WaitCount;
@@ -80,6 +80,9 @@ void InputRANKING::InputRanking()
 			--cursor_X;
 			if (cursor_X < 0) {
 				cursor_X = 12;
+			}
+			if (cursor_X == 11 && cursor_Y == 4) {
+				cursor_X = 10;
 			}
 			g_KeyFLG = FALSE;
 		}
@@ -93,6 +96,9 @@ void InputRANKING::InputRanking()
 			if (cursor_Y < 0) {
 				cursor_Y = 4;
 			}
+			if (cursor_X == 11 && cursor_Y == 4) {
+				cursor_Y = 3;
+			}
 			g_KeyFLG = FALSE;
 		}
 		++g_WaitCount;
@@ -103,6 +109,9 @@ void InputRANKING::InputRanking()
 		if (g_KeyFLG == TRUE) {
 			++cursor_Y;
 			if (cursor_Y > 4) {
+				cursor_Y = 0;
+			}
+			if (cursor_X == 11 && cursor_Y == 4) {
 				cursor_Y = 0;
 			}
 			g_KeyFLG = FALSE;
@@ -134,7 +143,6 @@ void InputRANKING::InputRanking()
 	DrawFormatString(185 + 8 * 28, 200, 0xFFFFFF, "%c", Name[8]);
 	DrawFormatString(185 + 9 * 28, 200, 0xFFFFFF, "%c", Name[9]);
 
-
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//決定押したとき
 		strcpy_s(ranking.getName(4),12,Name);
 		ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録
@@ -142,11 +150,4 @@ void InputRANKING::InputRanking()
 		ranking.SaveRanking();		// ランキングデータの保存
 		g_GameState = 2;			// ゲームモードの変更
 	}
-
-	//if (KeyInputSingleCharString(170, 210, 10, ranking.getName(4), FALSE) == 1) {
-	//	ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録
-	//	ranking.SortRanking();		// ランキング並べ替え
-	//	ranking.SaveRanking();		// ランキングデータの保存
-	//	g_GameState = 2;		// ゲームモードの変更
-	//}
 }

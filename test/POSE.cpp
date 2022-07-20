@@ -43,7 +43,7 @@ void POSE::DrawPose() {
 	if (NowTime < 30) {
 		DrawFormatString(550, 250, 0xFFFFFF, "%02d", NowTime);
 	}
-	if (NowTime < 10) {
+	if (NowTime <= 10) {
 		DrawFormatString(550, 250, 0xFFFF00, "%02d", NowTime);
 	}
 	if (NowTime < 5) {

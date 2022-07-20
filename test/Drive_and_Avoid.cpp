@@ -201,7 +201,7 @@ void GameInit(void)
 	
 
 	Time = GetNowCount();
-	strncpy_s(Name, 11, Name, 0);
+	strcpy_s(Name, sizeof(Name), "          ");
 	inputranking.count = 0;
 	inputranking.cursor_X = 0;
 	inputranking.cursor_Y = 0;

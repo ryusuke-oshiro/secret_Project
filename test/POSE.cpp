@@ -40,7 +40,15 @@ void POSE::DrawPose() {
 	
 	SetFontSize(36);
 	apple.AppleScore();
-	DrawFormatString(550, 250, 0xFFFFFF, "%02d", NowTime);
+	if (NowTime < 30) {
+		DrawFormatString(550, 250, 0xFFFFFF, "%02d", NowTime);
+	}
+	if (NowTime < 10) {
+		DrawFormatString(550, 250, 0xFFFF00, "%02d", NowTime);
+	}
+	if (NowTime < 5) {
+		DrawFormatString(550, 250, 0xFF0000, "%02d", NowTime);
+	}
 	
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 128);		//ブレンドモードをα(128/255)に設定
 	DrawBox(0, 0, 490, 480, GetColor(0, 0, 0), TRUE);

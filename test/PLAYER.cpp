@@ -20,11 +20,11 @@ PLAYER::PLAYER() {
 	angle = 0.0;
 	count = 0;
 	speed = 0.0;
-	hp = 0;
+	/*hp = 0;
 	fuel = 0;
 	bari = 0;
 	baricnt = 0;
-	bariup = 0;
+	bariup = 0;*/
 }
 
 void PLAYER::InitPlayer() {
@@ -38,10 +38,10 @@ void PLAYER::InitPlayer() {
 	angle = 0.0;
 	count = 0;
 	speed = 0.0;
-	hp = 1000;
+	/*hp = 1000;
 	fuel = 20000;
 	bari = 3;
-	bariup = 10;
+	bariup = 10;*/
 }
 
 void PLAYER::PlayerControl() {
@@ -152,8 +152,6 @@ void PLAYER::PlayerControl() {
 	if (input.Buttons[XINPUT_BUTTON_START] == 1 && g_KeyFLG==TRUE) {
 		g_KeyFLG = FALSE;
 		StopSoundMem(g_MusicBGM);
-		pose.initPose();
-
 		g_GameState = 7;
 	}
 

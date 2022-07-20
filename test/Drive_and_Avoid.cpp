@@ -40,11 +40,11 @@ int StartTime;
 int NowTime = 0;
 int RefreshTime;
 
-int g_Mileage;          //走行距離
+int g_Mileage;          
 
 int Apple_Img[4]; //リンゴ描画変数
-int g_Item[2];    //アイテム画像変数
-int g_Teki[3];    //キャラ画像変数
+//int g_Item[2];    //アイテム画像変数
+//int g_Teki[3];    //キャラ画像変数
 
 int g_StageImage;//ステージ画像
 
@@ -81,7 +81,6 @@ char Name[11];
 ****************************************************/
 void GameInit(void);	//ゲーム初期化処理
 void GameMain(void);	//ゲームメイン処理
-//void DrawEnd(void);//ゲームエンド描画処理
 
 int LoadImages(); //画像読み込み
 
@@ -251,17 +250,25 @@ int LoadSounds()
 	
 	
 	ChangeVolumeSoundMem(130, title.g_TitleBGM);
+	ChangeVolumeSoundMem(130, g_MusicBGM);
 	
 	//SE データ読み込み
 	if ((g_SE1 = LoadSoundMem("sounds/SE01.wav")) == -1)return -1;
 	if ((g_SE2 = LoadSoundMem("sounds/SE02.wav")) == -1)return -1;
 	if ((g_SE3 = LoadSoundMem("sounds/SE03.wav")) == -1)return -1;
+
 	if ((g_HitRedApple = LoadSoundMem("sounds/GetRedApple.wav")) == -1)return -1;
 	if ((g_HitGreenApple = LoadSoundMem("sounds/GetGreenApple.wav")) == -1)return -1;
 	if ((g_HitYellowApple = LoadSoundMem("sounds/GetYellowApple.wav")) == -1)return -1;
 	if ((g_HitPoisonApple = LoadSoundMem("sounds/GetPoisonApple.wav")) == -1)return -1;
 	if ((g_Warning = LoadSoundMem("sounds/Warning.wav")) == -1)return -1;
 
+
+	ChangeVolumeSoundMem(120, g_HitRedApple);
+	ChangeVolumeSoundMem(120, g_HitGreenApple);
+	ChangeVolumeSoundMem(120, g_HitYellowApple);
+	ChangeVolumeSoundMem(120, g_HitPoisonApple);
+	ChangeVolumeSoundMem(130, g_Warning);
 	//SEの音量調整
 	ChangeVolumeSoundMem(255, g_SE1);
 	ChangeVolumeSoundMem(255, g_SE2);

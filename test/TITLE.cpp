@@ -70,10 +70,13 @@ void TITLE::DrawGameTitle(void)
 		g_KeyFLG = TRUE; g_WaitCount = 0;
 	}
 
+	if (input.Buttons[12] == 0) { ButtonFLG = TRUE; }
+
 	//Aキーでメニュー選択
-	if (input.Buttons[12] == 1) {
+	if (input.Buttons[12] == 1 && ButtonFLG==TRUE) {
 		StopSoundMem(g_TitleBGM);
 		PlaySoundMem(g_SE2, DX_PLAYTYPE_BACK, TRUE);
+		ButtonFLG = FALSE;
 		g_KeyFLG = FALSE;
 		g_GameState = MenuNo + 1;
 	}
@@ -94,6 +97,4 @@ void TITLE::DrawGameTitle(void)
 
 	DrawOval(393, 465, 24, 10, GetColor(0, 0, 0), TRUE);
 	DrawString(367, 458, " BACK  終了 ", GetColor(255, 255, 255));
-
-
 }

@@ -145,13 +145,18 @@ void InputRANKING::InputRanking()
 	DrawFormatString(185 + 6 * 28, 200, 0xFFFFFF, "%c", Name[6]);
 	DrawFormatString(185 + 7 * 28, 200, 0xFFFFFF, "%c", Name[7]);
 	DrawFormatString(185 + 8 * 28, 200, 0xFFFFFF, "%c", Name[8]);
-	
 
 	if (input.Buttons[XINPUT_BUTTON_A] == 1 && cursor_X == 12 && cursor_Y == 4) {	//決定押したとき
-		strcpy_s(ranking.getName(4),12,Name);
-		ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録
-		ranking.SortRanking();		// ランキング並べ替え
-		ranking.SaveRanking();		// ランキングデータの保存
-		g_GameState = 2;			// ゲームモードの変更
+		if (Name[0] == ' ') {
+			DrawString(185, 200, "Input Your Name!", 0xFFFFFF);
+		}
+		if (Name[0] != ' ') {
+			ButtonFLG = FALSE;
+			strcpy_s(ranking.getName(4), 12, Name);
+			ranking.setScore(g_Score);	// ランキングデータの5番目にスコアを登録
+			ranking.SortRanking();		// ランキング並べ替え
+			ranking.SaveRanking();		// ランキングデータの保存
+			g_GameState = 2;			// ゲームモードの変更
+		}
 	}
 }

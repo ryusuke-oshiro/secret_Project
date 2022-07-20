@@ -12,11 +12,6 @@ public:
 	double angle;//機体の向き
 	int count;	//タイミング用
 	double speed;	//移動速度
-	//int hp;		//体力
-	//int fuel;	//燃料
-	//int bari;	//バリア回数
-	//int baricnt;	//バリア継続時間
-	//int bariup;	//バリア回数（走行距離アップ）
 public:
 	PLAYER();
 	void InitPlayer();

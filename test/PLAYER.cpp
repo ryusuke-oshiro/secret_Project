@@ -20,11 +20,6 @@ PLAYER::PLAYER() {
 	angle = 0.0;
 	count = 0;
 	speed = 0.0;
-	/*hp = 0;
-	fuel = 0;
-	bari = 0;
-	baricnt = 0;
-	bariup = 0;*/
 }
 
 void PLAYER::InitPlayer() {
@@ -38,10 +33,6 @@ void PLAYER::InitPlayer() {
 	angle = 0.0;
 	count = 0;
 	speed = 0.0;
-	/*hp = 1000;
-	fuel = 20000;
-	bari = 3;
-	bariup = 10;*/
 }
 
 void PLAYER::PlayerControl() {

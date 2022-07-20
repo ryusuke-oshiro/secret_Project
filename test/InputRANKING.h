@@ -8,7 +8,6 @@ public:
 	char moji=0;
 	int cursor_X;
 	int cursor_Y;
-	int NameWarning;
 public:
 	InputRANKING();
 	void InputRanking();

@@ -36,12 +36,5 @@ void DrawRANKING::DrawRanking(){
 	SetFontSize(16);
 	DrawCircle(210, 463, 10, GetColor(0, 0, 0), TRUE);
 	DrawString(207, 456, "B", GetColor(255, 255, 255));
-//// 文字の表示(点滅)
-//	if (++g_WaitTime < 30) {
-//		SetFontSize(24);
-//		DrawString(150, 450, "--  Bを押してタイトルへ  --", 0xFFFFFF);
-//	}
-//	else if (g_WaitTime > 60) {
-//		g_WaitTime = 0;
-//	}
+
 }

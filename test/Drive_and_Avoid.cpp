@@ -250,17 +250,25 @@ int LoadSounds()
 	
 	
 	ChangeVolumeSoundMem(130, title.g_TitleBGM);
+	ChangeVolumeSoundMem(130, g_MusicBGM);
 	
 	//SE ÉfÅ[É^ì«Ç›çûÇ›
 	if ((g_SE1 = LoadSoundMem("sounds/SE01.wav")) == -1)return -1;
 	if ((g_SE2 = LoadSoundMem("sounds/SE02.wav")) == -1)return -1;
 	if ((g_SE3 = LoadSoundMem("sounds/SE03.wav")) == -1)return -1;
+
 	if ((g_HitRedApple = LoadSoundMem("sounds/GetRedApple.wav")) == -1)return -1;
 	if ((g_HitGreenApple = LoadSoundMem("sounds/GetGreenApple.wav")) == -1)return -1;
 	if ((g_HitYellowApple = LoadSoundMem("sounds/GetYellowApple.wav")) == -1)return -1;
 	if ((g_HitPoisonApple = LoadSoundMem("sounds/GetPoisonApple.wav")) == -1)return -1;
 	if ((g_Warning = LoadSoundMem("sounds/Warning.wav")) == -1)return -1;
 
+
+	ChangeVolumeSoundMem(120, g_HitRedApple);
+	ChangeVolumeSoundMem(120, g_HitGreenApple);
+	ChangeVolumeSoundMem(120, g_HitYellowApple);
+	ChangeVolumeSoundMem(120, g_HitPoisonApple);
+	ChangeVolumeSoundMem(130, g_Warning);
 	//SEÇÃâπó í≤êÆ
 	ChangeVolumeSoundMem(255, g_SE1);
 	ChangeVolumeSoundMem(255, g_SE2);

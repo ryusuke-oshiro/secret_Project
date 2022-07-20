@@ -97,6 +97,4 @@ void TITLE::DrawGameTitle(void)
 
 	DrawOval(393, 465, 24, 10, GetColor(0, 0, 0), TRUE);
 	DrawString(367, 458, " BACK  èIóπ ", GetColor(255, 255, 255));
-
-
 }

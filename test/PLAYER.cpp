@@ -108,8 +108,7 @@ void PLAYER::PlayerControl() {
 	if (g_player.flg == TRUE) {		//TRUEの間、表示
 		DrawRotaGraph(g_player.x, g_player.y, 1.0f, 0, g_Player_Nowangle, TRUE, FALSE);
 	}
-	
-	
+
 	if (g_player.tenmetu == TRUE) {		//TRUEの間、点滅
 		if (g_player.count == 0) { 
 			g_player.flg = ~g_player.flg; 

@@ -1,4 +1,5 @@
 #include"Common.h"
+#include"TITLE.h"
 #include"DrawRANKING.h"
 #include"RANKING.h"
 
@@ -12,6 +13,7 @@ void DrawRANKING::DrawRanking(){
 	// Bキーでメニューに戻る
 	if (input.Buttons[XINPUT_BUTTON_B]) {
 		PlaySoundMem(g_SE3, DX_PLAYTYPE_BACK, TRUE);
+		SetCurrentPositionSoundMem(0, title.g_TitleBGM);
 		g_GameState = 0;
 	}
 

@@ -146,7 +146,7 @@ void PLAYER::PlayerControl() {
 	}
 
 	
-	NowTime = 10 - StartTime / 1000 + pose.PoseTime;	//§ŒÀŽžŠÔ’²®
+	NowTime = 30 - StartTime / 1000 + pose.PoseTime;	//§ŒÀŽžŠÔ’²®
 	
 	SetFontSize(36);
 	if (NowTime > 10) {

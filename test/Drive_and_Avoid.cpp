@@ -40,11 +40,11 @@ int StartTime;
 int NowTime = 0;
 int RefreshTime;
 
-int g_Mileage;          //走行距離
+int g_Mileage;          
 
 int Apple_Img[4]; //リンゴ描画変数
-int g_Item[2];    //アイテム画像変数
-int g_Teki[3];    //キャラ画像変数
+//int g_Item[2];    //アイテム画像変数
+//int g_Teki[3];    //キャラ画像変数
 
 int g_StageImage;//ステージ画像
 
@@ -81,7 +81,6 @@ char Name[11];
 ****************************************************/
 void GameInit(void);	//ゲーム初期化処理
 void GameMain(void);	//ゲームメイン処理
-//void DrawEnd(void);//ゲームエンド描画処理
 
 int LoadImages(); //画像読み込み
 

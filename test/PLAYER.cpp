@@ -181,12 +181,10 @@ int PLAYER::HitBoxPlayer(PLAYER* p, APPLE* e)
 	int sy1 = p->y - (p->h / 2);
 	int sx2 = sx1 + p->w;
 	int sy2 = sy1 + p->h;
- /*    DrawBox(sx1, sy1, sx2, sy2, 0xffffff, FALSE);*/
 	int dx1 = e->x - (e->w / 2);
 	int dy1 = e->y - (e->h / 2);
 	int dx2 = dx1 + e->w;
 	int dy2 = dy1 + e->h;
-	//DrawBox(dx1, dy1, dx2, dy2, 0xffffff, FALSE);
 
 	//‹éŒ`‚ªd‚È‚Á‚Ä‚¢‚ê‚Î“–‚½‚è
 	if (sx1 < dx2 && dx1 < sx2 && sy1 < dy2 && dy1 < sy2) {
